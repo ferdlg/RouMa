@@ -1,0 +1,15 @@
+mostrar el nombre que inicie con  la letra J
+SELECT *FROM clientes WHERE NOMBRE_CLIENTE LIKE 'J%';
+
+mostrar el nombre que contenga  la 'na'
+SELECT *FROM clientes WHERE NOMBRE_CLIENTE LIKE '%NA%';
+
+SELECT *FROM productos WHERE ID_PRODUCTO IN (1,10,23,4);
+
+SELECT *FROM clientes WHERE ID_CLIENTE<900907 OR BY NOMBRE_CLIENTE
+
+SELECT COUNT(*) AS VALOR_U FROM productos WHERE VALOR_U=100
+
+SELECT SUM(VALOR_U) AS VALOR_U FROM productos
+
+SELECT MAX(VALOR_U) AS VALOR_U FROM productos
