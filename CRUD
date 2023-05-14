@@ -1,0 +1,36 @@
+Create 
+Read
+Update 
+Delete
+
+Los comandos en sql para CRUD son: 
+INSERT
+SELECT
+UPDATE
+DELETE/DROP
+
+Script: 
+
+UPDATE clientes SET CIUDAD='CALI' WHERE ID_CLIENTE BETWEEN 900903 AND 900905 (En este ejemplo se esta actualiznado la ciudad de los
+clientes a CALI donde el id este entre 900903 y 9009010.
+
+DELETE FROM clientes WHERE ID_CLIENTE=900905 (eliminar de la tabla cliente los registros que tienen como id 900905)
+
+SELECT NOMBRE_CLIENTE FROM cliente (muestra el campo NOMBRE_CLIENTE de la tabla clientes)
+SELECT *FROM clientes WHERE TELEFONO='265134' AND CIUDAD='CALI'
+
+Para hacer los registros desde excel se debe:
+-copiar la hoja en un libro nuevo.
+-eliminar los titulos tales como (id_example, telefono, email, etc).
+- guardar el archivo con la extencion csv (delimitado por comas)
+- usar el siguiente script:
+
+LOAD DATA INFILE'Ruta/de acceso/del archivo.csv'
+INTO TABLE clientes
+FILES TERMINATED BY';'
+LINES TERMINATED BY'\n'
+(NOMBRE_CAMPOS, NO_LLAVES_FORANEAS)
+
+
+
+
