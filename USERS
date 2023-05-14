@@ -1,0 +1,22 @@
+CREATE USER 'ferdlg'@'localhost' IDENTIDIED BY '124512'
+
+el localhost se usa como buena practica para prevenir conexiones desde host no deseados.
+
+SET PASSWORD FOR 'usuario' = PASSWORD('clavenueva'); -> cambiar clave de un usuario o agregar.
+
+Asignar permisos a los usuarios
+GRANT SELECT, CREATE, UPDATE ON basededatos.*FROM ferdlg;
+GRANT ALL ON basededatos. *FROM ferdlg;
+
+Especificar las tablas a las que se daran permisos 
+
+GRANT ALL ON basededatos.tabla FROM ferdlg;
+GRANT ALL ON basededatos.tabla1, tabla2 FROM ferdlg;
+GRANT ALL ON basededatos.* FROM ferdlg;
+
+para ver todos los usuario que hay en la base de datos;
+SHOW GRANTS FOR 'ferdlg'
+
+Revocar permisos 
+REVOKE SELECT ON tabla1 FROM ferdlg
+
