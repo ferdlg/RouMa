@@ -1,0 +1,41 @@
+En el siguiente SCRPT se usa el JOIN para comparar dos tablas y que nos arroje el resultado de cuantos clientes hay por provincia, veamos;
+
+DELIMITER $$
+CREATE PROCEDURE CLIENTES_PROVINCIA(IN PROVINCIA1 VARCHAR(30), PROVINCIA2 VARCHAR (30))
+
+BEGIN 
+  DECLARE CANTP1 INT;
+  DECLARE CANTP2 INT;
+  SELECT COUNT(*) INTO CANTP1 FROM clientes AS cli                     //el As actua COMO, es decir, la tabla clientes pasa a ser reconocida con el termino "cli" en las proximas lines de codigo
+  JOIN provincias AS pro
+  ON PRO.codigo = CLI.codigoprovincia
+  WHERE PRO.nombre = PROVINCIA1;
+  
+  SELECT COUNT(*) INTO CANTP2 FROM clientes AS cli          
+  JOIN provincias AS pro
+  ON PRO.codigo = CLI.codigoprovincia
+  WHERE PRO.nombre = PROVINCIA2;
+  SELECT CANTP1, CANTP2;
+END $$
+
+
+Usando condicional if, consulta cual de dos provincias tiene mas clientes
+
+DELIMITER $$
+CREATE PROCEDURE Provincia_mas_clientes (IN PROVINCIA1 VARCHAR (30), PROVINCIA2 VARCHAR (30))
+
+BEGIN 
+  DECLARE CANT_CLIENTES1 INT;
+  DECLARE CANT_CLIENTES2 INT;
+  
+  SELECT COUNT(*) INTO CANT_CLIENTES1 FROM clientes AS cli
+  JOIN provincias as pro
+  ON PRO.codigo = CLI.codigoprovincia
+  WHERE pro.nombre = PROVINCIA1;
+  SELECT COUNT(*) INTO CANT_CLIENTES2 FROM clientes AS cli
+  JOIN provincias as pro
+  ON PRO.codigo = CLI.codigoprovincia
+  WHERE pro.nombre = PROVINCIA2;
+  SELECT CANTP1, CANTP2;
+  
+END $$
