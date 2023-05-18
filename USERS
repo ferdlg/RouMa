@@ -1,4 +1,4 @@
-CREATE USER 'ferdlg'@'localhost' IDENTIFED BY '124512'
+CREATE USER 'ferdlg'@'localhost' IDENTIFIED BY '124512'
 
 el localhost se usa como buena practica para prevenir conexiones desde host no deseados.
 
