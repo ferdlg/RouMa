@@ -1,6 +1,7 @@
 # Route Management RouMa 🚞
 
 ## 📚Analisís del software
+
 ###  🚨 Objetivo
 
 Optimizar el proceso de rutas de transporte mediante la integración de solicitudes a empresas proveedoras de transporte, con el fin de mejorar la eficiencia operativa y mejorar la calidad del servicio
@@ -8,8 +9,21 @@ Optimizar el proceso de rutas de transporte mediante la integración de solicitu
 ## 🚥 Objetivos Especificos
 - Desarrollar y aplicar métodos para la planificación eficiente de rutas
 - Implementar herramientas de monitoreo y análisis
+  
+## Documentación 
+
+En este repositorio podrá encontrar la documentacion respectiva del proyecto:
+- Modelo relacional.
+- Casos de uso.
+- Requisitos funcionales y no funcionales
+- Historias de usuario
+- Manual Tecnico
+- Manual de usuario
+- Manual de pruebas
+  
 
 ## 🛠🔧 Desarrollo del software 💻
+
 ### Descripion Tecnica 👩‍💻
 Proyecto caso de estudio desarrollado en etapa productiva como alternativa. 
 Route Management (RouMa) es un proyecto de microservicios, el cual esta desarrollado en dos aplicaciones, una para el Backend y otra para el Frontend, la aplicacion de Backend es una Api Rest Ful, que es consumida por la aplicacion del Frontend
@@ -26,4 +40,4 @@ Route Management (RouMa) es un proyecto de microservicios, el cual esta desarrol
 
 ### Algunas librerias
 - [Libreria] css
-- 
+  
