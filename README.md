@@ -6,8 +6,8 @@
 Optimizar el proceso de rutas de transporte mediante la integración de solicitudes a empresas proveedoras de transporte, con el fin de mejorar la eficiencia operativa y mejorar la calidad del servicio
 
 ## 🚥 Objetivos Especificos
-Desarrollar y aplicar métodos para la planificación eficiente de rutas
-Implementar herramientas de monitoreo y análisis
+- Desarrollar y aplicar métodos para la planificación eficiente de rutas
+- Implementar herramientas de monitoreo y análisis
 
 ## 🛠🔧 Desarrollo del software 💻
 ### Descripion Tecnica 👩‍💻
