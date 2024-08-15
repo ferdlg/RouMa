@@ -44,24 +44,25 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update TransportType 
-
-        public async Task<TransportType> PutTransportType(int id)
+        // Update transportType by id 
+        public async Task<bool> UpdateTransportType(TransportType transportType)
         {
-            var TransportType = _appDbContext.TransportTypes.FirstOrDefaultAsync(TransportType_x => TransportType_x.TransportTypeId == id);
-            _appDbContext.TransportTypes.Update(await TransportType);
-            await _appDbContext.SaveChangesAsync();
-            return await TransportType;
+            var up_transportType = await GetTransportType(transportType.TransportTypeId);
+            up_transportType.Name = transportType.Name;
+            up_transportType.Description = transportType.Description;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove TransportType by id 
 
-        public async Task<TransportType> DeleteTransportType(int id)
+        // Remove transportType by id
+        public async Task<bool> DeleteTransportType(int id)
         {
-            var TransportType = await _appDbContext.TransportTypes.FirstOrDefaultAsync(TransportType_x => TransportType_x.TransportTypeId == id);
-            _appDbContext.TransportTypes.Remove(TransportType);
-            await _appDbContext.SaveChangesAsync();
-            return TransportType;
+            var up_transportType = await GetTransportType(id);
+            _appDbContext.TransportTypes.Remove(up_transportType);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

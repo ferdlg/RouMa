@@ -44,24 +44,28 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update TransportRequest 
-
-        public async Task<TransportRequest> PutTransportRequest(int id)
+        // Update transportRequest by id 
+        public async Task<bool> UpdateTransportRequest(TransportRequest transportRequest)
         {
-            var transportRequest = _appDbContext.TransportRequests.FirstOrDefaultAsync(TransportRequest_x => TransportRequest_x.RequestId== id);
-            _appDbContext.TransportRequests.Update(await transportRequest);
-            await _appDbContext.SaveChangesAsync();
-            return await transportRequest;
+            var up_transportRequest = await GetTransportRequest(transportRequest.RequestId);
+            up_transportRequest.Date = transportRequest.Date;
+            up_transportRequest.Description = transportRequest.Description;
+            up_transportRequest.TransportType = transportRequest.TransportType;
+            up_transportRequest.CompanyId = transportRequest.CompanyId;
+            up_transportRequest.AdministratorId = transportRequest.AdministratorId;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove TransportRequest by id 
 
-        public async Task<TransportRequest> DeleteTransportRequest(int id)
+        // Remove transportRequest by id
+        public async Task<bool> DeleteTransportRequest(int id)
         {
-            var transportRequest = await _appDbContext.TransportRequests.FirstOrDefaultAsync(TransportRequest_x => TransportRequest_x.RequestId== id);
-            _appDbContext.TransportRequests.Remove(transportRequest);
-            await _appDbContext.SaveChangesAsync();
-            return transportRequest;
+            var up_transportRequest = await GetTransportRequest(id);
+            _appDbContext.TransportRequests.Remove(up_transportRequest);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

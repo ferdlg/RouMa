@@ -7,8 +7,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<TransportType>> GetTransportTypes();
         Task<TransportType> GetTransportType(int id);
         Task PostTransportType(TransportType TransportType);
-        Task<TransportType> PutTransportType(int id);
+        Task<bool> UpdateTransportType(TransportType transportType);
 
-        Task<TransportType> DeleteTransportType(int id);
+        Task<bool> DeleteTransportType(int id);
     }
 }

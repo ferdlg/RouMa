@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<StreetType>> GetStreetTypes();
         Task<StreetType> GetStreetType(int id);
         Task PostStreetType(StreetType StreetType);
-        Task<StreetType> PutStreetType(int id);
+        Task<bool> UpdateStreetType(StreetType streetType);
 
-        Task<StreetType> DeleteStreetType(int id);
+        Task<bool> DeleteStreetType(int id);
     }
 }

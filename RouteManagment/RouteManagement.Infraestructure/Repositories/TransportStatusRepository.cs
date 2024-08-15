@@ -44,24 +44,24 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update TransportStatus 
-
-        public async Task<TransportStatus> PutTransportStatus(int id)
+        // Update transportStatus by id 
+        public async Task<bool> UpdatetransportStatus(TransportStatus transportStatus)
         {
-            var transportStatus = _appDbContext.TransportStatuses.FirstOrDefaultAsync(TransportStatus_x => TransportStatus_x.StatusId== id);
-            _appDbContext.TransportStatuses.Update(await transportStatus);
-            await _appDbContext.SaveChangesAsync();
-            return await transportStatus;
+            var up_transportStatus = await GetTransportStatus(transportStatus.StatusId);
+            up_transportStatus.Status = transportStatus.Status;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove TransportStatus by id 
 
-        public async Task<TransportStatus> DeleteTransportStatus(int id)
+        // Remove transportStatus by id
+        public async Task<bool> DeleteTransportStatus(int id)
         {
-            var transportStatus = await _appDbContext.TransportStatuses.FirstOrDefaultAsync(TransportStatus_x => TransportStatus_x.StatusId== id);
-            _appDbContext.TransportStatuses.Remove(transportStatus);
-            await _appDbContext.SaveChangesAsync();
-            return transportStatus;
+            var up_transportStatus = await GetTransportStatus(id);
+            _appDbContext.TransportStatuses.Remove(up_transportStatus);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

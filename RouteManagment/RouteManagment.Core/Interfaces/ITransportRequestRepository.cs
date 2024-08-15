@@ -7,8 +7,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<TransportRequest>> GetTransportRequests();
         Task<TransportRequest> GetTransportRequest(int id);
         Task PostTransportRequest(TransportRequest TransportRequest);
-        Task<TransportRequest> PutTransportRequest(int id);
+        Task<bool> UpdateTransportRequest(TransportRequest transportRequest);
 
-        Task<TransportRequest> DeleteTransportRequest(int id);
+        Task<bool> DeleteTransportRequest(int id);
     }
 }

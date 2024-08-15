@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<TransportStatus>> GetTransportStatuss();
         Task<TransportStatus> GetTransportStatus(int id);
         Task PostTransportStatus(TransportStatus TransportStatus);
-        Task<TransportStatus> PutTransportStatus(int id);
+        Task<bool> UpdatetransportStatus(TransportStatus transportStatus);
 
-        Task<TransportStatus> DeleteTransportStatus(int id);
+        Task<bool> DeleteTransportStatus(int id);
     }
 }

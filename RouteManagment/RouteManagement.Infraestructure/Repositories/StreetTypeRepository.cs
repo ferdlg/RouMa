@@ -43,25 +43,24 @@ namespace ManejoRutas.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
 
         }
-
-        //Update StreetType 
-
-        public async Task<StreetType> PutStreetType(int id)
+        // Update streetType by id 
+        public async Task<bool> UpdateStreetType(StreetType streetType)
         {
-            var streetType = _appDbContext.StreetTypes.FirstOrDefaultAsync(StreetType_x => StreetType_x.StreetTypeId == id);
-            _appDbContext.StreetTypes.Update(await streetType);
-            await _appDbContext.SaveChangesAsync();
-            return await streetType;
+            var up_streetType = await GetStreetType(streetType.StreetTypeId);
+            up_streetType.Name = streetType.Name;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove StreetType by id 
 
-        public async Task<StreetType> DeleteStreetType(int id)
+        // Remove streetType by id
+        public async Task<bool> DeleteStreetType(int id)
         {
-            var streetType = await _appDbContext.StreetTypes.FirstOrDefaultAsync(StreetType_x => StreetType_x.StreetTypeId == id);
-            _appDbContext.StreetTypes.Remove(streetType);
-            await _appDbContext.SaveChangesAsync();
-            return streetType;
+            var up_streetType = await GetStreetType(id);
+            _appDbContext.StreetTypes.Remove(up_streetType);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

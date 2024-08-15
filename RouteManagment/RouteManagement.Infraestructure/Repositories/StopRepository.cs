@@ -44,24 +44,24 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update stop 
-
-        public async Task<Stop> PutStop(int id)
+        // Update stop by id 
+        public async Task<bool> UpdateStop(Stop stop)
         {
-            var stop = _appDbContext.Stops.FirstOrDefaultAsync(stop_x => stop_x.StopId == id);
-            _appDbContext.Stops.Update(await stop);
-            await _appDbContext.SaveChangesAsync();
-            return await stop;
+            var up_stop = await GetStop(stop.StopId);
+            up_stop.AddressId = stop.AddressId;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove stop by id 
 
-        public async Task<Stop> DeleteStop(int id)
+        // Remove stop by id
+        public async Task<bool> DeleteStop(int id)
         {
-            var stop = await _appDbContext.Stops.FirstOrDefaultAsync(stop_x => stop_x.StopId == id);
-            _appDbContext.Stops.Remove(stop);
-            await _appDbContext.SaveChangesAsync();
-            return stop;
+            var up_stop = await GetStop(id);
+            _appDbContext.Stops.Remove(up_stop);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

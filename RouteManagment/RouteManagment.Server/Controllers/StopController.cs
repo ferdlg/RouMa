@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -53,24 +54,27 @@ namespace RouteManagment.Server.Controllers
             await _stopRepository.PostStop(stop);
             return Ok(stop);
         }
-
-        //Request to update top
+        //Request to update stop
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        public async Task<IActionResult> Updatestop(int id, StopDto stopDto)
         {
-            var stop = await _stopRepository.PutStop(id);
-            var stopDto = _mapper.Map<StopDto>(stop);
-            return Ok(stopDto);
+            var stop = _mapper.Map<Stop>(stopDto);
+            stop.StopId = id;
+
+            await _stopRepository.UpdateStop(stop);
+            return Ok(stop);
         }
-
-        //Request to remove top 
+        //Request to remove stop by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
-        {
-            var stop = await _stopRepository.DeleteStop(id);
-            var stopDto = _mapper.Map<StopDto>(stop);
 
-            return Ok(stopDto);
+        public async Task<IActionResult> Deletestop(int id)
+        {
+            {
+
+                var result = await _stopRepository.DeleteStop(id);
+                return Ok(result);
+            }
         }
     }
 }

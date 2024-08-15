@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -54,23 +55,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(streetType);
         }
 
-        //Request to update top
+        //Request to update streetType
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        public async Task<IActionResult> UpdateStreetType(int id, StreetTypeDto streetTypeDto)
         {
-           var streetType = await _streetTypeRepository.PutStreetType(id);
-           var streetTypeDto = _mapper.Map<StreetTypeDto>(streetType);
-            return Ok(streetTypeDto);
+            var streetType = _mapper.Map<StreetType>(streetTypeDto);
+            streetType.StreetTypeId = id;
+
+            await _streetTypeRepository.UpdateStreetType(streetType);
+            return Ok(streetType);
         }
-
-        //Request to remove top 
+        //Request to remove streetType by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
-        {
-           var streetType = await _streetTypeRepository.DeleteStreetType(id);
-           var streetTypeDto = _mapper.Map<StreetTypeDto>(streetType);
 
-            return Ok(streetTypeDto);
+        public async Task<IActionResult> DeletestreetType(int id)
+        {
+            {
+
+                var result = await _streetTypeRepository.DeleteStreetType(id);
+                return Ok(result);
+            }
         }
     }
 }

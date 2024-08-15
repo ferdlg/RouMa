@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -54,23 +55,28 @@ namespace RouteManagment.Server.Controllers
             return Ok(TransportStatus);
         }
 
-        //Request to update top
+
+        //Request to update transportStatus
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        public async Task<IActionResult> UpdatetransportStatus(int id, TransportStatusDto transportStatusDto)
         {
-           var TransportStatus = await _TransportStatusRepository.PutTransportStatus(id);
-           var TransportStatusDto = _mapper.Map<TransportStatusDto>(TransportStatus);
-            return Ok(TransportStatusDto);
+            var transportStatus = _mapper.Map<TransportStatus>(transportStatusDto);
+            transportStatus.StatusId= id;
+
+            await _TransportStatusRepository.UpdatetransportStatus(transportStatus);
+            return Ok(transportStatus);
         }
-
-        //Request to remove top 
+        //Request to remove transportStatus by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
-        {
-           var TransportStatus = await _TransportStatusRepository.DeleteTransportStatus(id);
-           var TransportStatusDto = _mapper.Map<TransportStatusDto>(TransportStatus);
 
-            return Ok(TransportStatusDto);
+        public async Task<IActionResult> DeletetransportStatus(int id)
+        {
+            {
+
+                var result = await _TransportStatusRepository.DeleteTransportStatus(id);
+                return Ok(result);
+            }
         }
     }
 }
