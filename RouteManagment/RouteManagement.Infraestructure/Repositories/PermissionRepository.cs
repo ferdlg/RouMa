@@ -39,24 +39,24 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update Permission 
-
-        public async Task<Permission> PutPermission(int id)
+        // Update permission by id 
+        public async Task<bool> UpdatePermission(Permission permission)
         {
-            var permission = _appDbContext.Permissions.FirstOrDefaultAsync(Permission_x => Permission_x.PermissionId == id);
-            _appDbContext.Permissions.Update(await permission);
-            await _appDbContext.SaveChangesAsync();
-            return await permission;
+            var up_permission = await GetPermission(permission.PermissionId);
+            up_permission.Name = permission.Name;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Permission by id 
 
-        public async Task<Permission> DeletePermission(int id)
+        // Remove permission by id
+        public async Task<bool> DeletePermission(int id)
         {
-            var permission = await _appDbContext.Permissions.FirstOrDefaultAsync(Permission_x => Permission_x.PermissionId == id);
-            _appDbContext.Permissions.Remove(permission);
-            await _appDbContext.SaveChangesAsync();
-            return permission;
+            var up_permission = await GetPermission(id);
+            _appDbContext.Permissions.Remove(up_permission);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

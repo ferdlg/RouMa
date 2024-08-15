@@ -4,7 +4,6 @@ using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 
 namespace RouteManagment.Server.Controllers
@@ -57,21 +56,23 @@ namespace RouteManagment.Server.Controllers
         //Request to update administrator
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutAdministrator(int id)
+        public async Task<IActionResult> Updateadministrator(int id, AdministratorDto administratorDto)
         {
-            var administrator = await _administratorRepository.PutAdministrator(id);
-            var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-            return Ok(administratorDto);
+            var administrator = _mapper.Map<Administrator>(administratorDto);
+            administrator.AdministratorId = id;
+
+            await _administratorRepository.UpdateAdministrator(administrator);
+            return Ok(administrator);
         }
         //Request to remove administrator by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteAdministrator(int id)
+        public async Task<IActionResult> Deleteadministrator(int id)
         {
             {
-                var administrator = await _administratorRepository.DeleteAdministrator(id);
-                var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-                return Ok(administratorDto);
+
+                var result = await _administratorRepository.DeleteAdministrator(id);
+                return Ok(result);
             }
         }
 

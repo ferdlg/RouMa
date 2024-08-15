@@ -2,11 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using RouteManagment.Core.Entities;
 using RouteManagment.Server.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ManejoRutas.Infrastructure.Repositories
 {
@@ -44,24 +39,25 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update RolPermission 
-
-        public async Task<RolesPermission> PutRolPermission(int id)
+        // Update rolPermission by id 
+            public async Task<bool> UpdateRolPermission(RolesPermission rolPermission)
         {
-            var rolPermission = _appDbContext.RolesPermissions.FirstOrDefaultAsync(RolPermission_x => RolPermission_x.RolPermissionId == id);
-            _appDbContext.RolesPermissions.Update(await rolPermission);
-            await _appDbContext.SaveChangesAsync();
-            return await rolPermission;
+            var up_rolPermission = await GetRolPermission(rolPermission.RolPermissionId);
+            up_rolPermission.RolId = rolPermission.RolPermissionId;
+            up_rolPermission.PermissionId = rolPermission.RolPermissionId;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove RolPermission by id 
 
-        public async Task<RolesPermission> DeleteRolPermission(int id)
+        // Remove rolPermission by id
+        public async Task<bool> DeleteRolPermission(int id)
         {
-            var rolPermission = await _appDbContext.RolesPermissions.FirstOrDefaultAsync(RolPermission_x => RolPermission_x.RolPermissionId == id);
-            _appDbContext.RolesPermissions.Remove(rolPermission);
-            await _appDbContext.SaveChangesAsync();
-            return rolPermission;
+            var up_rolPermission = await GetRolPermission(id);
+            _appDbContext.RolesPermissions.Remove(up_rolPermission);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

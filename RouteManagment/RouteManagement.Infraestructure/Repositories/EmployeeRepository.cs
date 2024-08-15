@@ -39,24 +39,34 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update Employee 
-
-        public async Task<Employee> PutEmployee(int id)
+        // Update employee by id 
+        public async Task<bool> UpdateEmployee(Employee employee)
         {
-            var employee = _appDbContext.Employees.FirstOrDefaultAsync(Employee_x => Employee_x.DocumentNumber == id);
-            _appDbContext.Employees.Update(await employee);
-            await _appDbContext.SaveChangesAsync();
-            return await employee;
+            var up_employee = await GetEmployee(employee.DocumentNumber);
+            up_employee.DocumentNumber = employee.DocumentNumber;
+            up_employee.FirstName = employee.FirstName;
+            up_employee.LastName = employee.LastName;
+            up_employee.Email = employee.Email;
+            up_employee.Phone = employee.Phone;
+            up_employee.AddressId = employee.AddressId;
+            up_employee.DocumentTypeId = employee.DocumentTypeId;
+            up_employee.RolId = employee.RolId;
+            up_employee.CompanyId = employee.CompanyId;
+            up_employee.TransportPlate = employee.TransportPlate;
+
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Employee by id 
 
-        public async Task<Employee> DeleteEmployee(int id)
+        // Remove employee by id
+        public async Task<bool> DeleteEmployee(int id)
         {
-            var employee = await _appDbContext.Employees.FirstOrDefaultAsync(Employee_x => Employee_x.DocumentNumber == id);
-            _appDbContext.Employees.Remove(employee);
-            await _appDbContext.SaveChangesAsync();
-            return employee;
+            var up_employee = await GetEmployee(id);
+            _appDbContext.Employees.Remove(up_employee);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

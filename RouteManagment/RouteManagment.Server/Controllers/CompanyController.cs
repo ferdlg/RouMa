@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -57,21 +58,25 @@ namespace RouteManagment.Server.Controllers
 
         //Request to update company
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCompany(int id)
+
+        public async Task<IActionResult> Updatecompany(int id, CompanyDto companyDto)
         {
-            var company = await _companyRepository.PutCompany(id);
-            var companyDto = _mapper.Map<CompanyDto>(company);
-            return Ok(companyDto);
+            var company = _mapper.Map<Company>(companyDto);
+            company.CompanyId = id;
+
+            await _companyRepository.UpdateCompany(company);
+            return Ok(company);
         }
-
-        //Request to remove company 
+        //Request to remove company by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCompany(int id)
-        {
-            var company = await _companyRepository.DeleteCompany(id);
-            var companyDto = _mapper.Map<CompanyDto>(company);
 
-            return Ok(companyDto);
+        public async Task<IActionResult> Deletecompany(int id)
+        {
+            {
+
+                var result = await _companyRepository.Deletecompany(id);
+                return Ok(result);
+            }
         }
 
     } 

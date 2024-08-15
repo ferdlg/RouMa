@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -54,22 +55,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(role);
         }
 
-        //Request to update Role
+        //Request to update rol
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRol(int id)
-        {
-            var Role = await _RolRepository.PutRol(id);
-            var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
-        }
 
-        //Request to remove Role 
+        public async Task<IActionResult> Updaterol(int id, RolDto rolDto)
+        {
+            var rol = _mapper.Map<Role>(rolDto);
+            rol.RolId = id;
+
+            await _RolRepository.UpdateRol(rol);
+            return Ok(rol);
+        }
+        //Request to remove rol by id 
         [HttpDelete("{id}")]
+
         public async Task<IActionResult> DeleteRol(int id)
         {
-            var Role = await _RolRepository.DeleteRol(id);
-            var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
+            {
+
+                var result = await _RolRepository.DeleteRol(id);
+                return Ok(result);
+            }
         }
 
     } 

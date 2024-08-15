@@ -38,25 +38,24 @@ namespace ManejoRutas.Infrastructure.Repositories
                 _appDbContext.Administrators.Add(administrator);
                 await _appDbContext.SaveChangesAsync();
             }
-            // Update Administrator by id 
-
-            public async Task<Administrator> PutAdministrator(int id)
+            // Update administrator by id 
+            public async Task<bool> UpdateAdministrator(Administrator administrator)
             {
-                var administrator = await _appDbContext.Administrators.FirstOrDefaultAsync(administrator_x => administrator_x.AdministratorId == id);
-                _appDbContext.Administrators.Update(administrator);
-                await _appDbContext.SaveChangesAsync();
-                return administrator;
-
+                var up_administrator = await GetAdministrator(administrator.AdministratorId);
+                up_administrator.DocumentNumber= administrator.DocumentNumber;
+             
+                int rows = await _appDbContext.SaveChangesAsync();
+                return rows > 0;
             }
 
-            // Remove Administrator by id
-            public async Task<Administrator> DeleteAdministrator(int id)
-            {
-                var administrator = await _appDbContext.Administrators.FirstOrDefaultAsync(Administrator_x => Administrator_x.AdministratorId == id);
-                _appDbContext.Administrators.Remove(administrator);
-                await _appDbContext.SaveChangesAsync();
-                return administrator;
 
+            // Remove administrator by id
+            public async Task<bool> DeleteAdministrator(int id)
+            {
+                var up_administrator = await GetAdministrator(id);
+                _appDbContext.Administrators.Remove(up_administrator);
+                int rows = await _appDbContext.SaveChangesAsync();
+                return rows > 0;
             }
 
     }

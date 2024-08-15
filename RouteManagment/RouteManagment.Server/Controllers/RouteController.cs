@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -55,22 +56,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(route);
         }
 
-        //Request to update Route
+        //Request to update route
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoute(int id)
-        {
-            var route = await _RouteRepository.PutRoute(id);
-            var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(routeDto);
-        }
 
-        //Request to remove Route 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRoute(int id)
+        public async Task<IActionResult> Updateroute(int id, RouteDto routeDto)
         {
-            var route = await _RouteRepository.DeleteRoute(id);
-            var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(routeDto);
+            var route = _mapper.Map<Core.Entities.Route>(routeDto);
+            route.RouteId = id;
+
+            await _RouteRepository.UpdateRoute(route);
+            return Ok(route);
+        }
+        //Request to remove route by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Deleteroute(int id)
+        {
+            {
+
+                var result = await _RouteRepository.DeleteRoute(id);
+                return Ok(result);
+            }
         }
 
     } 

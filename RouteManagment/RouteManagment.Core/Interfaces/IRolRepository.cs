@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Role>> GetRoles();
         Task<Role> GetRol(int id);
         Task PostRol(Role Rol);
-        Task<Role> PutRol(int id);
+        Task<bool> UpdateRol(Role rol);
 
-        Task<Role> DeleteRol(int id);
+        Task<bool> DeleteRol(int id);
     }
 }

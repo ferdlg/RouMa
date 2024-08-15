@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<DocumentType>> GetDocumentTypes();
         Task<DocumentType> GetDocumentType(int id);
         Task PostDocumentType(DocumentType DocumentType);
-        Task<DocumentType> PutDocumentType(int id);
+        Task<bool> UpdateDocumentType(DocumentType documentType);
 
-        Task<DocumentType> DeleteDocumentType(int id);
+        Task<bool> DeleteDocumentType(int id);
     }
 }

@@ -9,8 +9,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<Address> GetAddress(int id);
 
         Task PostAddress(Address address);
-        Task<Address> PutAddress(int id);
+        Task<bool> UpdateAddress(Address address);
 
-        Task<Address> DeleteAddress(int id);
+        Task<bool> DeleteAddress(int id);
     }
 }

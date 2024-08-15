@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -55,22 +56,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(passenger);
         }
 
-        //Request to update Passenger
+        //Request to update passenger
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPassenger(int id)
-        {
-            var passenger = await _PassengerRepository.PutPassenger(id);
-            var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
-        }
 
-        //Request to remove Passenger 
+        public async Task<IActionResult> UpdatePassenger(int id, PassengerDto passengerDto)
+        {
+            var passenger = _mapper.Map<Passenger>(passengerDto);
+            passenger.PassengerId = id;
+
+            await _PassengerRepository.UpdatePassenger(passenger);
+            return Ok(passenger);
+        }
+        //Request to remove passenger by id 
         [HttpDelete("{id}")]
+
         public async Task<IActionResult> DeletePassenger(int id)
         {
-            var passenger = await _PassengerRepository.DeletePassenger(id);
-            var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
+            {
+
+                var result = await _PassengerRepository.DeletePassenger(id);
+                return Ok(result);
+            }
         }
 
     } 

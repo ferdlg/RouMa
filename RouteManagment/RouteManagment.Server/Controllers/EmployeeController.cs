@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -55,22 +56,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(employee);
         }
 
-        //Request to update Employee
+        //Request to update employee
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployee(int id)
-        {
-            var employee = await _EmployeeRepository.PutEmployee(id);
-            var employeeDto = _mapper.Map<EmployeeDto>(employee);
-            return Ok(employeeDto);
-        }
 
-        //Request to remove Employee 
+        public async Task<IActionResult> UpdateEmployee(int id, EmployeeDto employeeDto)
+        {
+            var employee = _mapper.Map<Employee>(employeeDto);
+            employee.DocumentNumber= id;
+
+            await _EmployeeRepository.UpdateEmployee(employee);
+            return Ok(employee);
+        }
+        //Request to remove employee by id 
         [HttpDelete("{id}")]
+
         public async Task<IActionResult> DeleteEmployee(int id)
         {
-            var Employee = await _EmployeeRepository.DeleteEmployee(id);
-            var documenTypeDto = _mapper.Map<EmployeeDto>(Employee);
-            return Ok(documenTypeDto);
+            {
+
+                var result = await _EmployeeRepository.DeleteEmployee(id);
+                return Ok(result);
+            }
         }
 
     } 

@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Passenger>> GetPassengers();
         Task<Passenger> GetPassenger(int id);
         Task PostPassenger(Passenger Passenger);
-        Task<Passenger> PutPassenger(int id);
+        Task<bool> UpdatePassenger(Passenger passenger);
 
-        Task<Passenger> DeletePassenger(int id);
+        Task<bool> DeletePassenger(int id);
     }
 }

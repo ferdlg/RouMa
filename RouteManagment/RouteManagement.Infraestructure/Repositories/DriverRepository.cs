@@ -39,24 +39,26 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update Driver 
-
-        public async Task<Driver> PutDriver(int id)
+        // Update driver by id 
+        public async Task<bool> UpdateDriver(Driver driver)
         {
-            var Driver = _appDbContext.Drivers.FirstOrDefaultAsync(Driver_x => Driver_x.DriverId == id);
-            _appDbContext.Drivers.Update(await Driver);
-            await _appDbContext.SaveChangesAsync();
-            return await Driver;
+            var up_driver = await GetDriver(driver.DriverId);
+            up_driver.DocumentNumber = driver.DocumentNumber;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Driver by id 
 
-        public async Task<Driver> DeleteDriver(int id)
+        // Remove driver by id
+        public async Task<bool> DeleteDriver(int id)
         {
-            var Driver = await _appDbContext.Drivers.FirstOrDefaultAsync(Driver_x => Driver_x.DriverId == id);
-            _appDbContext.Drivers.Remove(Driver);
-            await _appDbContext.SaveChangesAsync();
-            return Driver;
+            var up_driver = await GetDriver(id);
+            _appDbContext.Drivers.Remove(up_driver);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
+
+
     }
 }

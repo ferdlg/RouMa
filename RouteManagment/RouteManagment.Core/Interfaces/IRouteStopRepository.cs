@@ -7,8 +7,7 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<RoutesStop>> GetRoutesStops();
         Task<RoutesStop> GetRoutesStop(int id);
         Task PostRoutesStop(RoutesStop RoutesStop);
-        Task<RoutesStop> PutRoutesStop(int id);
-
-        Task<RoutesStop> DeleteRoutesStop(int id);
+        Task<bool> UpdateRouteStop(RoutesStop routeStop);
+        Task<bool> DeleteRouteStop(int id);
     }
 }

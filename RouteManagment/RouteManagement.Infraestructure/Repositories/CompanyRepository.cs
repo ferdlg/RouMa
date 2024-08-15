@@ -44,24 +44,26 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update company 
-
-        public async Task<Company> PutCompany(int id)
+        // Update company by id 
+        public async Task<bool> UpdateCompany(Company company)
         {
-            var company = _appDbContext.Companies.FirstOrDefaultAsync(Company_x => Company_x.CompanyId == id);
-            _appDbContext.Companies.Update(await company);
-            await _appDbContext.SaveChangesAsync();
-            return await company;
+            var up_company = await GetCompany(company.CompanyId);
+            up_company.Name = company.Name;
+            up_company.Description = company.Description;
+            up_company.AddressId = company.AddressId;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove company by id 
 
-        public async Task<Company> DeleteCompany(int id)
+        // Remove company by id
+        public async Task<bool> Deletecompany(int id)
         {
-            var company = await _appDbContext.Companies.FirstOrDefaultAsync(Company_x => Company_x.CompanyId == id);
-            _appDbContext.Companies.Remove(company);
-            await _appDbContext.SaveChangesAsync();
-            return company;
+            var up_company = await GetCompany(id);
+            _appDbContext.Companies.Remove(up_company);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

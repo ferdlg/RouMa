@@ -9,8 +9,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<Administrator> GetAdministrator(int id);
 
         Task PostAdministrator(Administrator administrator);
-        Task<Administrator> PutAdministrator(int id);
+        Task<bool> UpdateAdministrator(Administrator administrator);
 
-        Task<Administrator> DeleteAdministrator(int id);
+        Task<bool> DeleteAdministrator(int id);
     }
 }

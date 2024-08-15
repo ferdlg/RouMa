@@ -58,11 +58,13 @@ namespace RouteManagment.Server.Controllers
         //Request to update address
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutAddress(int id)
+        public async Task<IActionResult> UpdateAddress(int id, AddressDto addressDto)
         {
-            var address = await _addressRepository.PutAddress(id);
-            var addressesDto = _mapper.Map<AddressDto>(address);
-            return Ok(addressesDto);
+            var address = _mapper.Map<Address>(addressDto);
+            address.AddressId = id;
+
+            await _addressRepository.UpdateAddress(address);
+            return Ok(address);
         }
         //Request to remove address by id 
         [HttpDelete("{id}")]
@@ -70,9 +72,9 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> DeleteAddress(int id)
         {
             {
-                var address = await _addressRepository.DeleteAddress(id);
-                var addressesDto = _mapper.Map<AddressDto>(address);
-                return Ok(addressesDto);
+                
+                var result = await _addressRepository.DeleteAddress(id);
+                return Ok(result);
             }
         }
 

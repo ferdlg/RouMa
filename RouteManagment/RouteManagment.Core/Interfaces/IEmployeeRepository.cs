@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Employee>> GetEmployees();
         Task<Employee> GetEmployee(int id);
         Task PostEmployee(Employee Employee);
-        Task<Employee> PutEmployee(int id);
+        Task<bool> UpdateEmployee(Employee employee);
 
-        Task<Employee> DeleteEmployee(int id);
+        Task<bool> DeleteEmployee(int id);
     }
 }

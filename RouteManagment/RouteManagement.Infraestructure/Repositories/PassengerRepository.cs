@@ -43,25 +43,24 @@ namespace ManejoRutas.Infrastructure.Repositories
             await _appDbContext.SaveChangesAsync();
 
         }
-
-        //Update Passenger 
-
-        public async Task<Passenger> PutPassenger(int id)
+        // Update passenger by id 
+        public async Task<bool> UpdatePassenger(Passenger passenger)
         {
-            var Passenger = _appDbContext.Passengers.FirstOrDefaultAsync(Passenger_x => Passenger_x.PassengerId == id);
-            _appDbContext.Passengers.Update(await Passenger);
-            await _appDbContext.SaveChangesAsync();
-            return await Passenger;
+            var up_passenger = await GetPassenger(passenger.PassengerId);
+            up_passenger.DocumentNumber = passenger.DocumentNumber;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Passenger by id 
 
-        public async Task<Passenger> DeletePassenger(int id)
+        // Remove passenger by id
+        public async Task<bool> DeletePassenger(int id)
         {
-            var Passenger = await _appDbContext.Passengers.FirstOrDefaultAsync(Passenger_x => Passenger_x.PassengerId == id);
-            _appDbContext.Passengers.Remove(Passenger);
-            await _appDbContext.SaveChangesAsync();
-            return Passenger;
+            var up_passenger = await GetPassenger(id);
+            _appDbContext.Passengers.Remove(up_passenger);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -55,22 +56,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(Driver);
         }
 
-        //Request to update Driver
+        //Request to update driver
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDriver(int id)
-        {
-            var Driver = await _DriverRepository.PutDriver(id);
-            var documenTypeDto = _mapper.Map<DriverDto>(Driver);
-            return Ok(documenTypeDto);
-        }
 
-        //Request to remove Driver 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDriver(int id)
+        public async Task<IActionResult> Updatedriver(int id, DriverDto driverDto)
         {
-            var Driver = await _DriverRepository.DeleteDriver(id);
-            var documenTypeDto = _mapper.Map<DriverDto>(Driver);
-            return Ok(documenTypeDto);
+            var driver = _mapper.Map<Driver>(driverDto);
+            driver.DriverId = id;
+
+            await _DriverRepository.UpdateDriver(driver);
+            return Ok(driver);
+        }
+        //Request to remove driver by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Deletedriver(int id)
+        {
+            {
+
+                var result = await _DriverRepository.DeleteDriver(id);
+                return Ok(result);
+            }
         }
 
     } 

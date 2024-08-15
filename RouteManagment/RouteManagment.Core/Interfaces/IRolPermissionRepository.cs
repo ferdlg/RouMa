@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<RolesPermission>> GetRolPermissions();
         Task<RolesPermission> GetRolPermission(int id);
         Task PostRolPermission(RolesPermission RolPermission);
-        Task<RolesPermission> PutRolPermission(int id);
+        Task<bool> UpdateRolPermission(RolesPermission rolPermission);
 
-        Task<RolesPermission> DeleteRolPermission(int id);
+        Task<bool> DeleteRolPermission(int id);
     }
 }

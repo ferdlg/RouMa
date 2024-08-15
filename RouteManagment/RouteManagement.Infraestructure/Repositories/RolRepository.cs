@@ -39,24 +39,24 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update rol 
-
-        public async Task<Role> PutRol(int id)
+        // Update rol by id 
+        public async Task<bool> UpdateRol(Role rol)
         {
-            var rol = _appDbContext.Roles.FirstOrDefaultAsync(rol_x => rol_x.RolId == id);
-            _appDbContext.Roles.Update(await rol);
-            await _appDbContext.SaveChangesAsync();
-            return await rol;
+            var up_rol = await GetRol(rol.RolId);
+            up_rol.Name = rol.Name;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove rol by id 
 
-        public async Task<Role> DeleteRol(int id)
+        // Remove rol by id
+        public async Task<bool> DeleteRol(int id)
         {
-            var rol = await _appDbContext.Roles.FirstOrDefaultAsync(rol_x => rol_x.RolId == id);
-            _appDbContext.Roles.Remove(rol);
-            await _appDbContext.SaveChangesAsync();
-            return rol;
+            var up_rol = await GetRol(id);
+            _appDbContext.Roles.Remove(up_rol);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

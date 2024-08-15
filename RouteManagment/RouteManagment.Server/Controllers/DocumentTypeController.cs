@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -54,25 +55,28 @@ namespace RouteManagment.Server.Controllers
             await _DocumentTypeRepository.PostDocumentType(documentType);
             return Ok(documentType);
         }
+            //Request to update documentType
+            [HttpPut("{id}")]
 
-        //Request to update DocumentType
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDocumentType(int id)
-        {
-            var documentType = await _DocumentTypeRepository.PutDocumentType(id);
-            var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documenTypeDto);
-        }
+            public async Task<IActionResult> UpdatedocumentType(int id, DocumentTypeDto documentTypeDto)
+            {
+                var documentType = _mapper.Map<DocumentType>(documentTypeDto);
+                documentType.DocumentTypeId = id;
 
-        //Request to remove DocumentType 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDocumentType(int id)
-        {
-            var documentType = await _DocumentTypeRepository.DeleteDocumentType(id);
-            var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documenTypeDto);
-        }
+                await _DocumentTypeRepository.UpdateDocumentType(documentType);
+                return Ok(documentType);
+            }
+            //Request to remove documentType by id 
+            [HttpDelete("{id}")]
 
+            public async Task<IActionResult> DeletedocumentType(int id)
+            {
+                {
+
+                    var result = await _DocumentTypeRepository.DeleteDocumentType(id);
+                    return Ok(result);
+                }
+            }
     } 
 }
 

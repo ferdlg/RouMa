@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -55,22 +56,27 @@ namespace RouteManagment.Server.Controllers
             return Ok(rolPermission);
         }
 
-        //Request to update RolPermission
+        //Request to update rolPermission
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRolPermission(int id)
-        {
-            var rolPermission = await _RolPermissionRepository.PutRolPermission(id);
-            var rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
-            return Ok(rolPermissionDto);
-        }
 
-        //Request to remove RolPermission 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRolPermission(int id)
+        public async Task<IActionResult> UpdaterolPermission(int id, RolPermisionDto rolPermissionDto)
         {
-            var rolPermission = await _RolPermissionRepository.DeleteRolPermission(id);
-            var rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
-            return Ok(rolPermissionDto);
+            var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
+            rolPermission.RolPermissionId = id;
+
+            await _RolPermissionRepository.UpdateRolPermission(rolPermission);
+            return Ok(rolPermission);
+        }
+        //Request to remove rolPermission by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleterolPermission(int id)
+        {
+            {
+
+                var result = await _RolPermissionRepository.DeleteRolPermission(id);
+                return Ok(result);
+            }
         }
 
     } 

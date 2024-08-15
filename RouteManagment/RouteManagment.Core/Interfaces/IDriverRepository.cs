@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Driver>> GetDrivers();
         Task<Driver> GetDriver(int id);
         Task PostDriver(Driver Driver);
-        Task<Driver> PutDriver(int id);
+        Task<bool> UpdateDriver(Driver driver);
 
-        Task<Driver> DeleteDriver(int id);
+        Task<bool> DeleteDriver(int id);
     }
 }

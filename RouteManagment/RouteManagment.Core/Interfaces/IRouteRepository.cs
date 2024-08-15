@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Route>> GetRoutes();
         Task<Route> GetRoute(int id);
         Task PostRoute(Route Route);
-        Task<Route> PutRoute(int id);
+        Task<bool> UpdateRoute(Route route);
 
-        Task<Route> DeleteRoute(int id);
+        Task<bool> DeleteRoute(int id);
     }
 }

@@ -1,6 +1,7 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -54,23 +55,27 @@ namespace RouteManagment.Server.Controllers
             await _PermissionRepository.PostPermission(permission);
             return Ok(permission);
         }
-
         //Request to update permission
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPermission(int id)
-        {
-            var permission = await _PermissionRepository.PutPermission(id);
-            var permissionDto = _mapper.Map<PermissionDto>(permission);
-            return Ok(permissionDto);
-        }
 
-        //Request to remove permission 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePermission(int id)
+        public async Task<IActionResult> Updatepermission(int id, PermissionDto permissionDto)
         {
-            var permission = await _PermissionRepository.DeletePermission(id);
-            var permissionDto = _mapper.Map<PermissionDto>(permission);
-            return Ok(permissionDto);
+            var permission = _mapper.Map<Permission>(permissionDto);
+            permission.PermissionId = id;
+
+            await _PermissionRepository.UpdatePermission(permission);
+            return Ok(permission);
+        }
+        //Request to remove permission by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Deletepermission(int id)
+        {
+            {
+
+                var result = await _PermissionRepository.DeletePermission(id);
+                return Ok(result);
+            }
         }
 
     } 

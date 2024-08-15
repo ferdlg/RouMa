@@ -44,24 +44,24 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update Route 
-
-        public async Task<Route> PutRoute(int id)
+        // Update route by id 
+        public async Task<bool> UpdateRoute(Route route)
         {
-            var route = _appDbContext.Routes.FirstOrDefaultAsync(Route_x => Route_x.RouteId == id);
-            _appDbContext.Routes.Update(await route);
-            await _appDbContext.SaveChangesAsync();
-            return await route;
+            var up_route = await GetRoute(route.RouteId);
+            up_route.Description = route.Description;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Route by id 
 
-        public async Task<Route> DeleteRoute(int id)
+        // Remove route by id
+        public async Task<bool> DeleteRoute(int id)
         {
-            var route = await _appDbContext.Routes.FirstOrDefaultAsync(Route_x => Route_x.RouteId == id);
-            _appDbContext.Routes.Remove(route);
-            await _appDbContext.SaveChangesAsync();
-            return route;
+            var up_route = await GetRoute(id);
+            _appDbContext.Routes.Remove(up_route);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

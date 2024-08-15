@@ -8,9 +8,9 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Company>> GetCompanies();
         Task<Company> GetCompany(int id);
         Task PostCompany(Company Company);
-        Task<Company> PutCompany(int id);
+        Task<bool> UpdateCompany(Company company);
 
-        Task<Company> DeleteCompany(int id);
+        Task<bool> Deletecompany(int id);
 
     }
 }

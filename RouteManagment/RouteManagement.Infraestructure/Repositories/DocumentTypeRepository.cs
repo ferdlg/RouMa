@@ -39,24 +39,25 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update DocumentType 
-
-        public async Task<DocumentType> PutDocumentType(int id)
+        // Update documentType by id 
+        public async Task<bool> UpdateDocumentType(DocumentType documentType)
         {
-            var DocumentType = _appDbContext.DocumentTypes.FirstOrDefaultAsync(DocumentType_x => DocumentType_x.DocumentTypeId == id);
-            _appDbContext.DocumentTypes.Update(await DocumentType);
-            await _appDbContext.SaveChangesAsync();
-            return await DocumentType;
+            var up_documentType = await GetDocumentType(documentType.DocumentTypeId);
+            up_documentType.Name = documentType.Name;
+            up_documentType.Description = documentType.Description;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove DocumentType by id 
 
-        public async Task<DocumentType> DeleteDocumentType(int id)
+        // Remove documentType by id
+        public async Task<bool> DeleteDocumentType(int id)
         {
-            var DocumentType = await _appDbContext.DocumentTypes.FirstOrDefaultAsync(DocumentType_x => DocumentType_x.DocumentTypeId == id);
-            _appDbContext.DocumentTypes.Remove(DocumentType);
-            await _appDbContext.SaveChangesAsync();
-            return DocumentType;
+            var up_documentType = await GetDocumentType(id);
+            _appDbContext.DocumentTypes.Remove(up_documentType);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

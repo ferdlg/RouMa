@@ -12,8 +12,8 @@ namespace ManejoRutas.Core.Interfaces
         Task<IEnumerable<Permission>> GetPermissions();
         Task<Permission> GetPermission(int id);
         Task PostPermission(Permission Permission);
-        Task<Permission> PutPermission(int id);
+        Task<bool> UpdatePermission(Permission permission);
 
-        Task<Permission> DeletePermission(int id);
+        Task<bool> DeletePermission(int id);
     }
 }
