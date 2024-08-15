@@ -13,6 +13,7 @@ Optimizar el proceso de rutas de transporte mediante la integración de solicitu
 ## Documentación 
 
 En este repositorio podrá encontrar la documentacion respectiva del proyecto:
+- Definicion el proyecto.
 - Modelo relacional.
 - Casos de uso.
 - Requisitos funcionales y no funcionales
