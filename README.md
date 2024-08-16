@@ -17,7 +17,6 @@ En este repositorio podrá encontrar la documentacion respectiva del proyecto:
 - Modelo relacional.
 - Casos de uso.
 - Requisitos funcionales y no funcionales
-- Historias de usuario
 - Manual Tecnico
 - Manual de usuario
 - Manual de pruebas
