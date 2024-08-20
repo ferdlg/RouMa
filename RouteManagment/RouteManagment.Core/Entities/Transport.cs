@@ -9,21 +9,17 @@ public partial class Transport
 
     public int Capacity { get; set; }
 
-    public int StatusId { get; set; }
+    public int StateId { get; set; }
 
     public int? RouteId { get; set; }
 
     public int? TransportTypeId { get; set; }
 
-    public int? CompanyId { get; set; }
-
-    public virtual Company? Company { get; set; }
-
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Person> Employees { get; set; } = new List<Person>();
 
     public virtual Route? Route { get; set; }
 
-    public virtual TransportStatus Status { get; set; } = null!;
+    public virtual TransportState State { get; set; } = null!;
 
     public virtual TransportType? TransportType { get; set; }
 }

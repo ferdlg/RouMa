@@ -11,7 +11,7 @@ public partial class Role
 
     public string Description { get; set; } = null!;
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Person> People { get; set; } = new List<Person>();
 
     public virtual ICollection<RolesPermission> RolesPermissions { get; set; } = new List<RolesPermission>();
 }

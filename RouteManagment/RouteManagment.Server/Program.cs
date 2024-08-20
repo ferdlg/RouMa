@@ -17,7 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Add filter validations from App 
-builder.Services.AddMvc(options =>
+IMvcBuilder mvcBuilder = builder.Services.AddMvc(options =>
 {
     options.Filters.Add<ValidationFilter>();
 }).AddFluentValidation(options =>
@@ -41,7 +41,9 @@ builder.Services.AddTransient<IAdministratorRepository, AdministratorRepository>
 builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
 builder.Services.AddTransient<IDocumentTypeRepository, DocumentTypeRepository>();
 builder.Services.AddTransient<IDriverRepository, DriverRepository>();
-builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddTransient<IDrivingLicenseTypeRepository, DrivingLicenseTypeRepository>();
+builder.Services.AddTransient<IHeadquarterRespository, HeadquarterRepository>();
+builder.Services.AddTransient<IPeopleRepository, PeopleRepository>();
 builder.Services.AddTransient<IPassengerRepository, PassengerRepository>();
 builder.Services.AddTransient<IPermissionRepository, PermissionRepository>();
 builder.Services.AddTransient<IRolRepository, RolRepository>();
@@ -52,7 +54,7 @@ builder.Services.AddTransient<IStopRepository, StopRepository>();
 builder.Services.AddTransient<IStreetTypeRepository, StreetTypeRepository>();
 builder.Services.AddTransient<ITransportRepository, TransportRepository>();
 builder.Services.AddTransient<ITransportRequestRepository, TransportRequestRepository>();
-builder.Services.AddTransient<ITransportStatusRepository, TransportStatusRepository>();
+builder.Services.AddTransient<ITransportStateRepository, TransportStateRepository>();
 builder.Services.AddTransient<ITransportTypeRepository, TransportTypeRepository>();
 
 

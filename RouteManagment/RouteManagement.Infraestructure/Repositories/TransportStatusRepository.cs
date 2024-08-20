@@ -10,56 +10,56 @@ using System.Threading.Tasks;
 
 namespace ManejoRutas.Infrastructure.Repositories
 {
-    public class TransportStatusRepository : ITransportStatusRepository
+    public class TransportStateRepository : ITransportStateRepository
     {
         //logic for Crud Methods 
 
         private readonly AppDbContext _appDbContext;
 
-        public TransportStatusRepository(AppDbContext appDbContext)
+        public TransportStateRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
 
-        //List all TransportStatus
-        public async Task<IEnumerable<TransportStatus>> GetTransportStatuss()
+        //List all TransportState
+        public async Task<IEnumerable<TransportState>> GetTransportStates()
         {
-            var transportStatus = await _appDbContext.TransportStatuses.ToListAsync();
-            return transportStatus;
+            var transportState = await _appDbContext.TransportStates.ToListAsync();
+            return transportState;
         }
 
-        //List TransportStatus by id 
-        public async Task<TransportStatus> GetTransportStatus(int id)
+        //List TransportState by id 
+        public async Task<TransportState> GetTransportState(int id)
         {
-            var transportStatus = await _appDbContext.TransportStatuses.FirstOrDefaultAsync(TransportStatus_x => TransportStatus_x.StatusId== id);
-            return transportStatus;
+            var transportState = await _appDbContext.TransportStates.FirstOrDefaultAsync(TransportState_x => TransportState_x.StateId== id);
+            return transportState;
         }
 
-        // Create TransportStatus
+        // Create TransportState
 
-        public async Task PostTransportStatus(TransportStatus TransportStatus)
+        public async Task PostTransportState(TransportState TransportState)
         {
-            _appDbContext.TransportStatuses.Add(TransportStatus);
+            _appDbContext.TransportStates.Add(TransportState);
             await _appDbContext.SaveChangesAsync();
 
         }
 
-        // Update transportStatus by id 
-        public async Task<bool> UpdatetransportStatus(TransportStatus transportStatus)
+        // Update transportState by id 
+        public async Task<bool> UpdatetransportState(TransportState transportState)
         {
-            var up_transportStatus = await GetTransportStatus(transportStatus.StatusId);
-            up_transportStatus.Status = transportStatus.Status;
+            var up_transportState = await GetTransportState(transportState.StateId);
+            up_transportState.State = transportState.State;
 
             int rows = await _appDbContext.SaveChangesAsync();
             return rows > 0;
         }
 
 
-        // Remove transportStatus by id
-        public async Task<bool> DeleteTransportStatus(int id)
+        // Remove transportState by id
+        public async Task<bool> DeleteTransportState(int id)
         {
-            var up_transportStatus = await GetTransportStatus(id);
-            _appDbContext.TransportStatuses.Remove(up_transportStatus);
+            var up_transportState = await GetTransportState(id);
+            _appDbContext.TransportStates.Remove(up_transportState);
             int rows = await _appDbContext.SaveChangesAsync();
             return rows > 0;
         }

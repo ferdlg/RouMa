@@ -48,7 +48,8 @@ namespace ManejoRutas.Infrastructure.Repositories
         public async Task<bool> UpdateRoute(Route route)
         {
             var up_route = await GetRoute(route.RouteId);
-            up_route.Description = route.Description;
+            up_route.AddressOriginId = route.AddressOriginId;
+            up_route.AddressHeadQuarterId = route.AddressHeadQuarterId;
 
             int rows = await _appDbContext.SaveChangesAsync();
             return rows > 0;

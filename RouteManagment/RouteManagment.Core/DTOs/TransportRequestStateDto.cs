@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace RouteManagment.Core.DTOs
 {
-    public class TransportStatusDto
+    public class TransportRequestStateDto
     {
-        public int StatusId { get; set; }
+        public int StateId { get; set; }
 
-        public string Status { get; set; } = null!;
+        public string State { get; set; } = null!;
 
     }
 }

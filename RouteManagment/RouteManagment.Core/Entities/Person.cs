@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Employee
+public partial class Person
 {
     public int DocumentNumber { get; set; }
 
@@ -23,13 +23,11 @@ public partial class Employee
 
     public int? CompanyId { get; set; }
 
-    public int? TransportPlate { get; set; }
 
     public virtual Address? Address { get; set; }
 
     public virtual ICollection<Administrator> Administrators { get; set; } = new List<Administrator>();
 
-    public virtual Company? Company { get; set; }
 
     public virtual DocumentType? DocumentType { get; set; }
 

@@ -7,7 +7,13 @@ public partial class Route
 {
     public int RouteId { get; set; }
 
-    public string? Description { get; set; }
+    public int AddressOriginId { get; set; }
+
+    public int AddressHeadQuarterId { get; set; }
+
+    public virtual Address AddressIdNavigation{ get; set; } = null!;
+
+    public virtual Headquarter HeadQuarterIdNavigation{ get; set; } = null!;
 
     public virtual ICollection<RoutesStop> RoutesStops { get; set; } = new List<RoutesStop>();
 

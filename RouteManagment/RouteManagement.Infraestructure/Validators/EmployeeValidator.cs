@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RouteManagement.Infraestructure.Validators
 {
-    public class EmployeeValidator : AbstractValidator<EmployeeDto>
+    public class EmployeeValidator : AbstractValidator<PeopleDto>
     {
         public EmployeeValidator()
         {

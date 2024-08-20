@@ -18,9 +18,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
             builder.ToTable("routes");
 
             builder.Property(e => e.RouteId).HasColumnType("int(11)");
-            builder.Property(e => e.Description)
-                .HasMaxLength(200)
-                .HasDefaultValueSql("'NULL'");
+            builder.Property(e => e.AddressOriginId).HasColumnType("int(11)");
+            builder.Property(e => e.AddressHeadQuarterId).HasColumnType("int(11)");
+
         }
     }
 }

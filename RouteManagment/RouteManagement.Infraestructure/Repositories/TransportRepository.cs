@@ -44,9 +44,8 @@ namespace ManejoRutas.Infrastructure.Repositories
         {
             var up_transport = await GetTransport(transport.Plate);
             up_transport.Capacity = transport.Capacity;
-            up_transport.StatusId = transport.StatusId;
+            up_transport.StateId = transport.StateId;
             up_transport.RouteId = transport.RouteId;
-            up_transport.CompanyId = transport.CompanyId;
 
             int rows = await _appDbContext.SaveChangesAsync();
             return rows > 0;

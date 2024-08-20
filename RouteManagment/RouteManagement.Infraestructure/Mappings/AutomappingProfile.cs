@@ -28,8 +28,8 @@ namespace RouteManagement.Infraestructure.Mappings
             CreateMap<Driver, DriverDto>();
             CreateMap<DriverDto, Driver>();
 
-            CreateMap<Employee, EmployeeDto>();
-            CreateMap<EmployeeDto, Employee>();
+            CreateMap<Person, PeopleDto>();
+            CreateMap<PeopleDto, Person>();
 
             CreateMap<Passenger, PassengerDto>();
             CreateMap<PassengerDto, Passenger>();
@@ -61,8 +61,8 @@ namespace RouteManagement.Infraestructure.Mappings
             CreateMap<TransportRequest, TransportRequestDto>();
             CreateMap<TransportRequestDto, TransportRequestDto>();
 
-            CreateMap<TransportStatus, TransportStatusDto>();
-            CreateMap<TransportStatusDto, TransportStatus>();
+            CreateMap<TransportState, TransportStateDto>();
+            CreateMap<TransportStateDto, TransportState>();
 
             CreateMap<TransportType, TransportTypeDto>();
             CreateMap<TransportTypeDto, TransportType>();

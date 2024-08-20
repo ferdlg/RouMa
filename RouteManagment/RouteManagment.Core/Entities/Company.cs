@@ -15,7 +15,7 @@ public partial class Company
 
     public virtual Address Address { get; set; } = null!;
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<Person> Employees { get; set; } = new List<Person>();
 
     public virtual ICollection<TransportRequest> TransportRequests { get; set; } = new List<TransportRequest>();
 

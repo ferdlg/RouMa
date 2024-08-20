@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RouteManagment.Core.DTOs
 {
-    public class EmployeeDto
+    public class PeopleDto
     {
         public int DocumentNumber { get; set; }
 

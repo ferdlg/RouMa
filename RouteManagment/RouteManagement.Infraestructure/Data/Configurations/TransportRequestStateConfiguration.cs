@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RouteManagement.Infraestructure.Data.Configurations
 {
-    public class TransportStateConfiguration : IEntityTypeConfiguration<TransportState>
+    public class TransportRequestStateConfiguration : IEntityTypeConfiguration<TransportState>
     {
         public void Configure(EntityTypeBuilder<TransportState> builder)
         {

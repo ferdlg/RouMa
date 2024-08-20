@@ -12,7 +12,7 @@ namespace RouteManagment.Core.DTOs
 
         public int Capacity { get; set; }
 
-        public int StatusId { get; set; }
+        public int StateId { get; set; }
 
         public int? RouteId { get; set; }
 

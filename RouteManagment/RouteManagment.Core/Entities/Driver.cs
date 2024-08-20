@@ -7,7 +7,18 @@ public partial class Driver
 {
     public int DriverId { get; set; }
 
+    public int DrivingLicenseNumber { get; set; }
+
     public int DocumentNumber { get; set; }
 
-    public virtual Employee DocumentNumberNavigation { get; set; } = null!;
+    public int TypelicenseId { get; set; }
+
+    public string ? PlateTransport {  get; set; }
+
+    public virtual Person DocumentNumberNavigation { get; set; } = null!;
+
+    public virtual DrivingLicenseType TypeLicenseIdNavigation { get; set; } = null!;
+
+    public virtual Transport PlateTransportNavigation { get; set; } = null!;
+
 }

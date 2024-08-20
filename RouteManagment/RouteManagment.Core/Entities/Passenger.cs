@@ -9,5 +9,5 @@ public partial class Passenger
 
     public int DocumentNumber { get; set; }
 
-    public virtual Employee DocumentNumberNavigation { get; set; } = null!;
+    public virtual Person DocumentNumberNavigation { get; set; } = null!;
 }

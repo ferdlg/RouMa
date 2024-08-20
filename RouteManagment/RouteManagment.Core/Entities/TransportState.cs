@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class TransportStatus
+public partial class TransportState
 {
-    public int StatusId { get; set; }
+    public int StateId { get; set; }
 
-    public string Status { get; set; } = null!;
+    public string State { get; set; } = null!;
 
     public virtual ICollection<Transport> Transports { get; set; } = new List<Transport>();
 }

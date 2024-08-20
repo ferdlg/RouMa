@@ -6,7 +6,7 @@ public partial class Administrator
 
     public int DocumentNumber { get; set; }
 
-    public virtual Employee DocumentNumberNavigation { get; set; } = null!;
+    public virtual Person DocumentNumberNavigation { get; set; } = null!;
 
     public virtual ICollection<TransportRequest> TransportRequests { get; set; } = new List<TransportRequest>();
 }
