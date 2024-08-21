@@ -13,7 +13,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<RolesPermission> builder)
         {
-            builder.HasKey(e => e.RolPermissionId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("roles_permissions");
 
@@ -21,7 +21,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.RolId, "RolId");
 
-            builder.Property(e => e.RolPermissionId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.PermissionId).HasColumnType("int(11)");
             builder.Property(e => e.RolId).HasColumnType("int(11)");
 

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Passenger
+public partial class Passenger : BaseEntity
 {
-    public int PassengerId { get; set; }
+    // public int PassengerId { get; set; }
 
     public int DocumentNumber { get; set; }
 

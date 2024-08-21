@@ -4,8 +4,10 @@ using ManejoRutas.Core.Interfaces;
 using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RouteManagement.Infraestructure.Filters;
+using RouteManagement.Infraestructure.Repositories;
 using RouteManagement.Infraestructure.Validators;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 using RouteManagment.Server.Data;
 
 
@@ -34,30 +36,9 @@ builder.Services.AddSwaggerGen();
 var conectionString = builder.Configuration.GetConnectionString("AppDbConnectionString");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)));
 
-// ID Interface registration
+// ID Interface registration --> Implementacion Generica
 
-builder.Services.AddTransient<IAddressRepository, AddressRepository>();
-builder.Services.AddTransient<IAdministratorRepository, AdministratorRepository>();
-builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
-builder.Services.AddTransient<IDocumentTypeRepository, DocumentTypeRepository>();
-builder.Services.AddTransient<IDriverRepository, DriverRepository>();
-builder.Services.AddTransient<IDrivingLicenseTypeRepository, DrivingLicenseTypeRepository>();
-builder.Services.AddTransient<IHeadquarterRespository, HeadquarterRepository>();
-builder.Services.AddTransient<IPeopleRepository, PeopleRepository>();
-builder.Services.AddTransient<IPassengerRepository, PassengerRepository>();
-builder.Services.AddTransient<IPermissionRepository, PermissionRepository>();
-builder.Services.AddTransient<IRolRepository, RolRepository>();
-builder.Services.AddTransient<IRolPermissionRepository, RolPermissionRepository>();
-builder.Services.AddTransient<IRouteRepository, RouteRepository>();
-builder.Services.AddTransient<IRouteStopRepository, RouteStopRepository>();
-builder.Services.AddTransient<IStopRepository, StopRepository>();
-builder.Services.AddTransient<IStreetTypeRepository, StreetTypeRepository>();
-builder.Services.AddTransient<ITransportRepository, TransportRepository>();
-builder.Services.AddTransient<ITransportRequestRepository, TransportRequestRepository>();
-builder.Services.AddTransient<ITransportStateRepository, TransportStateRepository>();
-builder.Services.AddTransient<ITransportTypeRepository, TransportTypeRepository>();
-
-
+builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
 var app = builder.Build();
 

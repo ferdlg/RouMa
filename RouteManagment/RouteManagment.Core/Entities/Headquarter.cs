@@ -1,8 +1,8 @@
 ﻿namespace RouteManagment.Core.Entities;
 
-public partial class Headquarter
+public partial class Headquarter : BaseEntity
 {
-    public int HeadQuarterId { get; set; }
+    //public int HeadQuarterId { get; set; }
 
     public int AddressId { get; set; }
 

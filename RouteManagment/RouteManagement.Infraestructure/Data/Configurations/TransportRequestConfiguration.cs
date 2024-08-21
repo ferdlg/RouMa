@@ -13,7 +13,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TransportRequest> builder)
         {
-            builder.HasKey(e => e.RequestId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("transport_requests");
 
@@ -23,7 +23,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.TransportTypeId, "TransportTypeId");
 
-            builder.Property(e => e.RequestId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.AdministratorId).HasColumnType("int(11)");
             builder.Property(e => e.CompanyId).HasColumnType("int(11)");
             builder.Property(e => e.Date).HasColumnType("datetime");

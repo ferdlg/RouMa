@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Transport
+public partial class Transport 
 {
     public int Plate { get; set; }
 

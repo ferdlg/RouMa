@@ -13,11 +13,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Route> builder)
         {
-            builder.HasKey(e => e.RouteId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("routes");
 
-            builder.Property(e => e.RouteId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.AddressOriginId).HasColumnType("int(11)");
             builder.Property(e => e.AddressHeadQuarterId).HasColumnType("int(11)");
 

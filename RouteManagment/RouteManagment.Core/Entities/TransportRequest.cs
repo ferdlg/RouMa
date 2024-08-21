@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class TransportRequest
+public partial class TransportRequest : BaseEntity
 {
-    public int RequestId { get; set; }
+    // public int RequestId { get; set; }
 
     public DateTime Date { get; set; }
 

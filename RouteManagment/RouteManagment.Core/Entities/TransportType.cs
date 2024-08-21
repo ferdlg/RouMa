@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class TransportType
+public partial class TransportType : BaseEntity
 {
-    public int TransportTypeId { get; set; }
+    // public int TransportTypeId { get; set; }
 
     public string? Name { get; set; }
 

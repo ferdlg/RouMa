@@ -1,8 +1,8 @@
 ﻿namespace RouteManagment.Core.Entities;
 
-public partial class DrivingLicenseType
+public partial class DrivingLicenseType : BaseEntity
 {
-    public int TypeLicenseId { get; set; }
+    //public int TypeLicenseId { get; set; }
 
     public string Name { get; set; } = null!;
 

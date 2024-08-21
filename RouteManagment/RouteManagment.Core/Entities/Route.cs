@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Route
+public partial class Route : BaseEntity
 {
-    public int RouteId { get; set; }
+    // public int RouteId { get; set; }
 
     public int AddressOriginId { get; set; }
 

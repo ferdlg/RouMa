@@ -13,11 +13,12 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TransportState> builder)
         {
-            builder.HasKey(e => e.StateId).HasName("PRIMARY");
+        {
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("transport_States");
 
-            builder.Property(e => e.StateId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.State).HasMaxLength(50);
         }
     }

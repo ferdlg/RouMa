@@ -13,11 +13,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            builder.HasKey(e => e.PermissionId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("permissions");
 
-            builder.Property(e => e.PermissionId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Driver
+public partial class Driver : BaseEntity
 {
-    public int DriverId { get; set; }
+    //public int DriverId { get; set; }
 
     public int DrivingLicenseNumber { get; set; }
 

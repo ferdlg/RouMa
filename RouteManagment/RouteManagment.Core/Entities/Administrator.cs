@@ -1,8 +1,8 @@
 ﻿namespace RouteManagment.Core.Entities;
 
-public partial class Administrator
+public partial class Administrator : BaseEntity
 {
-    public int AdministratorId { get; set; }
+    //public int AdministratorId { get; set; }
 
     public int DocumentNumber { get; set; }
 

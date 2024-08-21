@@ -10,13 +10,13 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
     {
         public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.HasKey(e => e.AddressId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("addresses");
 
             builder.HasIndex(e => e.StreetTypeId, "StreetTypeId");
 
-            builder.Property(e => e.AddressId).HasColumnType("int(11)");
+            builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.Plate)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");
