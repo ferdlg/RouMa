@@ -21,7 +21,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
            builder.HasIndex(e => e.StopId, "StopId");
 
-           builder.Property(e => e.Id).HasColumnType("int(11)");
+           builder.Property(e => e.Id)
+                .HasColumnName("RouteStopId")
+                .HasColumnType("int(11)");
            builder.Property(e => e.RouteId).HasColumnType("int(11)");
            builder.Property(e => e.StopId).HasColumnType("int(11)");
 

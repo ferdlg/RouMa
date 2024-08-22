@@ -19,7 +19,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.AddressId, "AddressId");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("StopId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.AddressId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Address).WithMany(p => p.Stops)

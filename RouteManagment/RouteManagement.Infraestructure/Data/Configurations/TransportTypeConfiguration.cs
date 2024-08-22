@@ -17,7 +17,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("transport_types");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("TransportTypeId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Description)
                 .HasMaxLength(200)
                 .HasDefaultValueSql("'NULL'");

@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 
@@ -17,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class DrivingLicenseTypeController : ControllerBase
     {
-        private readonly IDrivingLicenseTypeRepository _DrivingLicenseTypeRepository;
+        private readonly IRepository<DrivingLicenseType> _DrivingLicenseTypeRepository;
         private readonly IMapper _mapper;
 
-        public DrivingLicenseTypeController(IDrivingLicenseTypeRepository DrivingLicenseTypeRepository, IMapper mapper)
+        public DrivingLicenseTypeController(IRepository<DrivingLicenseType> DrivingLicenseTypeRepository, IMapper mapper)
         {
             _DrivingLicenseTypeRepository = DrivingLicenseTypeRepository;
             _mapper = mapper;
@@ -28,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all DrivingLicenseTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetDrivingLicenseTypes()
+        public async Task<IActionResult> GetAll()
         {
-            var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetDrivingLicenseTypes();
+            var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetAll();
             var DrivingLicenseTypeDto = _mapper.Map<IEnumerable<DrivingLicenseTypeDto>>(DrivingLicenseType);
             return Ok(DrivingLicenseTypeDto);
         }
@@ -38,9 +39,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetDrivingLicenseType(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetDrivingLicenseType(id);
+            var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetById(id);
             var documenTypeDto = _mapper.Map<DrivingLicenseTypeDto>(DrivingLicenseType);
             return Ok(DrivingLicenseType);
         }
@@ -49,32 +50,32 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostDrivingLicenseType(DrivingLicenseTypeDto DrivingLicenseTypeDto)
+        public async Task<IActionResult> Add(DrivingLicenseTypeDto DrivingLicenseTypeDto)
         {
             var DrivingLicenseType = _mapper.Map<DrivingLicenseType>(DrivingLicenseTypeDto);
-            await _DrivingLicenseTypeRepository.PostDrivingLicenseType(DrivingLicenseType);
+            await _DrivingLicenseTypeRepository.Add(DrivingLicenseType);
             return Ok(DrivingLicenseType);
         }
             //Request to update DrivingLicenseType
             [HttpPut("{id}")]
 
-            public async Task<IActionResult> UpdateDrivingLicenseType(int id, DrivingLicenseTypeDto DrivingLicenseTypeDto)
+            public async Task<IActionResult> Update(int id, DrivingLicenseTypeDto DrivingLicenseTypeDto)
             {
                 var DrivingLicenseType = _mapper.Map<DrivingLicenseType>(DrivingLicenseTypeDto);
                 DrivingLicenseType.Id = id;
 
-                await _DrivingLicenseTypeRepository.UpdateDrivingLicenseType(DrivingLicenseType);
+                await _DrivingLicenseTypeRepository.Update(DrivingLicenseType);
                 return Ok(DrivingLicenseType);
             }
             //Request to remove DrivingLicenseType by id 
             [HttpDelete("{id}")]
 
-            public async Task<IActionResult> DeleteDrivingLicenseType(int id)
+            public async Task<IActionResult> Delete(int id)
             {
                 {
 
-                    var result = await _DrivingLicenseTypeRepository.DeleteDrivingLicenseType(id);
-                    return Ok(result);
+                    await _DrivingLicenseTypeRepository.Delete(id);
+                    return Ok();
                 }
             }
     } 

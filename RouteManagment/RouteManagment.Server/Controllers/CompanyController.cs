@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 
@@ -17,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class CompanyController : ControllerBase
     {
-        private readonly ICompanyRepository _companyRepository;
+        private readonly IRepository<Company> _companyRepository;
         private readonly IMapper _mapper;
 
-        public CompanyController(ICompanyRepository companyRepository, IMapper mapper)
+        public CompanyController(IRepository<Company> companyRepository, IMapper mapper)
         {
             _companyRepository = companyRepository;
             _mapper = mapper;
@@ -28,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all companies
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetAll()
         {
-            var companies = await _companyRepository.GetCompanies();
+            var companies = await _companyRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
             return Ok(companiesDto);
         }
@@ -38,9 +39,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetCompanies(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var company = await _companyRepository.GetCompany(id);
+            var company = await _companyRepository.GetById(id);
             var companyDto = _mapper.Map<CompanyDto>(company);
             return Ok(company);
         }
@@ -49,33 +50,33 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostCompany(CompanyDto companyDto)
+        public async Task<IActionResult> Add(CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
-            await _companyRepository.PostCompany(company);
+            await _companyRepository.Add(company);
             return Ok(company);
         }
 
         //Request to update company
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> Updatecompany(int id, CompanyDto companyDto)
+        public async Task<IActionResult> Update(int id, CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
             company.Id = id;
 
-            await _companyRepository.UpdateCompany(company);
+            await _companyRepository.Update(company);
             return Ok(company);
         }
         //Request to remove company by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> Deletecompany(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _companyRepository.Deletecompany(id);
-                return Ok(result);
+                await _companyRepository.Delete(id);
+                return Ok();
             }
         }
 

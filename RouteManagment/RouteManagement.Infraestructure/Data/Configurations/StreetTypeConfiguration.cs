@@ -17,7 +17,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("street_types");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("StreetTypeId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

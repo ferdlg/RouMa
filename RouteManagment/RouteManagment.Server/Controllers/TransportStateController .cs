@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportStateController : ControllerBase
     {
-        private readonly ITransportStateRepository _TransportStateRepository;
+        private readonly IRepository<TransportState> _TransportStateRepository;
         private readonly IMapper _mapper;
 
-        public TransportStateController(ITransportStateRepository TransportStateRepository, IMapper mapper)
+        public TransportStateController(IRepository<TransportState> TransportStateRepository, IMapper mapper)
         {
             _TransportStateRepository = TransportStateRepository;
             _mapper = mapper;
@@ -27,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportStates
 
         [HttpGet]
-        public async Task<IActionResult> GetTransportStates()
+        public async Task<IActionResult> GetAll()
         {
-           var TransportStates = await _TransportStateRepository.GetTransportStates();
+           var TransportStates = await _TransportStateRepository.GetAll();
            var TransportStatesDto = _mapper.Map<IEnumerable<TransportStateDto>>(TransportStates);
             return Ok(TransportStatesDto);
         }
@@ -37,9 +38,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetTransportStates(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var TransportState = await _TransportStateRepository.GetTransportState(id);
+           var TransportState = await _TransportStateRepository.GetById(id);
            var TransportStateDto = _mapper.Map<TransportStateDto>(TransportState);
             return Ok(TransportState);
         }
@@ -48,10 +49,10 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(TransportStateDto topDto)
+        public async Task<IActionResult> Add(TransportStateDto topDto)
         {
-           var TransportState = _mapper.Map<TransportState>(topDto);
-            await _TransportStateRepository.PostTransportState(TransportState);
+            var TransportState = _mapper.Map<TransportState>(topDto);
+            await _TransportStateRepository.Add(TransportState);
             return Ok(TransportState);
         }
 
@@ -59,23 +60,23 @@ namespace RouteManagment.Server.Controllers
         //Request to update transportState
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdatetransportState(int id, TransportStateDto transportStateDto)
+        public async Task<IActionResult> Update(int id, TransportStateDto transportStateDto)
         {
             var transportState = _mapper.Map<TransportState>(transportStateDto);
             transportState.Id= id;
 
-            await _TransportStateRepository.UpdatetransportState(transportState);
+            await _TransportStateRepository.Update(transportState);
             return Ok(transportState);
         }
         //Request to remove transportState by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeletetransportState(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _TransportStateRepository.DeleteTransportState(id);
-                return Ok(result);
+                await _TransportStateRepository.Delete(id);
+                return Ok();
             }
         }
     }

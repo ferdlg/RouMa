@@ -12,7 +12,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("drivinglicensetype");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("TypeLicenseId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

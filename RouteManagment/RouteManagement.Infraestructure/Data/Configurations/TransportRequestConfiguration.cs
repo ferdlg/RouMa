@@ -23,7 +23,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.TransportTypeId, "TransportTypeId");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("RequestId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.AdministratorId).HasColumnType("int(11)");
             builder.Property(e => e.CompanyId).HasColumnType("int(11)");
             builder.Property(e => e.Date).HasColumnType("datetime");

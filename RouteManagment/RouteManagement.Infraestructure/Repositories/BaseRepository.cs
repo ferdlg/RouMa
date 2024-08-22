@@ -14,19 +14,6 @@ namespace RouteManagement.Infraestructure.Repositories
             _appDbContext = appDbContext;
             _entities = appDbContext.Set<T>();
         }
-        public async Task Add(T entity)
-        {
-            _entities.Add(entity);
-            await _appDbContext.SaveChangesAsync();
-        }
-
-        public async Task Delete(int id)
-        {
-            T entity = await GetById(id);
-            _entities.Remove( entity);
-            await _appDbContext.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _entities.ToListAsync();
@@ -36,11 +23,24 @@ namespace RouteManagement.Infraestructure.Repositories
         {
             return await _entities.FindAsync(id);
         }
+        public async Task Add(T entity)
+        {
+            _entities.Add(entity);
+            await _appDbContext.SaveChangesAsync();
+        }
 
         public async Task Update(T entity)
         {
             _entities.Update(entity);
             await _appDbContext.SaveChangesAsync();
         }
+        public async Task Delete(int id)
+        {
+            T entity = await GetById(id);
+            _entities.Remove( entity);
+            await _appDbContext.SaveChangesAsync();
+        }
+
+
     }
 }

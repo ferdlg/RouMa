@@ -19,7 +19,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.DocumentNumber, "DocumentNumber");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("AdministratorId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.DocumentNumber).HasColumnType("int(11)");
 
             builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.Administrators)

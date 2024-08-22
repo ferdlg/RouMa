@@ -19,7 +19,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.AddressId, "AddressId");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("CompanyId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.AddressId).HasColumnType("int(11)");
             builder.Property(e => e.Description)
                 .HasMaxLength(200)

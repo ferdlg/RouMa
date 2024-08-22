@@ -17,7 +17,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("routes");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("RouteId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.AddressOriginId).HasColumnType("int(11)");
             builder.Property(e => e.AddressHeadQuarterId).HasColumnType("int(11)");
 

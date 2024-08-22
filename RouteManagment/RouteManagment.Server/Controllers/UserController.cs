@@ -1,10 +1,10 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class UserController : ControllerBase
     {
-        private readonly IUserRepository _UserRepository;
+        private readonly IRepository<User> _UserRepository;
         private readonly IMapper _mapper;
 
-        public UserController(IUserRepository UserRepository, IMapper mapper)
+        public UserController(IRepository<User> UserRepository, IMapper mapper)
         {
             _UserRepository = UserRepository;
             _mapper = mapper;
@@ -27,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Users
 
         [HttpGet]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetAll()
         {
-           var Users = await _UserRepository.GetUsers();
+           var Users = await _UserRepository.GetAll();
            var UsersDto = _mapper.Map<IEnumerable<UserDto>>(Users);
             return Ok(UsersDto);
         }
@@ -37,9 +37,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetUsers(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var User = await _UserRepository.GetUser(id);
+           var User = await _UserRepository.GetById(id);
            var UserDto = _mapper.Map<UserDto>(User);
             return Ok(User);
         }
@@ -48,10 +48,10 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(UserDto topDto)
+        public async Task<IActionResult> Add(UserDto topDto)
         {
            var User = _mapper.Map<User>(topDto);
-            await _UserRepository.PostUser(User);
+            await _UserRepository.Add(User);
             return Ok(User);
         }
 
@@ -59,23 +59,23 @@ namespace RouteManagment.Server.Controllers
         //Request to update User
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdateUser(int id, UserDto UserDto)
+        public async Task<IActionResult> Update(int id, UserDto UserDto)
         {
             var User = _mapper.Map<User>(UserDto);
             User.Id= id;
 
-            await _UserRepository.UpdateUser(User);
+            await _UserRepository.Update(User);
             return Ok(User);
         }
         //Request to remove User by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _UserRepository.DeleteUser(id);
-                return Ok(result);
+                await _UserRepository.Delete(id);
+                return Ok();
             }
         }
     }

@@ -1,10 +1,9 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 
@@ -17,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PeopleController : ControllerBase
     {
-        private readonly IPeopleRepository _PersonRepository;
+        private readonly IRepository<Person> _PersonRepository;
         private readonly IMapper _mapper;
 
-        public PeopleController(IPeopleRepository PersonRepository, IMapper mapper)
+        public PeopleController(IRepository<Person> PersonRepository, IMapper mapper)
         {
             _PersonRepository = PersonRepository;
             _mapper = mapper;
@@ -28,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Persons
 
         [HttpGet]
-        public async Task<IActionResult> GetPeople()
+        public async Task<IActionResult> GetAll()
         {
-            var Person = await _PersonRepository.GetPeople();
+            var Person = await _PersonRepository.GetAll();
             var PersonDto = _mapper.Map<IEnumerable<PeopleDto>>(Person);
             return Ok(PersonDto);
         }
@@ -38,9 +37,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetPerson(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var Person = await _PersonRepository.GetPerson(id);
+            var Person = await _PersonRepository.GetById(id);
             var PersonDto = _mapper.Map<PeopleDto>(Person);
             return Ok(PersonDto);
         }
@@ -49,34 +48,32 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostPerson(PeopleDto PersonDto)
+        public async Task<IActionResult> Add(PeopleDto PersonDto)
         {
             var Person = _mapper.Map<Person>(PersonDto);
-            await _PersonRepository.PostPerson(Person);
+            await _PersonRepository.Add(Person);
             return Ok(Person);
         }
 
         //Request to update Person
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdatePerson(int id, PeopleDto PersonDto)
+        public async Task<IActionResult> Update(int id, PeopleDto PersonDto)
         {
             var Person = _mapper.Map<Person>(PersonDto);
             Person.Id= id;
 
-            await _PersonRepository.UpdatePerson(Person);
+            await _PersonRepository.Update(Person);
             return Ok(Person);
         }
         //Request to remove Person by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeletePerson(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                var result = await _PersonRepository.DeletePerson(id);
-                return Ok(result);
-            }
+              await _PersonRepository.Delete(id);
+              return Ok();
+            
         }
 
     } 

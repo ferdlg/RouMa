@@ -1,10 +1,9 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +15,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RoutesStopController : ControllerBase
     {
-        private readonly IRouteStopRepository _routeStopRepository;
+        private readonly IRepository<RoutesStop> _routeStopRepository;
         private readonly IMapper _mapper;
 
-        public RoutesStopController(IRouteStopRepository routeStopRepository, IMapper mapper)
+        public RoutesStopController(IRepository<RoutesStop> routeStopRepository, IMapper mapper)
         {
             _routeStopRepository = routeStopRepository;
             _mapper = mapper;
@@ -27,9 +26,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all companies
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public async Task<IActionResult> GetAll()
         {
-            var companies = await _routeStopRepository.GetRoutesStops();
+            var companies = await _routeStopRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<RouteStopDto>>(companies);
             return Ok(companiesDto);
         }
@@ -37,9 +36,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetCompanies(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var RouteStop = await _routeStopRepository.GetRoutesStop(id);
+            var RouteStop = await _routeStopRepository.GetById(id);
             var RouteStopDto = _mapper.Map<RouteStopDto>(RouteStop);
             return Ok(RouteStop);
         }
@@ -48,33 +47,33 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostRouteStop(RouteStopDto RouteStopDto)
+        public async Task<IActionResult> Add(RouteStopDto RouteStopDto)
         {
             var RouteStop = _mapper.Map<RoutesStop>(RouteStopDto);
-            await _routeStopRepository.PostRoutesStop(RouteStop);
+            await _routeStopRepository.Add(RouteStop);
             return Ok(RouteStop);
         }
 
         //Request to update routeStop
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdaterouteStop(int id, RouteStopDto routeStopDto)
+        public async Task<IActionResult> Update(int id, RouteStopDto routeStopDto)
         {
             var routeStop = _mapper.Map<RoutesStop>(routeStopDto);
             routeStop.Id = id;
 
-            await _routeStopRepository.UpdateRouteStop(routeStop);
+            await _routeStopRepository.Update(routeStop);
             return Ok(routeStop);
         }
         //Request to remove routeStop by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleterouteStop(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _routeStopRepository.DeleteRouteStop(id);
-                return Ok(result);
+                await _routeStopRepository.Delete(id);
+                return Ok();
             }
         }
     }

@@ -21,7 +21,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.RolId, "RolId");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("RolPermissionId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.PermissionId).HasColumnType("int(11)");
             builder.Property(e => e.RolId).HasColumnType("int(11)");
 

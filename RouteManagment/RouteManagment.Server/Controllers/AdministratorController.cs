@@ -4,6 +4,7 @@ using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -15,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class AdministratorController : ControllerBase
     {
-        private readonly IAdministratorRepository _administratorRepository;
+        private readonly IRepository<Administrator> _administratorRepository;
         private readonly IMapper _mapper;
 
-        public AdministratorController(IAdministratorRepository administratorRepository, IMapper mapper)
+        public AdministratorController(IRepository<Administrator> administratorRepository, IMapper mapper)
         {
             _administratorRepository = administratorRepository;
             _mapper = mapper;
@@ -26,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all administrator
 
         [HttpGet]
-        public async Task<IActionResult> GetAdministrators()
+        public async Task<IActionResult> GetAll()
         {
-            var administrators = await _administratorRepository.GetAdministrators();
+            var administrators = await _administratorRepository.GetAll();
             var administratorsDto = _mapper.Map<IEnumerable<AdministratorDto>>(administrators);
 
             return Ok(administratorsDto);
@@ -37,42 +38,42 @@ namespace RouteManagment.Server.Controllers
         //Request to get administrator by id 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAdministrator(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var administrator = await _administratorRepository.GetAdministrator(id);
+            var administrator = await _administratorRepository.GetById(id);
             var administratorDto = _mapper.Map<AdministratorDto>(administrator);
             return Ok(administrator);
         }
 
         //Request to create administrator
         [HttpPost]
-        public async Task<IActionResult> PostAdministrator(AdministratorDto administratorDto)
+        public async Task<IActionResult> Add(AdministratorDto administratorDto)
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
-            await _administratorRepository.PostAdministrator(administrator);
+            await _administratorRepository.Add(administrator);
             return Ok(administrator);
         }
 
         //Request to update administrator
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> Updateadministrator(int id, AdministratorDto administratorDto)
+        public async Task<IActionResult> Update(int id, AdministratorDto administratorDto)
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
             administrator.Id = id;
 
-            await _administratorRepository.UpdateAdministrator(administrator);
+            await _administratorRepository.Update(administrator);
             return Ok(administrator);
         }
         //Request to remove administrator by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> Deleteadministrator(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _administratorRepository.DeleteAdministrator(id);
-                return Ok(result);
+                await _administratorRepository.Delete(id);
+                return Ok();
             }
         }
 

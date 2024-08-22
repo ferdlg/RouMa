@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportTypeController : ControllerBase
     {
-        private readonly ITransportTypeRepository _TransportTypeRepository;
+        private readonly IRepository<TransportType> _TransportTypeRepository;
         private readonly IMapper _mapper;
 
-        public TransportTypeController(ITransportTypeRepository TransportTypeRepository, IMapper mapper)
+        public TransportTypeController(IRepository<TransportType>  TransportTypeRepository, IMapper mapper)
         {
             _TransportTypeRepository = TransportTypeRepository;
             _mapper = mapper;
@@ -27,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetTransportTypes()
+        public async Task<IActionResult> GetAll()
         {
-           var TransportTypes = await _TransportTypeRepository.GetTransportTypes();
+           var TransportTypes = await _TransportTypeRepository.GetAll();
            var TransportTypesDto = _mapper.Map<IEnumerable<TransportTypeDto>>(TransportTypes);
             return Ok(TransportTypesDto);
         }
@@ -37,9 +38,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetTransportTypes(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var TransportType = await _TransportTypeRepository.GetTransportType(id);
+           var TransportType = await _TransportTypeRepository.GetById(id);
            var TransportTypeDto = _mapper.Map<TransportTypeDto>(TransportType);
             return Ok(TransportType);
         }
@@ -48,10 +49,10 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(TransportTypeDto topDto)
+        public async Task<IActionResult> Add(TransportTypeDto topDto)
         {
            var TransportType = _mapper.Map<TransportType>(topDto);
-            await _TransportTypeRepository.PostTransportType(TransportType);
+            await _TransportTypeRepository.Add(TransportType);
             return Ok(TransportType);
         }
 
@@ -59,23 +60,23 @@ namespace RouteManagment.Server.Controllers
         //Request to update transportType
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdatetransportType(int id, TransportTypeDto transportTypeDto)
+        public async Task<IActionResult> Update(int id, TransportTypeDto transportTypeDto)
         {
             var transportType = _mapper.Map<TransportType>(transportTypeDto);
             transportType.Id = id;
 
-            await _TransportTypeRepository.UpdateTransportType(transportType);
+            await _TransportTypeRepository.Update(transportType);
             return Ok(transportType);
         }
         //Request to remove transportType by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteTransportType(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _TransportTypeRepository.DeleteTransportType(id);
-                return Ok(result);
+                await _TransportTypeRepository.Delete(id);
+                return Ok();
             }
         }
     }

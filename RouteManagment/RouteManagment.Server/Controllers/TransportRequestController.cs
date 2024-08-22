@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestController : ControllerBase
     {
-        private readonly ITransportRequestRepository _transportRequestRepository;
+        private readonly IRepository<TransportRequest> _transportRequestRepository;
         private readonly IMapper _mapper;
 
-        public TransportRequestController(ITransportRequestRepository TransportRequestRepository, IMapper mapper)
+        public TransportRequestController(IRepository<TransportRequest> TransportRequestRepository, IMapper mapper)
         {
             _transportRequestRepository = TransportRequestRepository;
             _mapper = mapper;
@@ -27,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportRequests
 
         [HttpGet]
-        public async Task<IActionResult> GetTransportRequests()
+        public async Task<IActionResult> GetAll()
         {
-           var TransportRequests = await _transportRequestRepository.GetTransportRequests();
+           var TransportRequests = await _transportRequestRepository.GetAll();
            var TransportRequestsDto = _mapper.Map<IEnumerable<TransportRequestDto>>(TransportRequests);
             return Ok(TransportRequestsDto);
         }
@@ -37,9 +38,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetTransportRequests(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var TransportRequest = await _transportRequestRepository.GetTransportRequest(id);
+           var TransportRequest = await _transportRequestRepository.GetById(id);
            var TransportRequestDto = _mapper.Map<TransportRequestDto>(TransportRequest);
             return Ok(TransportRequest);
         }
@@ -48,10 +49,10 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(TransportRequestDto topDto)
+        public async Task<IActionResult> Add(TransportRequestDto topDto)
         {
            var TransportRequest = _mapper.Map<TransportRequest>(topDto);
-            await _transportRequestRepository.PostTransportRequest(TransportRequest);
+            await _transportRequestRepository.Add(TransportRequest);
             return Ok(TransportRequest);
         }
 
@@ -59,23 +60,23 @@ namespace RouteManagment.Server.Controllers
         //Request to update transportRequest
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdatetransportRequest(int id, TransportRequestDto transportRequestDto)
+        public async Task<IActionResult> Update(int id, TransportRequestDto transportRequestDto)
         {
             var transportRequest = _mapper.Map<TransportRequest>(transportRequestDto);
             transportRequest.Id = id;
 
-            await _transportRequestRepository.UpdateTransportRequest(transportRequest);
+            await _transportRequestRepository.Update(transportRequest);
             return Ok(transportRequest);
         }
         //Request to remove transportRequest by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteTransportRequest(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _transportRequestRepository.DeleteTransportRequest(id);
-                return Ok(result);
+                await _transportRequestRepository.Delete(id);
+                return Ok();
             }
         }
     }

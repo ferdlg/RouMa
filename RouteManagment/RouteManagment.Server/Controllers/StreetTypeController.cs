@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StreetTypeController : ControllerBase
     {
-        private readonly IStreetTypeRepository _streetTypeRepository;
+        private readonly IRepository<StreetType> _streetTypeRepository;
         private readonly IMapper _mapper;
 
-        public StreetTypeController(IStreetTypeRepository StreetTypeRepository, IMapper mapper)
+        public StreetTypeController(IRepository<StreetType> StreetTypeRepository, IMapper mapper)
         {
             _streetTypeRepository = StreetTypeRepository;
             _mapper = mapper;
@@ -27,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all StreetTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetStreetTypes()
+        public async Task<IActionResult> GetAll()
         {
-           var streetTypes = await _streetTypeRepository.GetStreetTypes();
+           var streetTypes = await _streetTypeRepository.GetAll();
            var streetTypesDto = _mapper.Map<IEnumerable<StreetTypeDto>>(streetTypes);
             return Ok(streetTypesDto);
         }
@@ -37,9 +38,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetStreetTypes(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var streetType = await _streetTypeRepository.GetStreetType(id);
+           var streetType = await _streetTypeRepository.GetById(id);
            var streetTypeDto = _mapper.Map<StreetTypeDto>(streetType);
             return Ok(streetType);
         }
@@ -48,33 +49,33 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(StreetTypeDto topDto)
+        public async Task<IActionResult> Add(StreetTypeDto topDto)
         {
            var streetType = _mapper.Map<StreetType>(topDto);
-            await _streetTypeRepository.PostStreetType(streetType);
+            await _streetTypeRepository.Add(streetType);
             return Ok(streetType);
         }
 
         //Request to update streetType
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdateStreetType(int id, StreetTypeDto streetTypeDto)
+        public async Task<IActionResult> Update(int id, StreetTypeDto streetTypeDto)
         {
             var streetType = _mapper.Map<StreetType>(streetTypeDto);
             streetType.Id = id;
 
-            await _streetTypeRepository.UpdateStreetType(streetType);
+            await _streetTypeRepository.Update(streetType);
             return Ok(streetType);
         }
         //Request to remove streetType by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeletestreetType(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _streetTypeRepository.DeleteStreetType(id);
-                return Ok(result);
+                await _streetTypeRepository.Delete(id);
+                return Ok();
             }
         }
     }

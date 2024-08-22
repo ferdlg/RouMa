@@ -17,7 +17,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("transport_States");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("StateId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.State).HasMaxLength(50);
         }
     }

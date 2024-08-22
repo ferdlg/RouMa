@@ -15,7 +15,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
         {
             builder.HasKey(e => e.Id).HasName("PRIMARY");
 
-            builder.ToTable("document_types");
+            builder.ToTable("users");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
             builder.Property(e => e.DocumentNumber).HasMaxLength(50);

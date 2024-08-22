@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 
@@ -17,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PermissionController : ControllerBase
     {
-        private readonly IPermissionRepository _PermissionRepository;
+        private readonly IRepository<Permission> _PermissionRepository;
         private readonly IMapper _mapper;
 
-        public PermissionController(IPermissionRepository permissionRepository, IMapper mapper)
+        public PermissionController(IRepository<Permission> permissionRepository, IMapper mapper)
         {
             _PermissionRepository = permissionRepository;
             _mapper = mapper;
@@ -28,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all permissions
 
         [HttpGet]
-        public async Task<IActionResult> GetPermissions()
+        public async Task<IActionResult> GetAll()
         {
-            var permission = await _PermissionRepository.GetPermissions();
+            var permission = await _PermissionRepository.GetAll();
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(permission);
             return Ok(permissionDto);
         }
@@ -38,9 +39,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetPermission(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var permission = await _PermissionRepository.GetPermission(id);
+            var permission = await _PermissionRepository.GetById(id);
             var permissionDto = _mapper.Map<PermissionDto>(permission);
             return Ok(permissionDto);
         }
@@ -49,21 +50,21 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostPermission(PermissionDto permissionDto)
+        public async Task<IActionResult> Add(PermissionDto permissionDto)
         {
             var permission = _mapper.Map<Permission>(permissionDto);
-            await _PermissionRepository.PostPermission(permission);
+            await _PermissionRepository.Add(permission);
             return Ok(permission);
         }
         //Request to update permission
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> Updatepermission(int id, PermissionDto permissionDto)
+        public async Task<IActionResult> Update(int id, PermissionDto permissionDto)
         {
             var permission = _mapper.Map<Permission>(permissionDto);
             permission.Id = id;
 
-            await _PermissionRepository.UpdatePermission(permission);
+            await _PermissionRepository.Update(permission);
             return Ok(permission);
         }
         //Request to remove permission by id 
@@ -73,8 +74,8 @@ namespace RouteManagment.Server.Controllers
         {
             {
 
-                var result = await _PermissionRepository.DeletePermission(id);
-                return Ok(result);
+                await _PermissionRepository.Delete(id);
+                return Ok();
             }
         }
 

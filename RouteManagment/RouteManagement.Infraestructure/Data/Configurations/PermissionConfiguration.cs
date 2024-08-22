@@ -17,7 +17,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("permissions");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("PermissionId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

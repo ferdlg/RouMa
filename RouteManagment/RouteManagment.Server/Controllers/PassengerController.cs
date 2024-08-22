@@ -5,6 +5,7 @@ using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 
 
 
@@ -17,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PassengerController : ControllerBase
     {
-        private readonly IPassengerRepository _PassengerRepository;
+        private readonly IRepository<Passenger> _PassengerRepository;
         private readonly IMapper _mapper;
 
-        public PassengerController(IPassengerRepository PassengerRepository, IMapper mapper)
+        public PassengerController(IRepository<Passenger> PassengerRepository, IMapper mapper)
         {
             _PassengerRepository = PassengerRepository;
             _mapper = mapper;
@@ -28,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Passengers
 
         [HttpGet]
-        public async Task<IActionResult> GetPassengers()
+        public async Task<IActionResult> GetAll()
         {
-            var passenger = await _PassengerRepository.GetPassengers();
+            var passenger = await _PassengerRepository.GetAll();
             var PassengerDto = _mapper.Map<IEnumerable<PassengerDto>>(passenger);
             return Ok(PassengerDto);
         }
@@ -38,9 +39,9 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetPassenger(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var passenger = await _PassengerRepository.GetPassenger(id);
+            var passenger = await _PassengerRepository.GetById(id);
             var passengerDto = _mapper.Map<PassengerDto>(passenger);
             return Ok(passengerDto);
         }
@@ -49,33 +50,33 @@ namespace RouteManagment.Server.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> PostPassenger(PassengerDto PassengerDto)
+        public async Task<IActionResult> Add(PassengerDto PassengerDto)
         {
             var passenger = _mapper.Map<Passenger>(PassengerDto);
-            await _PassengerRepository.PostPassenger(passenger);
+            await _PassengerRepository.Add(passenger);
             return Ok(passenger);
         }
 
         //Request to update passenger
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> UpdatePassenger(int id, PassengerDto passengerDto)
+        public async Task<IActionResult> Update(int id, PassengerDto passengerDto)
         {
             var passenger = _mapper.Map<Passenger>(passengerDto);
             passenger.Id = id;
 
-            await _PassengerRepository.UpdatePassenger(passenger);
+            await _PassengerRepository.Update(passenger);
             return Ok(passenger);
         }
         //Request to remove passenger by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeletePassenger(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             {
 
-                var result = await _PassengerRepository.DeletePassenger(id);
-                return Ok(result);
+                await _PassengerRepository.Delete(id);
+                return Ok();
             }
         }
 
