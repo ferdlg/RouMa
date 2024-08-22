@@ -1,12 +1,7 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RouteManagement.Infraestructure.Filters;
 using RouteManagement.Infraestructure.Repositories;
-using RouteManagement.Infraestructure.Validators;
-using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
 using RouteManagment.Core.Services;
 using RouteManagment.Server.Data;
