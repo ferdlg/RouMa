@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdateTransportRequestState(int id, TransportRequestStateDto TransportRequestStateDto)
         {
             var TransportRequestState = _mapper.Map<TransportRequestState>(TransportRequestStateDto);
-            TransportRequestState.StateId= id;
+            TransportRequestState.Id= id;
 
             await _TransportRequestStateRepository.UpdateTransportRequestState(TransportRequestState);
             return Ok(TransportRequestState);

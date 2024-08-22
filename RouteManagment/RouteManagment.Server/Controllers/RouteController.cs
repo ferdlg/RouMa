@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updateroute(int id, RouteDto routeDto)
         {
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
-            route.RouteId = id;
+            route.Id = id;
 
             await _RouteRepository.UpdateRoute(route);
             return Ok(route);

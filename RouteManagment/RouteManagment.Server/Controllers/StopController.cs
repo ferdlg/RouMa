@@ -60,7 +60,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updatestop(int id, StopDto stopDto)
         {
             var stop = _mapper.Map<Stop>(stopDto);
-            stop.StopId = id;
+            stop.Id = id;
 
             await _stopRepository.UpdateStop(stop);
             return Ok(stop);

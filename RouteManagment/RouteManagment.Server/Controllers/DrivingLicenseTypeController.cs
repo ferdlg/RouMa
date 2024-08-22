@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
             public async Task<IActionResult> UpdateDrivingLicenseType(int id, DrivingLicenseTypeDto DrivingLicenseTypeDto)
             {
                 var DrivingLicenseType = _mapper.Map<DrivingLicenseType>(DrivingLicenseTypeDto);
-                DrivingLicenseType.TypeLicenseId = id;
+                DrivingLicenseType.Id = id;
 
                 await _DrivingLicenseTypeRepository.UpdateDrivingLicenseType(DrivingLicenseType);
                 return Ok(DrivingLicenseType);

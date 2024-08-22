@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdatetransportType(int id, TransportTypeDto transportTypeDto)
         {
             var transportType = _mapper.Map<TransportType>(transportTypeDto);
-            transportType.TransportTypeId = id;
+            transportType.Id = id;
 
             await _TransportTypeRepository.UpdateTransportType(transportType);
             return Ok(transportType);

@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updatepermission(int id, PermissionDto permissionDto)
         {
             var permission = _mapper.Map<Permission>(permissionDto);
-            permission.PermissionId = id;
+            permission.Id = id;
 
             await _PermissionRepository.UpdatePermission(permission);
             return Ok(permission);

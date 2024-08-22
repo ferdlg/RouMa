@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updatedriver(int id, DriverDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
-            driver.DriverId = id;
+            driver.Id = id;
 
             await _DriverRepository.UpdateDriver(driver);
             return Ok(driver);

@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdateAddress(int id, AddressDto addressDto)
         {
             var address = _mapper.Map<Address>(addressDto);
-            address.AddressId = id;
+            address.Id = id;
 
             await _addressRepository.UpdateAddress(address);
             return Ok(address);

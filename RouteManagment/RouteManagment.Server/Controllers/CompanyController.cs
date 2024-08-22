@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updatecompany(int id, CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
-            company.CompanyId = id;
+            company.Id = id;
 
             await _companyRepository.UpdateCompany(company);
             return Ok(company);

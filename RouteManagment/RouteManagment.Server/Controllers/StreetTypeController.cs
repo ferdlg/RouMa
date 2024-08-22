@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdateStreetType(int id, StreetTypeDto streetTypeDto)
         {
             var streetType = _mapper.Map<StreetType>(streetTypeDto);
-            streetType.StreetTypeId = id;
+            streetType.Id = id;
 
             await _streetTypeRepository.UpdateStreetType(streetType);
             return Ok(streetType);

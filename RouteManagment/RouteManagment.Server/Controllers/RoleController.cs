@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updaterol(int id, RolDto rolDto)
         {
             var rol = _mapper.Map<Role>(rolDto);
-            rol.RolId = id;
+            rol.Id = id;
 
             await _RolRepository.UpdateRol(rol);
             return Ok(rol);

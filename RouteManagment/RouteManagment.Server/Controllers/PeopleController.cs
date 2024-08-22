@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdatePerson(int id, PeopleDto PersonDto)
         {
             var Person = _mapper.Map<Person>(PersonDto);
-            Person.DocumentNumber= id;
+            Person.Id= id;
 
             await _PersonRepository.UpdatePerson(Person);
             return Ok(Person);

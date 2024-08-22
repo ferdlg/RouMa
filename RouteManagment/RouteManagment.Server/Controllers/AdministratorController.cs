@@ -59,7 +59,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Updateadministrator(int id, AdministratorDto administratorDto)
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
-            administrator.AdministratorId = id;
+            administrator.Id = id;
 
             await _administratorRepository.UpdateAdministrator(administrator);
             return Ok(administrator);

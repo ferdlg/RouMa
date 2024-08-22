@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdatetransportRequest(int id, TransportRequestDto transportRequestDto)
         {
             var transportRequest = _mapper.Map<TransportRequest>(transportRequestDto);
-            transportRequest.RequestId = id;
+            transportRequest.Id = id;
 
             await _transportRequestRepository.UpdateTransportRequest(transportRequest);
             return Ok(transportRequest);

@@ -62,7 +62,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> UpdaterolPermission(int id, RolPermisionDto rolPermissionDto)
         {
             var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
-            rolPermission.RolPermissionId = id;
+            rolPermission.Id = id;
 
             await _RolPermissionRepository.UpdateRolPermission(rolPermission);
             return Ok(rolPermission);

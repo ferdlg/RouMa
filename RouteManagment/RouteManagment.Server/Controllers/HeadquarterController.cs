@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
             public async Task<IActionResult> UpdateHeadquarter(int id, HeadquarterDto HeadquarterDto)
             {
                 var Headquarter = _mapper.Map<Headquarter>(HeadquarterDto);
-                Headquarter.HeadQuarterId = id;
+                Headquarter.Id = id;
 
                 await _HeadquarterRepository.UpdateHeadquarter(Headquarter);
                 return Ok(Headquarter);

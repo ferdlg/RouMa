@@ -61,7 +61,7 @@ namespace RouteManagment.Server.Controllers
             public async Task<IActionResult> UpdatedocumentType(int id, DocumentTypeDto documentTypeDto)
             {
                 var documentType = _mapper.Map<DocumentType>(documentTypeDto);
-                documentType.DocumentTypeId = id;
+                documentType.Id = id;
 
                 await _DocumentTypeRepository.UpdateDocumentType(documentType);
                 return Ok(documentType);
