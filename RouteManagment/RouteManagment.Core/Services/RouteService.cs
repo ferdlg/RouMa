@@ -14,7 +14,7 @@ namespace RouteManagment.Core.Services
         private readonly IRepository<Route> _routeRepository;
         private readonly IRepository<Stop> _routeStopRepository;
         private readonly IRepository<RoutesStop> _stopRepository;
-        public RouteService(IRouteRepository routeRepository, IRouteStopRepository routeStopRepository , IStopRepository stopRepository)
+        public RouteService(IRepository<Route> routeRepository, IRepository<Stop> routeStopRepository, IRepository<RoutesStop> stopRepository)
         {
             _routeRepository = routeRepository;
             _routeStopRepository = routeStopRepository;
