@@ -8,6 +8,7 @@ using RouteManagement.Infraestructure.Repositories;
 using RouteManagement.Infraestructure.Validators;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Core.Services;
 using RouteManagment.Server.Data;
 
 
@@ -37,6 +38,8 @@ var conectionString = builder.Configuration.GetConnectionString("AppDbConnection
 builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectionString, ServerVersion.AutoDetect(conectionString)));
 
 // ID Interface registration --> Implementacion Generica
+
+builder.Services.AddTransient<IRouteService, RouteService>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
