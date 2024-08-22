@@ -1,6 +1,6 @@
 # Route Management RouMa 🚞
-![Portada RouMa](https://github.com/ferdlg/RouMa/blob/main/aerial-view-shanghai-overpass-night.jpg)
-<img src="https://github.com/ferdlg/RouMa/blob/main/aerial-view-shanghai-overpass-night.jpg" alt="Descripción de la imagen" width="400" height="100">
+
+<img src="https://github.com/ferdlg/RouMa/blob/main/aerial-view-shanghai-overpass-night.jpg" alt="Descripción de la imagen" width="600" height="200">
 
 
 ## 📚Analisís del software
