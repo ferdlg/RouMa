@@ -3,9 +3,8 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Person : BaseEntity
+public partial class People : BaseEntity
 {
-    // public int DocumentNumber { get; set; }
 
     public string FirstName { get; set; } = null!;
 
@@ -21,13 +20,10 @@ public partial class Person : BaseEntity
 
     public int? RolId { get; set; }
 
-    public int? CompanyId { get; set; }
-
 
     public virtual Address? Address { get; set; }
 
     public virtual ICollection<Administrator> Administrators { get; set; } = new List<Administrator>();
-
 
     public virtual DocumentType? DocumentType { get; set; }
 
@@ -36,6 +32,7 @@ public partial class Person : BaseEntity
     public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
 
     public virtual Role? Rol { get; set; }
+    public virtual ICollection<User> Users{ get; set; } = new List<User>();
 
-    public virtual Transport? TransportPlateNavigation { get; set; }
+
 }

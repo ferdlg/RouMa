@@ -5,7 +5,6 @@ namespace RouteManagment.Core.Entities;
 
 public partial class TransportRequest : BaseEntity
 {
-    // public int RequestId { get; set; }
 
     public DateTime Date { get; set; }
 
@@ -15,11 +14,10 @@ public partial class TransportRequest : BaseEntity
 
     public int CompanyId { get; set; }
 
-    public int AdministratorId { get; set; }
-
-    public virtual Administrator Administrator { get; set; } = null!;
+    public int StateId { get; set; }
 
     public virtual Company Company { get; set; } = null!;
 
+    public virtual TransportRequestState? TransportRequestState { get; set; }
     public virtual TransportType TransportType { get; set; } = null!;
 }

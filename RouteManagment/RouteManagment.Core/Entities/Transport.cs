@@ -5,7 +5,7 @@ namespace RouteManagment.Core.Entities;
 
 public partial class Transport 
 {
-    public int Plate { get; set; }
+    public string? Plate { get; set; }
 
     public int Capacity { get; set; }
 
@@ -15,7 +15,7 @@ public partial class Transport
 
     public int? TransportTypeId { get; set; }
 
-    public virtual ICollection<Person> Employees { get; set; } = new List<Person>();
+    public virtual ICollection<Driver> Drivers { get; set; } = new List<Driver>();
 
     public virtual Route? Route { get; set; }
 

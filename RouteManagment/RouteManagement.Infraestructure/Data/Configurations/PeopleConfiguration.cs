@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace RouteManagement.Infraestructure.Data.Configurations
 {
-    public class PersonConfiguration : IEntityTypeConfiguration<Person>
+    public class PeopleConfiguration : IEntityTypeConfiguration<People>
     {
-        public void Configure(EntityTypeBuilder<Person> builder)
+        public void Configure(EntityTypeBuilder<People> builder)
         {
             builder.HasKey(e => e.Id).HasName("PRIMARY");
 
@@ -26,6 +26,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
             builder.Property(e => e.Id)
                 .HasColumnName("DocumentNumber")
                 .HasColumnType("int(11)");
+
             builder.Property(e => e.AddressId)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");

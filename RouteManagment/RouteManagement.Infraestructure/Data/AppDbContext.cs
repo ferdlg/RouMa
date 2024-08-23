@@ -33,7 +33,7 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
 
-    public virtual DbSet<Person> People{ get; set; }
+    public virtual DbSet<People> People{ get; set; }
 
     public virtual DbSet<Passenger> Passengers { get; set; }
 
@@ -82,7 +82,7 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new EfmigrationshistoryConfiguration());
 
-        modelBuilder.ApplyConfiguration(new PersonConfiguration());
+        modelBuilder.ApplyConfiguration(new PeopleConfiguration());
 
         modelBuilder.ApplyConfiguration(new PassengerConfiguration());
 

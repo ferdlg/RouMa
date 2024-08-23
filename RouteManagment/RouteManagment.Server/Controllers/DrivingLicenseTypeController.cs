@@ -42,7 +42,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetById(id);
-            var documenTypeDto = _mapper.Map<DrivingLicenseTypeDto>(DrivingLicenseType);
+            var drivingLicenseDto = _mapper.Map<DrivingLicenseTypeDto>(DrivingLicenseType);
             return Ok(DrivingLicenseType);
         }
 

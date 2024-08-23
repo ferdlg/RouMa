@@ -19,9 +19,10 @@ public partial class Address : BaseEntity
 
     public int StreetTypeId { get; set; }
 
-    public virtual ICollection<Company> Companies { get; set; } = new List<Company>();
+    public virtual ICollection<Headquarter> Headquarters { get; set; } = new List<Headquarter>();
 
-    public virtual ICollection<Person> People { get; set; } = new List<Person>();
+    public virtual ICollection<People> People { get; set; } = new List<People>();
+    public virtual ICollection<Route> Routes{ get; set; } = new List<Route>();
 
     public virtual ICollection<Stop> Stops { get; set; } = new List<Stop>();
 

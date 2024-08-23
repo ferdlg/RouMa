@@ -20,7 +20,6 @@ namespace RouteManagement.Infraestructure.Data.Configurations
             builder.Property(e => e.Id)
                 .HasColumnName("RolId")
                 .HasColumnType("int(11)");
-            builder.Property(e => e.Description).HasMaxLength(200);
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

@@ -9,9 +9,8 @@ public partial class Role : BaseEntity
 
     public string Name { get; set; } = null!;
 
-    public string Description { get; set; } = null!;
 
-    public virtual ICollection<Person> People { get; set; } = new List<Person>();
+    public virtual ICollection<People> People { get; set; } = new List<People>();
 
     public virtual ICollection<RolesPermission> RolesPermissions { get; set; } = new List<RolesPermission>();
 }

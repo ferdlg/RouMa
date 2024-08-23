@@ -18,6 +18,5 @@ namespace RouteManagment.Core.DTOs
 
         public int CompanyId { get; set; }
 
-        public int AdministratorId { get; set; }
     }
 }

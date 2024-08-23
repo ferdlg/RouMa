@@ -17,21 +17,12 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("companies");
 
-            builder.HasIndex(e => e.AddressId, "AddressId");
 
             builder.Property(e => e.Id)
                 .HasColumnName("CompanyId")
                 .HasColumnType("int(11)");
-            builder.Property(e => e.AddressId).HasColumnType("int(11)");
-            builder.Property(e => e.Description)
-                .HasMaxLength(200)
-                .HasDefaultValueSql("'NULL'");
             builder.Property(e => e.Name).HasMaxLength(50);
 
-            builder.HasOne(d => d.Address).WithMany(p => p.Companies)
-                .HasForeignKey(d => d.AddressId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("companies_ibfk_1");
         }
     }
 }

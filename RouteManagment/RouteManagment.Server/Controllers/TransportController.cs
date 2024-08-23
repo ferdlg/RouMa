@@ -35,11 +35,11 @@ namespace RouteManagment.Server.Controllers
         }
         //Request to get top by id
 
-        [HttpGet("{id}")]
+        [HttpGet("{plate}")]
 
-        public async Task<IActionResult> GetTransports(int id)
+        public async Task<IActionResult> GetTransports(string? plate)
         {
-           var transport = await _transportRepository.GetTransport(id);
+           var transport = await _transportRepository.GetTransport(plate);
            var transportDto = _mapper.Map<TransportDto>(transport);
             return Ok(transport);
         }
@@ -57,24 +57,24 @@ namespace RouteManagment.Server.Controllers
 
 
         //Request to update transport
-        [HttpPut("{id}")]
+        [HttpPut("{plate}")]
 
-        public async Task<IActionResult> UpdateTransport(int id, TransportDto transportDto)
+        public async Task<IActionResult> UpdateTransport(string? plate, TransportDto transportDto)
         {
             var transport = _mapper.Map<Transport>(transportDto);
-            transport.Plate= id;
+            transport.Plate = plate;
 
             await _transportRepository.UpdateTransport(transport);
             return Ok(transport);
         }
         //Request to remove transport by id 
-        [HttpDelete("{id}")]
+        [HttpDelete("{plate}")]
 
-        public async Task<IActionResult> Deletetransport(int id)
+        public async Task<IActionResult> Deletetransport(string? plate)
         {
             {
 
-                var result = await _transportRepository.DeleteTransport(id);
+                var result = await _transportRepository.DeleteTransport(plate);
                 return Ok(result);
             }
         }

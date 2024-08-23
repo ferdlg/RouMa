@@ -1,4 +1,6 @@
 using FluentValidation.AspNetCore;
+using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using RouteManagement.Infraestructure.Filters;
 using RouteManagement.Infraestructure.Repositories;
@@ -35,7 +37,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectio
 // ID Interface registration --> Implementacion Generica
 
 builder.Services.AddTransient<IRouteService, RouteService>();
-
+builder.Services.AddScoped<ITransportRepository, TransportRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 
 var app = builder.Build();

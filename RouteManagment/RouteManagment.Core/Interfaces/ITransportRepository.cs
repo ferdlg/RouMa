@@ -5,10 +5,10 @@ namespace ManejoRutas.Core.Interfaces
     public interface ITransportRepository
     {
         Task<IEnumerable<Transport>> GetTransports();
-        Task<Transport> GetTransport(int id);
+        Task<Transport> GetTransport(string? plate);
         Task PostTransport(Transport Transport);
         Task<bool> UpdateTransport(Transport transport);
 
-        Task<bool> DeleteTransport(int id);
+        Task<bool> DeleteTransport(string? plate);
     }
 }

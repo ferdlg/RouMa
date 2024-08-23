@@ -28,8 +28,14 @@ namespace RouteManagement.Infraestructure.Mappings
             CreateMap<Driver, DriverDto>();
             CreateMap<DriverDto, Driver>();
 
-            CreateMap<Person, PeopleDto>();
-            CreateMap<PeopleDto, Person>();
+            CreateMap<DrivingLicenseType, DrivingLicenseTypeDto>();
+            CreateMap<DrivingLicenseTypeDto, DrivingLicenseType>();
+
+            CreateMap<Headquarter, HeadquarterDto>();
+            CreateMap<HeadquarterDto, Headquarter>();
+
+            CreateMap<People, PeopleDto>();
+            CreateMap<PeopleDto, People>();
 
             CreateMap<Passenger, PassengerDto>();
             CreateMap<PassengerDto, Passenger>();
@@ -61,11 +67,17 @@ namespace RouteManagement.Infraestructure.Mappings
             CreateMap<TransportRequest, TransportRequestDto>();
             CreateMap<TransportRequestDto, TransportRequestDto>();
 
+            CreateMap<TransportRequestState, TransportRequestStateDto>();
+            CreateMap<TransportRequestStateDto, TransportRequestState>();
+
             CreateMap<TransportState, TransportStateDto>();
             CreateMap<TransportStateDto, TransportState>();
 
             CreateMap<TransportType, TransportTypeDto>();
             CreateMap<TransportTypeDto, TransportType>();
+
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
 
         }
     }

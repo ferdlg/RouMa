@@ -17,11 +17,19 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("users");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
-            builder.Property(e => e.DocumentNumber).HasMaxLength(50);
+            builder.Property(e => e.Id)
+                .HasColumnName("UserId")
+                .HasColumnType("int(11)");
+            builder.Property(e => e.DocumentNumber)
+                .HasMaxLength(50);
             builder.Property(e => e.Password)
                 .HasMaxLength(200)
                 .HasDefaultValueSql("'NULL'");
+
+            builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.Users)
+                .HasForeignKey(d => d.DocumentNumber)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("drivers_ibfk_1");
         }
     }
 }

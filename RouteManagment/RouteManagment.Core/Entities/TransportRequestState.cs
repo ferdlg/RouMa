@@ -5,7 +5,6 @@ namespace RouteManagment.Core.Entities;
 
 public partial class TransportRequestState : BaseEntity
 {
-    // public int StateId { get; set; }
 
     public string? State { get; set; }
 

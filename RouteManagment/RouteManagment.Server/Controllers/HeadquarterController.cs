@@ -40,7 +40,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var Headquarter = await _HeadquarterRepository.GetById(id);
-            var documenTypeDto = _mapper.Map<HeadquarterDto>(Headquarter);
+            var headQuarterDto = _mapper.Map<HeadquarterDto>(Headquarter);
             return Ok(Headquarter);
         }
 

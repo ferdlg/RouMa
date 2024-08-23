@@ -9,5 +9,12 @@ public partial class Passenger : BaseEntity
 
     public int DocumentNumber { get; set; }
 
-    public virtual Person DocumentNumberNavigation { get; set; } = null!;
+    public int CompanyId { get; set; }
+    public int RouteId { get; set; }
+
+
+    public virtual People DocumentNumberNavigation { get; set; } = null!;
+    public virtual Company CompanyIdNavigation { get; set; } = null!;
+    public virtual Route RouteIdNavigation { get; set; } = null!;
+
 }

@@ -23,7 +23,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasIndex(e => e.TransportTypeId, "TransportTypeId");
 
-            builder.Property(e => e.Plate).HasColumnType("int(11)");
+            builder.Property(e => e.Plate).HasColumnType("varchar(50)");
             builder.Property(e => e.Capacity).HasColumnType("int(11)");
             builder.Property(e => e.RouteId)
                 .HasDefaultValueSql("'NULL'")

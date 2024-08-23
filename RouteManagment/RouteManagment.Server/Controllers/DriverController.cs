@@ -42,7 +42,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var Driver = await _DriverRepository.GetById(id);
-            var documenTypeDto = _mapper.Map<DriverDto>(Driver);
+            var driverDto = _mapper.Map<DriverDto>(Driver);
             return Ok(Driver);
         }
 

@@ -11,14 +11,14 @@ public partial class Driver : BaseEntity
 
     public int DocumentNumber { get; set; }
 
-    public int TypelicenseId { get; set; }
+    public int TypeLicenseId { get; set; }
 
     public string ? PlateTransport {  get; set; }
 
-    public virtual Person DocumentNumberNavigation { get; set; } = null!;
+    public virtual People DocumentNumberNavigation { get; set; } = null!;
 
-    public virtual DrivingLicenseType TypeLicenseIdNavigation { get; set; } = null!;
+    public virtual DrivingLicenseType? DrivingLicenseType { get; set; }
 
-    public virtual Transport PlateTransportNavigation { get; set; } = null!;
+    public virtual Transport? Plate { get; set; } = null!;
 
 }

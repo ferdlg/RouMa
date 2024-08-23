@@ -6,7 +6,6 @@ public partial class Administrator : BaseEntity
 
     public int DocumentNumber { get; set; }
 
-    public virtual Person DocumentNumberNavigation { get; set; } = null!;
+    public virtual People DocumentNumberNavigation { get; set; } = null!;
 
-    public virtual ICollection<TransportRequest> TransportRequests { get; set; } = new List<TransportRequest>();
 }

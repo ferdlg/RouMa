@@ -24,8 +24,8 @@ namespace RouteManagment.Core.DTOs
 
         public int? RolId { get; set; }
 
-        public int? CompanyId { get; set; }
 
-        public int? TransportPlate { get; set; }
+
+  
     }
 }

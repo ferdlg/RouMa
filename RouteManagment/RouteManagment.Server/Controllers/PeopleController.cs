@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PeopleController : ControllerBase
     {
-        private readonly IRepository<Person> _PersonRepository;
+        private readonly IRepository<People> _PersonRepository;
         private readonly IMapper _mapper;
 
-        public PeopleController(IRepository<Person> PersonRepository, IMapper mapper)
+        public PeopleController(IRepository<People> PersonRepository, IMapper mapper)
         {
             _PersonRepository = PersonRepository;
             _mapper = mapper;
@@ -50,7 +50,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Add(PeopleDto PersonDto)
         {
-            var Person = _mapper.Map<Person>(PersonDto);
+            var Person = _mapper.Map<People>(PersonDto);
             await _PersonRepository.Add(Person);
             return Ok(Person);
         }
@@ -60,7 +60,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Update(int id, PeopleDto PersonDto)
         {
-            var Person = _mapper.Map<Person>(PersonDto);
+            var Person = _mapper.Map<People>(PersonDto);
             Person.Id= id;
 
             await _PersonRepository.Update(Person);

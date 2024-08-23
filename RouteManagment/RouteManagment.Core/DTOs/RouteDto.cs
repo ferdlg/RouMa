@@ -8,8 +8,10 @@ namespace RouteManagment.Core.DTOs
 {
     public class RouteDto
     {
-        public int RouteId { get; set; }
+        public int AddressOriginId { get; set; }
 
-        public string? Description { get; set; }
+        public int AddressHeadQuarterId { get; set; }
+
+
     }
 }
