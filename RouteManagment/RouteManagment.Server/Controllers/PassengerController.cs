@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +34,8 @@ namespace RouteManagment.Server.Controllers
         {
             var passenger = await _PassengerRepository.GetAll();
             var PassengerDto = _mapper.Map<IEnumerable<PassengerDto>>(passenger);
-            return Ok(PassengerDto);
+            var response = new ApiResponse<IEnumerable<PassengerDto>>(PassengerDto);
+            return Ok(response);
         }
         //Request to get Passenger by id
 
@@ -43,18 +45,22 @@ namespace RouteManagment.Server.Controllers
         {
             var passenger = await _PassengerRepository.GetById(id);
             var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
+            var response = new ApiResponse<PassengerDto>(passengerDto);
+            return Ok(response);
         }
 
         //Request to create Passenger
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(PassengerDto PassengerDto)
+        public async Task<IActionResult> Add(PassengerDto passengerDto)
         {
-            var passenger = _mapper.Map<Passenger>(PassengerDto);
+            var passenger = _mapper.Map<Passenger>(passengerDto);
             await _PassengerRepository.Add(passenger);
-            return Ok(passenger);
+
+            passengerDto = _mapper.Map<PassengerDto>(passengerDto);
+            var response = new ApiResponse<PassengerDto>(passengerDto);
+            return Ok(response);
         }
 
         //Request to update passenger
@@ -65,19 +71,19 @@ namespace RouteManagment.Server.Controllers
             var passenger = _mapper.Map<Passenger>(passengerDto);
             passenger.Id = id;
 
-            await _PassengerRepository.Update(passenger);
-            return Ok(passenger);
+            var result= await _PassengerRepository.Update(passenger);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove passenger by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _PassengerRepository.Delete(id);
-                return Ok();
-            }
+           var result= await _PassengerRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+         
         }
 
     } 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -30,7 +31,8 @@ namespace RouteManagment.Server.Controllers
         {
             var companies = await _routeStopRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<RouteStopDto>>(companies);
-            return Ok(companiesDto);
+            var response = new ApiResponse<IEnumerable<RouteStopDto>>(companiesDto);
+            return Ok(response);
         }
         //Request to get RouteStop by id
 
@@ -40,18 +42,23 @@ namespace RouteManagment.Server.Controllers
         {
             var RouteStop = await _routeStopRepository.GetById(id);
             var RouteStopDto = _mapper.Map<RouteStopDto>(RouteStop);
-            return Ok(RouteStop);
+            var response = new ApiResponse<RouteStopDto>(RouteStopDto);
+
+            return Ok(response);
         }
 
         //Request to create RouteStop
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(RouteStopDto RouteStopDto)
+        public async Task<IActionResult> Add(RouteStopDto routeStopDto)
         {
-            var RouteStop = _mapper.Map<RoutesStop>(RouteStopDto);
-            await _routeStopRepository.Add(RouteStop);
-            return Ok(RouteStop);
+            var routeStop = _mapper.Map<RoutesStop>(routeStopDto);
+            await _routeStopRepository.Add(routeStop);
+
+            routeStopDto = _mapper.Map<RouteStopDto>(routeStop);
+            var response = new ApiResponse<RouteStopDto>(routeStopDto);
+            return Ok(response);
         }
 
         //Request to update routeStop
@@ -62,19 +69,19 @@ namespace RouteManagment.Server.Controllers
             var routeStop = _mapper.Map<RoutesStop>(routeStopDto);
             routeStop.Id = id;
 
-            await _routeStopRepository.Update(routeStop);
-            return Ok(routeStop);
+            var result = await _routeStopRepository.Update(routeStop);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove routeStop by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _routeStopRepository.Delete(id);
-                return Ok();
-            }
+           var repository = await _routeStopRepository.Delete(id);
+           var response = new ApiResponse<bool>(repository);
+           return Ok(response);
+        
         }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +34,9 @@ namespace RouteManagment.Server.Controllers
         {
             var documentType = await _DocumentTypeRepository.GetAll();
             var documentTypeDto = _mapper.Map<IEnumerable<DocumentTypeDto>>(documentType);
-            return Ok(documentTypeDto);
+            var response = new ApiResponse<IEnumerable<DocumentTypeDto>>(documentTypeDto);  
+
+            return Ok(response);
         }
         //Request to get DocumentType by id
 
@@ -43,7 +46,9 @@ namespace RouteManagment.Server.Controllers
         {
             var documentType = await _DocumentTypeRepository.GetById(id);
             var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documentType);
+            var response = new ApiResponse<DocumentTypeDto>(documenTypeDto);
+            
+            return Ok(response);
         }
 
         //Request to create DocumentType
@@ -64,19 +69,21 @@ namespace RouteManagment.Server.Controllers
                 var documentType = _mapper.Map<DocumentType>(documentTypeDto);
                 documentType.Id = id;
 
-                await _DocumentTypeRepository.Update(documentType);
-                return Ok(documentType);
+                var result= await _DocumentTypeRepository.Update(documentType);
+                var response = new ApiResponse<bool>(result);
+            return Ok(response);
             }
             //Request to remove documentType by id 
             [HttpDelete("{id}")]
 
             public async Task<IActionResult> Delete(int id)
             {
-                {
+             
 
-                    await _DocumentTypeRepository.Delete(id);
-                    return Ok();
-                }
+                var repository= await _DocumentTypeRepository.Delete(id);
+                var result = new ApiResponse<bool>(repository);
+                return Ok(result);
+             
             }
     } 
 }

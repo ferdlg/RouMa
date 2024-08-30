@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +34,9 @@ namespace RouteManagment.Server.Controllers
         {
             var companies = await _companyRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
-            return Ok(companiesDto);
+            var response = new ApiResponse<IEnumerable<CompanyDto>>(companiesDto);
+
+            return Ok(response);
         }
         //Request to get company by id
 
@@ -43,7 +46,8 @@ namespace RouteManagment.Server.Controllers
         {
             var company = await _companyRepository.GetById(id);
             var companyDto = _mapper.Map<CompanyDto>(company);
-            return Ok(company);
+            var response = new ApiResponse<CompanyDto>(companyDto);
+            return Ok(response);
         }
 
         //Request to create company
@@ -54,7 +58,10 @@ namespace RouteManagment.Server.Controllers
         {
             var company = _mapper.Map<Company>(companyDto);
             await _companyRepository.Add(company);
-            return Ok(company);
+
+            companyDto = _mapper.Map<CompanyDto>(company);
+            var response = new ApiResponse<CompanyDto>(companyDto);
+            return Ok(response);
         }
 
         //Request to update company
@@ -65,19 +72,19 @@ namespace RouteManagment.Server.Controllers
             var company = _mapper.Map<Company>(companyDto);
             company.Id = id;
 
-            await _companyRepository.Update(company);
-            return Ok(company);
+            var result = await _companyRepository.Update(company);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove company by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _companyRepository.Delete(id);
-                return Ok();
-            }
+    
+            var result = await _companyRepository.Delete(id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
 
     } 

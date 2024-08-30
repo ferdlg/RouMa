@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -31,7 +32,8 @@ namespace RouteManagment.Server.Controllers
         {
             var Headquarter = await _HeadquarterRepository.GetAll();
             var HeadquarterDto = _mapper.Map<IEnumerable<HeadquarterDto>>(Headquarter);
-            return Ok(HeadquarterDto);
+            var response = new ApiResponse<IEnumerable<HeadquarterDto>>(HeadquarterDto);
+            return Ok(response);
         }
         //Request to get Headquarter by id
 
@@ -41,7 +43,8 @@ namespace RouteManagment.Server.Controllers
         {
             var Headquarter = await _HeadquarterRepository.GetById(id);
             var headQuarterDto = _mapper.Map<HeadquarterDto>(Headquarter);
-            return Ok(Headquarter);
+            var response = new ApiResponse<HeadquarterDto>(headQuarterDto);
+            return Ok(response);
         }
 
         //Request to create Headquarter
@@ -52,7 +55,10 @@ namespace RouteManagment.Server.Controllers
         {
             var Headquarter = _mapper.Map<Headquarter>(HeadquarterDto);
             await _HeadquarterRepository.Add(Headquarter);
-            return Ok(Headquarter);
+
+            HeadquarterDto = _mapper.Map<HeadquarterDto>(Headquarter);
+            var response = new ApiResponse<HeadquarterDto>(HeadquarterDto);
+            return Ok(response);
         }
             //Request to update Headquarter
             [HttpPut("{id}")]
@@ -62,19 +68,18 @@ namespace RouteManagment.Server.Controllers
                 var Headquarter = _mapper.Map<Headquarter>(HeadquarterDto);
                 Headquarter.Id = id;
 
-                await _HeadquarterRepository.Update(Headquarter);
-                return Ok(Headquarter);
+                var result = await _HeadquarterRepository.Update(Headquarter);
+                var response = new ApiResponse<bool>(result);
+                return Ok(response);
             }
             //Request to remove Headquarter by id 
             [HttpDelete("{id}")]
 
             public async Task<IActionResult> Delete(int id)
-            {
-                {
-
-                    await _HeadquarterRepository.Delete(id);
-                    return Ok();
-                }
+            { 
+               var result = await _HeadquarterRepository.Delete(id);
+               var response = new ApiResponse<bool>(result);
+               return Ok(response);
             }
     } 
 }

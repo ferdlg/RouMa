@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -32,7 +33,7 @@ namespace RouteManagment.Server.Controllers
         {
            var TransportRequestStates = await _TransportRequestStateRepository.GetAll();
            var TransportRequestStatesDto = _mapper.Map<IEnumerable<TransportRequestStateDto>>(TransportRequestStates);
-            return Ok(TransportRequestStatesDto);
+           return Ok(TransportRequestStatesDto);
         }
         //Request to get top by id
 
@@ -42,18 +43,23 @@ namespace RouteManagment.Server.Controllers
         {
            var TransportRequestState = await _TransportRequestStateRepository.GetById(id);
            var TransportRequestStateDto = _mapper.Map<TransportRequestStateDto>(TransportRequestState);
-            return Ok(TransportRequestStateDto);
+           var response = new ApiResponse<TransportRequestStateDto>(TransportRequestStateDto);
+
+           return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(TransportRequestStateDto topDto)
+        public async Task<IActionResult> Add(TransportRequestStateDto transportDto)
         {
-            var TransportRequestState = _mapper.Map<TransportRequestState>(topDto);
+            var TransportRequestState = _mapper.Map<TransportRequestState>(transportDto);
             await _TransportRequestStateRepository.Add(TransportRequestState);
-            return Ok(TransportRequestState);
+
+            transportDto = _mapper.Map<TransportRequestStateDto>(TransportRequestState);
+            var response = new ApiResponse<TransportRequestStateDto>(transportDto);
+            return Ok(response);
         }
 
 
@@ -65,19 +71,19 @@ namespace RouteManagment.Server.Controllers
             var TransportRequestState = _mapper.Map<TransportRequestState>(TransportRequestStateDto);
             TransportRequestState.Id= id;
 
-            await _TransportRequestStateRepository.Update(TransportRequestState);
-            return Ok(TransportRequestState);
+            var result = await _TransportRequestStateRepository.Update(TransportRequestState);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove TransportRequestState by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _TransportRequestStateRepository.Delete(id);
-                return Ok();
-            }
+            var result = await _TransportRequestStateRepository.Delete(id);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        
         }
     }
 }

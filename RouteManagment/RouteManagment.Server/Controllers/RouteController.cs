@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -13,7 +14,7 @@ namespace RouteManagment.Server.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    
+
     //Request Managment
 
     public class RouteController : ControllerBase
@@ -33,7 +34,8 @@ namespace RouteManagment.Server.Controllers
         {
             var route = await _RouteRepository.GetAll();
             var routeDto = _mapper.Map<IEnumerable<RouteDto>>(route);
-            return Ok(routeDto);
+            var response = new ApiResponse<IEnumerable<RouteDto>>(routeDto);
+            return Ok(response);
         }
         //Request to get Route by id
 
@@ -43,7 +45,9 @@ namespace RouteManagment.Server.Controllers
         {
             var route = await _RouteRepository.GetById(id);
             var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(route);
+            var response = new ApiResponse<RouteDto>(routeDto);
+
+            return Ok(response);
         }
 
         //Request to create Route
@@ -54,7 +58,10 @@ namespace RouteManagment.Server.Controllers
         {
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
             await _RouteRepository.Add(route);
-            return Ok(route);
+
+            routeDto = _mapper.Map<RouteDto>(route);
+            var response = new ApiResponse<RouteDto>(routeDto);
+            return Ok(response);
         }
 
         //Request to update route
@@ -65,8 +72,9 @@ namespace RouteManagment.Server.Controllers
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
             route.Id = id;
 
-            await _RouteRepository.Update(route);
-            return Ok(route);
+            var result = await _RouteRepository.Update(route);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove route by id 
         [HttpDelete("{id}")]
@@ -75,8 +83,9 @@ namespace RouteManagment.Server.Controllers
         {
             {
 
-                await _RouteRepository.Delete(id);
-                return Ok();
+               var result =  await _RouteRepository.Delete(id);
+               var response = new ApiResponse<bool>(result);
+               return Ok(response);
             }
         }
 

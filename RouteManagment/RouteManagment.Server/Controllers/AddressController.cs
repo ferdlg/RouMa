@@ -5,6 +5,7 @@ using RouteManagment.Core.Entities;
 using RouteManagment.Core.DTOs;
 using AutoMapper;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -32,7 +33,8 @@ namespace RouteManagment.Server.Controllers
         {
             var addresses = await _addressRepository.GetAll();
             var addressesDto = _mapper.Map<IEnumerable<AddressDto>>(addresses);
-            return Ok(addressesDto);
+            var response = new ApiResponse<IEnumerable<AddressDto>>(addressesDto);
+            return Ok(response);
         }
 
         //Request to get address by id 
@@ -42,8 +44,10 @@ namespace RouteManagment.Server.Controllers
         {
             var address = await _addressRepository.GetById(id);
             var addressesDto = _mapper.Map<AddressDto>(address);
+            var response = new ApiResponse<AddressDto>(addressesDto);
 
-            return Ok(address);
+
+            return Ok(response);
         }
 
         //Request to create address
@@ -51,9 +55,11 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(AddressDto addressDto)
         {
             var address = _mapper.Map<Address>(addressDto);
-
             await _addressRepository.Add(address);
-            return Ok(address);
+
+            var response = new ApiResponse<AddressDto>(addressDto);
+
+            return Ok(response);
         }
 
         //Request to update address
@@ -64,19 +70,18 @@ namespace RouteManagment.Server.Controllers
             var address = _mapper.Map<Address>(addressDto);
             address.Id = id;
 
-            await _addressRepository.Update(address);
-            return Ok(address);
+            var result = await _addressRepository.Update(address);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove address by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-                
-                await _addressRepository.Delete(id);
-                return Ok();
-            }
+           var repository = await _addressRepository.Delete(id);
+           var response = new ApiResponse<bool>(repository);
+           return Ok(response);
         }
 
     }

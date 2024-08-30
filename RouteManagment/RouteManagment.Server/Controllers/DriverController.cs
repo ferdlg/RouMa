@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +34,9 @@ namespace RouteManagment.Server.Controllers
         {
             var Driver = await _DriverRepository.GetAll();
             var DriverDto = _mapper.Map<IEnumerable<DriverDto>>(Driver);
-            return Ok(DriverDto);
+
+            var response = new ApiResponse<IEnumerable<DriverDto>>(DriverDto);
+            return Ok(response);
         }
         //Request to get Driver by id
 
@@ -43,18 +46,22 @@ namespace RouteManagment.Server.Controllers
         {
             var Driver = await _DriverRepository.GetById(id);
             var driverDto = _mapper.Map<DriverDto>(Driver);
-            return Ok(Driver);
+            var response = new ApiResponse<DriverDto>(driverDto);
+            return Ok(response);
         }
 
         //Request to create Driver
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(DriverDto DriverDto)
+        public async Task<IActionResult> Add(DriverDto driverDto)
         {
-            var Driver = _mapper.Map<Driver>(DriverDto);
-            await _DriverRepository.Add(Driver);
-            return Ok(Driver);
+            var driver = _mapper.Map<Driver>(driverDto);
+            await _DriverRepository.Add(driver);
+
+            driverDto = _mapper.Map<DriverDto>(driver);
+            var response = new ApiResponse<DriverDto>(driverDto);
+            return Ok(response);
         }
 
         //Request to update driver
@@ -65,19 +72,19 @@ namespace RouteManagment.Server.Controllers
             var driver = _mapper.Map<Driver>(driverDto);
             driver.Id = id;
 
-            await _DriverRepository.Update(driver);
-            return Ok(driver);
+            var result = await _DriverRepository.Update(driver);
+            var respose = new ApiResponse<bool>(result);
+            return Ok(respose);
         }
         //Request to remove driver by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _DriverRepository.Delete(id);
-                return Ok();
-            }
+           var result = await _DriverRepository.Delete(id);
+           var respose = new ApiResponse<bool>(result);
+           return Ok(respose);
+        
         }
 
     } 

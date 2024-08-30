@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -32,7 +33,8 @@ namespace RouteManagment.Server.Controllers
             var administrators = await _administratorRepository.GetAll();
             var administratorsDto = _mapper.Map<IEnumerable<AdministratorDto>>(administrators);
 
-            return Ok(administratorsDto);
+            var response = new ApiResponse<IEnumerable<AdministratorDto>>(administratorsDto);
+            return Ok(response);
         }
 
         //Request to get administrator by id 
@@ -42,7 +44,8 @@ namespace RouteManagment.Server.Controllers
         {
             var administrator = await _administratorRepository.GetById(id);
             var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-            return Ok(administrator);
+            var response = new ApiResponse<AdministratorDto>(administratorDto);
+            return Ok(response);
         }
 
         //Request to create administrator
@@ -51,7 +54,10 @@ namespace RouteManagment.Server.Controllers
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
             await _administratorRepository.Add(administrator);
-            return Ok(administrator);
+
+            administratorDto = _mapper.Map<AdministratorDto>(administrator);
+            var response = new ApiResponse<AdministratorDto>(administratorDto);
+            return Ok(response);
         }
 
         //Request to update administrator
@@ -62,19 +68,19 @@ namespace RouteManagment.Server.Controllers
             var administrator = _mapper.Map<Administrator>(administratorDto);
             administrator.Id = id;
 
-            await _administratorRepository.Update(administrator);
-            return Ok(administrator);
+            var result= await _administratorRepository.Update(administrator);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove administrator by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _administratorRepository.Delete(id);
-                return Ok();
-            }
+            var repository = await _administratorRepository.Delete(id);
+            var response = new ApiResponse<bool>(repository);
+            return Ok(response);
+            
         }
 
     }

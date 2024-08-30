@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -30,8 +31,11 @@ namespace RouteManagment.Server.Controllers
         {
             var Role = await _RolRepository.GetAll();
             var RolDto = _mapper.Map<IEnumerable<RolDto>>(Role);
-            return Ok(RolDto);
+            var response = new ApiResponse<IEnumerable<RolDto>>(RolDto);
+
+            return Ok(response);
         }
+
         //Request to get Role by id
 
         [HttpGet("{id}")]
@@ -40,7 +44,8 @@ namespace RouteManagment.Server.Controllers
         {
             var Role = await _RolRepository.GetById(id);
             var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
+            var response = new ApiResponse<RolDto>(RolDto);
+            return Ok(response);
         }
 
         //Request to create Role
@@ -51,7 +56,10 @@ namespace RouteManagment.Server.Controllers
         {
             var role = _mapper.Map<Role>(RolDto);
             await _RolRepository.Add(role);
-            return Ok(role);
+
+            RolDto = _mapper.Map<RolDto>(role);
+            var response = new ApiResponse<RolDto>(RolDto);
+            return Ok(response);
         }
 
         //Request to update rol
@@ -62,19 +70,23 @@ namespace RouteManagment.Server.Controllers
             var rol = _mapper.Map<Role>(rolDto);
             rol.Id = id;
 
-            await _RolRepository.Update(rol);
-            return Ok(rol);
+            var result = await _RolRepository.Update(rol);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
         }
         //Request to remove rol by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
+        
 
-                await _RolRepository.Delete(id);
-                return Ok();
-            }
+           var result = await _RolRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+
+           return Ok(response);
+        
         }
 
     } 

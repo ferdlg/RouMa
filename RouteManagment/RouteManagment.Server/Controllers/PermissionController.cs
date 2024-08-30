@@ -1,11 +1,10 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +32,8 @@ namespace RouteManagment.Server.Controllers
         {
             var permission = await _PermissionRepository.GetAll();
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(permission);
-            return Ok(permissionDto);
+            var response = new ApiResponse<IEnumerable<PermissionDto>>(permissionDto);
+            return Ok(response);
         }
         //Request to get permission by id
 
@@ -43,7 +43,9 @@ namespace RouteManagment.Server.Controllers
         {
             var permission = await _PermissionRepository.GetById(id);
             var permissionDto = _mapper.Map<PermissionDto>(permission);
-            return Ok(permissionDto);
+            var response = new ApiResponse<PermissionDto>(permissionDto);
+
+            return Ok(response);
         }
 
         //Request to create permission
@@ -54,7 +56,10 @@ namespace RouteManagment.Server.Controllers
         {
             var permission = _mapper.Map<Permission>(permissionDto);
             await _PermissionRepository.Add(permission);
-            return Ok(permission);
+
+            permissionDto = _mapper.Map<PermissionDto>(permission);
+            var response = new ApiResponse<PermissionDto>(permissionDto);
+            return Ok(response);
         }
         //Request to update permission
         [HttpPut("{id}")]
@@ -64,19 +69,19 @@ namespace RouteManagment.Server.Controllers
             var permission = _mapper.Map<Permission>(permissionDto);
             permission.Id = id;
 
-            await _PermissionRepository.Update(permission);
-            return Ok(permission);
+            var result = await _PermissionRepository.Update(permission);
+            var response =  new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove permission by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Deletepermission(int id)
         {
-            {
+           var result = await _PermissionRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
 
-                await _PermissionRepository.Delete(id);
-                return Ok();
-            }
+           return Ok(response);
         }
 
     } 

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -31,7 +32,8 @@ namespace RouteManagment.Server.Controllers
         {
            var Users = await _UserRepository.GetAll();
            var UsersDto = _mapper.Map<IEnumerable<UserDto>>(Users);
-            return Ok(UsersDto);
+           var response = new ApiResponse<IEnumerable<UserDto>>(UsersDto);
+            return Ok(response);
         }
         //Request to get top by id
 
@@ -41,18 +43,22 @@ namespace RouteManagment.Server.Controllers
         {
            var User = await _UserRepository.GetById(id);
            var UserDto = _mapper.Map<UserDto>(User);
-            return Ok(User);
+           var response = new ApiResponse<UserDto>(UserDto);
+           return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(UserDto topDto)
+        public async Task<IActionResult> Add(UserDto userDto)
         {
-           var User = _mapper.Map<User>(topDto);
-            await _UserRepository.Add(User);
-            return Ok(User);
+           var user = _mapper.Map<User>(userDto);
+           await _UserRepository.Add(user);
+
+           userDto = _mapper.Map<UserDto>(user);
+           var response = new ApiResponse<UserDto>(userDto);
+            return Ok(response);
         }
 
 
@@ -64,19 +70,20 @@ namespace RouteManagment.Server.Controllers
             var User = _mapper.Map<User>(UserDto);
             User.Id= id;
 
-            await _UserRepository.Update(User);
-            return Ok(User);
+            var result = await _UserRepository.Update(User);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
         }
         //Request to remove User by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-                await _UserRepository.Delete(id);
-                return Ok();
-            }
+           var result = await _UserRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+        
         }
     }
 }

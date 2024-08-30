@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -33,7 +34,8 @@ namespace RouteManagment.Server.Controllers
         {
             var rolPermission = await _RolPermissionRepository.GetAll();
             var rolPermissionDto = _mapper.Map<IEnumerable<RolPermisionDto>>(rolPermission);
-            return Ok(rolPermissionDto);
+            var response = new ApiResponse<IEnumerable<RolPermisionDto>>(rolPermissionDto);
+            return Ok(response);
         }
         //Request to get RolPermission by id
 
@@ -43,7 +45,9 @@ namespace RouteManagment.Server.Controllers
         {
             var rolPermission = await _RolPermissionRepository.GetById(id);
             var rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
-            return Ok(rolPermissionDto);
+            var response = new ApiResponse<RolPermisionDto>(rolPermissionDto);
+
+            return Ok(response);
         }
 
         //Request to create RolPermission
@@ -54,7 +58,10 @@ namespace RouteManagment.Server.Controllers
         {
             var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
             await _RolPermissionRepository.Add(rolPermission);
-            return Ok(rolPermission);
+
+            rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
+            var response = new ApiResponse<RolPermisionDto>(rolPermissionDto);
+            return Ok(response);
         }
 
         //Request to update rolPermission
@@ -65,19 +72,21 @@ namespace RouteManagment.Server.Controllers
             var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
             rolPermission.Id = id;
 
-            await _RolPermissionRepository.Update(rolPermission);
-            return Ok(rolPermission);
+            var result= await _RolPermissionRepository.Update(rolPermission);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove rolPermission by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
+        
 
-                await _RolPermissionRepository.Delete(id);
-                return Ok();
-            }
+           var result= await _RolPermissionRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+        
         }
 
     } 

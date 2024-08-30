@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -32,7 +33,8 @@ namespace RouteManagment.Server.Controllers
         {
            var TransportTypes = await _TransportTypeRepository.GetAll();
            var TransportTypesDto = _mapper.Map<IEnumerable<TransportTypeDto>>(TransportTypes);
-            return Ok(TransportTypesDto);
+           var response = new ApiResponse<IEnumerable<TransportTypeDto>>(TransportTypesDto);
+           return Ok(response);
         }
         //Request to get top by id
 
@@ -42,7 +44,8 @@ namespace RouteManagment.Server.Controllers
         {
            var TransportType = await _TransportTypeRepository.GetById(id);
            var TransportTypeDto = _mapper.Map<TransportTypeDto>(TransportType);
-            return Ok(TransportType);
+           var response = new ApiResponse<TransportTypeDto>(TransportTypeDto);
+           return Ok(response);
         }
 
         //Request to create top
@@ -52,8 +55,8 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(TransportTypeDto topDto)
         {
            var TransportType = _mapper.Map<TransportType>(topDto);
-            await _TransportTypeRepository.Add(TransportType);
-            return Ok(TransportType);
+           await _TransportTypeRepository.Add(TransportType);
+           return Ok(TransportType);
         }
 
 
@@ -65,19 +68,22 @@ namespace RouteManagment.Server.Controllers
             var transportType = _mapper.Map<TransportType>(transportTypeDto);
             transportType.Id = id;
 
-            await _TransportTypeRepository.Update(transportType);
-            return Ok(transportType);
+            var result = await _TransportTypeRepository.Update(transportType);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove transportType by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
+         
 
-                await _TransportTypeRepository.Delete(id);
-                return Ok();
-            }
+            var result = await _TransportTypeRepository.Delete(id);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
+         
         }
     }
 }

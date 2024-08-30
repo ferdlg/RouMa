@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -32,7 +33,8 @@ namespace RouteManagment.Server.Controllers
         {
             var stops = await _stopRepository.GetAll();
             var stopsDto = _mapper.Map<IEnumerable<StopDto>>(stops);
-            return Ok(stopsDto);
+            var response = new ApiResponse<IEnumerable<StopDto>>(stopsDto);
+            return Ok(response);
         }
         //Request to get top by id
 
@@ -42,18 +44,22 @@ namespace RouteManagment.Server.Controllers
         {
             var stop = await _stopRepository.GetById(id);
             var stopDto = _mapper.Map<StopDto>(stop);
-            return Ok(stop);
+            var response = new ApiResponse<StopDto>(stopDto);
+            return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(StopDto topDto)
+        public async Task<IActionResult> Add(StopDto stopDto)
         {
-            var stop = _mapper.Map<Stop>(topDto);
+            var stop = _mapper.Map<Stop>(stopDto);
             await _stopRepository.Add(stop);
-            return Ok(stop);
+
+            stopDto = _mapper.Map<StopDto>(stop);
+            var response = new ApiResponse<StopDto>(stopDto);
+            return Ok(response);
         }
         //Request to update stop
         [HttpPut("{id}")]
@@ -63,19 +69,21 @@ namespace RouteManagment.Server.Controllers
             var stop = _mapper.Map<Stop>(stopDto);
             stop.Id = id;
 
-            await _stopRepository.Update(stop);
-            return Ok(stop);
+            var result = await _stopRepository.Update(stop);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
         }
         //Request to remove stop by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
 
-                await _stopRepository.Delete(id);
-                return Ok();
-            }
+              var result = await _stopRepository.Delete(id);
+              var response = new ApiResponse<bool>(result);
+              return Ok();
+            
         }
     }
 }
