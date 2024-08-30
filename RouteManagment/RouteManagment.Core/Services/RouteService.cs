@@ -1,11 +1,5 @@
-﻿using ManejoRutas.Core.Interfaces;
-using RouteManagment.Core.Entities;
+﻿using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RouteManagment.Core.Services
 {
@@ -14,11 +8,36 @@ namespace RouteManagment.Core.Services
         private readonly IRepository<Route> _routeRepository;
         private readonly IRepository<Stop> _routeStopRepository;
         private readonly IRepository<RoutesStop> _stopRepository;
-        public RouteService(IRepository<Route> routeRepository, IRepository<Stop> routeStopRepository, IRepository<RoutesStop> stopRepository)
+        private readonly IRepository<User> _userRepository;
+        public RouteService(
+                IRepository<Route> routeRepository,
+                IRepository<Stop> routeStopRepository,
+                IRepository<RoutesStop> stopRepository,
+                IRepository<User> userRepository)
         {
             _routeRepository = routeRepository;
             _routeStopRepository = routeStopRepository;
             _stopRepository = stopRepository;
+            _userRepository = userRepository;
+        }
+
+        public async Task<Route> GetRoute(int id)
+        {
+            return await _routeRepository.GetById(id);
+        }
+
+        public async Task<IEnumerable<Route>> GetRoutes()
+        {
+            return await _routeRepository.GetAll();
+        }
+        // Solo el admin puede crear rutas
+        // Las rutas deben tener un minimo de paradas y un maximo
+
+        public async Task InsertRoute(Route route)
+        {
+
+            //Validar que la ruta tenga un origen y un destino
+            //si la ruta tiene un origen
         }
     }
 }

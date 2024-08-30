@@ -17,22 +17,21 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("people");
 
+            builder.Property(e => e.Id)
+                .HasColumnName("DocumentNumber")
+                .HasColumnType("bigint");
+
             builder.HasIndex(e => e.AddressId, "AddressId");
 
             builder.HasIndex(e => e.DocumentTypeId, "DocumentTypeId");
 
             builder.HasIndex(e => e.RolId, "RolId");
 
-            builder.Property(e => e.Id)
-                .HasColumnName("DocumentNumber")
-                .HasColumnType("int(11)");
 
             builder.Property(e => e.AddressId)
-                .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");
 
             builder.Property(e => e.DocumentTypeId)
-                .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");
             builder.Property(e => e.Email).HasMaxLength(100);
             builder.Property(e => e.FirstName).HasMaxLength(100);

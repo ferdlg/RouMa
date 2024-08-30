@@ -4,13 +4,13 @@ using RouteManagment.Core.Entities;
 
 namespace RouteManagement.Infraestructure.Data.Configurations
 {
-    public class TransportRequestStateConfiguration : IEntityTypeConfiguration<TransportState>
+    public class TransportRequestStateConfiguration : IEntityTypeConfiguration<TransportRequestState>
     {
-        public void Configure(EntityTypeBuilder<TransportState> builder)
+        public void Configure(EntityTypeBuilder<TransportRequestState> builder)
         {
             builder.HasKey(e => e.Id).HasName("PRIMARY");
 
-            builder.ToTable("transport_Request_States");
+            builder.ToTable("transport_request_states");
 
             builder.Property(e => e.Id)
                 .HasColumnName("StateId")

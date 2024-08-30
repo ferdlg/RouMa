@@ -19,9 +19,7 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
             builder.Property(e => e.Id)
                 .HasColumnName("AddressId")
                 .HasColumnType("int(11)");
-            builder.Property(e => e.Plate)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("int(11)");
+  
             builder.Property(e => e.Prefix)
                 .HasMaxLength(50)
                 .HasDefaultValueSql("'NULL'");

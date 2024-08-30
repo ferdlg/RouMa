@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -31,7 +32,8 @@ namespace RouteManagment.Server.Controllers
         {
             var Person = await _PersonRepository.GetAll();
             var PersonDto = _mapper.Map<IEnumerable<PeopleDto>>(Person);
-            return Ok(PersonDto);
+            var Response = new ApiResponse<IEnumerable<PeopleDto>>(PersonDto);
+            return Ok(Response);
         }
         //Request to get Person by id
 
@@ -39,40 +41,46 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var Person = await _PersonRepository.GetById(id);
-            var PersonDto = _mapper.Map<PeopleDto>(Person);
-            return Ok(PersonDto);
+            var person = await _PersonRepository.GetById(id);
+            var personDto = _mapper.Map<PeopleDto>(person);
+            var response = new ApiResponse<PeopleDto>(personDto);
+            return Ok(response);
         }
 
         //Request to create Person
 
         [HttpPost]
 
-        public async Task<IActionResult> Add(PeopleDto PersonDto)
+        public async Task<IActionResult> Add(PeopleDto personDto)
         {
-            var Person = _mapper.Map<People>(PersonDto);
-            await _PersonRepository.Add(Person);
-            return Ok(Person);
+            var person = _mapper.Map<People>(personDto);
+            await _PersonRepository.Add(person);
+
+            personDto = _mapper.Map<PeopleDto>(person);
+            var response = new ApiResponse<PeopleDto>(personDto);
+            return Ok(response);
         }
 
         //Request to update Person
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> Update(int id, PeopleDto PersonDto)
+        public async Task<IActionResult> Update(int id, PeopleDto personDto)
         {
-            var Person = _mapper.Map<People>(PersonDto);
-            Person.Id= id;
+            var person = _mapper.Map<People>(personDto);
+            person.Id= id;
 
-            await _PersonRepository.Update(Person);
-            return Ok(Person);
+            var result = await _PersonRepository.Update(person);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove Person by id 
         [HttpDelete("{id}")]
 
         public async Task<IActionResult> Delete(int id)
         {
-              await _PersonRepository.Delete(id);
-              return Ok();
+            var repository =  await _PersonRepository.Delete(id);
+            var response = new ApiResponse<bool>(repository);
+            return Ok(response);
             
         }
 

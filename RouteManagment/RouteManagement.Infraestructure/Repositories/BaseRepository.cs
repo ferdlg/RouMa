@@ -29,16 +29,18 @@ namespace RouteManagement.Infraestructure.Repositories
             await _appDbContext.SaveChangesAsync();
         }
 
-        public async Task Update(T entity)
+        public async Task<bool> Update(T entity)
         {
             _entities.Update(entity);
-            await _appDbContext.SaveChangesAsync();
+            var result = await _appDbContext.SaveChangesAsync();
+            return result != 0;
         }
-        public async Task Delete(int id)
+        public async Task<bool> Delete(int id)
         {
             T entity = await GetById(id);
             _entities.Remove( entity);
-            await _appDbContext.SaveChangesAsync();
+            var result = await _appDbContext.SaveChangesAsync();
+            return result != 0;
         }
 
 

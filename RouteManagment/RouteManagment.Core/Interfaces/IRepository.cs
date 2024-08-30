@@ -12,8 +12,8 @@ namespace RouteManagment.Core.Interfaces
         Task<IEnumerable<T>> GetAll();
         Task<T> GetById(int id);
         Task Add(T entity);
-        Task Update(T entity);
-        Task Delete(int id);
+        Task<bool> Update(T entity);
+        Task<bool> Delete(int id);
 
     }
 }

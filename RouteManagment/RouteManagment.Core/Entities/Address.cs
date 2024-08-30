@@ -13,8 +13,6 @@ public partial class Address : BaseEntity
 
     public string? Quadrant { get; set; }
 
-    public int? Plate { get; set; }
-
     public string? Prefix { get; set; }
 
     public int StreetTypeId { get; set; }

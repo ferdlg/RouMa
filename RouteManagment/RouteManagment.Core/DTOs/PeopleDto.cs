@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class PeopleDto
     {
-        public int DocumentNumber { get; set; }
+        public int id { get; set; }
 
         public string FirstName { get; set; } = null!;
 
