@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RouteManagment.Core.Entities;
 
 namespace RouteManagment.Core.Interfaces
 {
-    public class IRouteService
+    public interface IRouteService
     {
+        Task<IEnumerable<Route>> GetRoutes();
+        Task<Route> GetRouteById(int id);
+        Task InsertRoute(Route route);
+        Task<bool> Update(Route route);
+        Task<bool> Delete(int id);
     }
 }

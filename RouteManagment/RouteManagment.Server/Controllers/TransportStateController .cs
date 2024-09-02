@@ -1,7 +1,5 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -63,7 +61,6 @@ namespace RouteManagment.Server.Controllers
 
         }
 
-
         //Request to update transportState
         [HttpPut("{id}")]
 
@@ -85,7 +82,6 @@ namespace RouteManagment.Server.Controllers
            var result = await _TransportStateRepository.Delete(id);
            var response = new ApiResponse<bool>(result);
            return Ok(response);
-        
         }
     }
 }

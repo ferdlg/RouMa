@@ -5,39 +5,32 @@ namespace RouteManagment.Core.Services
 {
     public class RouteService : IRouteService 
     {
-        private readonly IRepository<Route> _routeRepository;
-        private readonly IRepository<Stop> _routeStopRepository;
-        private readonly IRepository<RoutesStop> _stopRepository;
-        private readonly IRepository<User> _userRepository;
-        public RouteService(
-                IRepository<Route> routeRepository,
-                IRepository<Stop> routeStopRepository,
-                IRepository<RoutesStop> stopRepository,
-                IRepository<User> userRepository)
-        {
-            _routeRepository = routeRepository;
-            _routeStopRepository = routeStopRepository;
-            _stopRepository = stopRepository;
-            _userRepository = userRepository;
-        }
+        private readonly IunitOfWork _unitOfWork;
 
-        public async Task<Route> GetRoute(int id)
+        public RouteService(IunitOfWork iunitOfWork)
         {
-            return await _routeRepository.GetById(id);
+            _unitOfWork = iunitOfWork;
         }
-
         public async Task<IEnumerable<Route>> GetRoutes()
         {
-            return await _routeRepository.GetAll();
+            return await _unitOfWork.RouteRepository.GetAll();
         }
-        // Solo el admin puede crear rutas
-        // Las rutas deben tener un minimo de paradas y un maximo
-
+        public async Task<Route> GetRouteById(int id)
+        {
+            return await _unitOfWork.RouteRepository.GetById(id);
+        }
         public async Task InsertRoute(Route route)
         {
-
-            //Validar que la ruta tenga un origen y un destino
-            //si la ruta tiene un origen
+            await _unitOfWork.RouteRepository.Add(route);
+        }
+        public async Task<bool> Update(Route route)
+        {
+           
+            return await _unitOfWork.RouteRepository.Update(route);
+        }
+        public async Task<bool> Delete(int id)
+        { 
+            return await _unitOfWork.RouteRepository.Delete(id);
         }
     }
 }
