@@ -3,11 +3,11 @@ using RouteManagment.Core.Interfaces;
 
 namespace RouteManagment.Core.Services
 {
-    public class RouteService : IRouteService 
+    public class RouteService : IRouteService
     {
-        private readonly IunitOfWork _unitOfWork;
+        private readonly IRouteUnitOfWork _unitOfWork;
 
-        public RouteService(IunitOfWork iunitOfWork)
+        public RouteService(IRouteUnitOfWork iunitOfWork)
         {
             _unitOfWork = iunitOfWork;
         }

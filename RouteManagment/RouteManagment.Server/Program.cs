@@ -39,7 +39,7 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectio
 builder.Services.AddTransient<IRouteService, RouteService>();
 builder.Services.AddScoped<ITransportRepository, TransportRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-
+builder.Services.AddScoped<IRouteUnitOfWork, RouteUnitOfWork >();
 var app = builder.Build();
 
 app.UseDefaultFiles();

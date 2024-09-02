@@ -1,23 +1,18 @@
 ﻿using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
 using RouteManagment.Server.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RouteManagement.Infraestructure.Repositories
 {
-    public class UnitOfWork : IunitOfWork
+    public class RouteUnitOfWork : IRouteUnitOfWork
     {
         private readonly AppDbContext _appDbContext;
         private readonly IRepository<Route> _routeRepository;
         private readonly IRepository<Stop> _stopRepository;
-        private readonly IRepository<RoutesStop> _routeStopRepository ;
+        private readonly IRepository<RoutesStop> _routeStopRepository;
         private readonly IRepository<User> _userRepository;
 
-        public UnitOfWork(AppDbContext appDbContext)
+        public RouteUnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
@@ -32,7 +27,7 @@ namespace RouteManagement.Infraestructure.Repositories
 
         public void Dispose()
         {
-           if(_appDbContext != null)
+            if (_appDbContext != null)
             {
                 _appDbContext.Dispose();
             }
@@ -49,5 +44,5 @@ namespace RouteManagement.Infraestructure.Repositories
         }
 
     }
-    
+
 }

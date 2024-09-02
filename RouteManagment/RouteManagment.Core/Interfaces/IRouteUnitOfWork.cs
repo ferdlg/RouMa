@@ -2,7 +2,7 @@
 
 namespace RouteManagment.Core.Interfaces
 {
-    public interface IunitOfWork : IDisposable
+    public interface IRouteUnitOfWork : IDisposable
     {
         IRepository<Route> RouteRepository { get; }
         IRepository<Stop> StopRepository { get; }
