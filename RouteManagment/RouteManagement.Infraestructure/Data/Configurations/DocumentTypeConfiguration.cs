@@ -13,11 +13,13 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<DocumentType> builder)
         {
-            builder.HasKey(e => e.DocumentTypeId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("document_types");
 
-            builder.Property(e => e.DocumentTypeId).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("DocumentTypeId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Description)
                 .HasMaxLength(200)
                 .HasDefaultValueSql("'NULL'");

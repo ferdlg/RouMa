@@ -1,9 +1,12 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -11,66 +14,79 @@ namespace RouteManagment.Server.Controllers
 {
     [Route("api/[Controller]")]
     [ApiController]
-    
+
     //Request Managment
 
     public class RouteController : ControllerBase
     {
-        private readonly IRouteRepository _RouteRepository;
+        private readonly IRouteService _RouteService;
         private readonly IMapper _mapper;
 
-        public RouteController(IRouteRepository routeRepository, IMapper mapper)
+        public RouteController(IRouteService routeService, IMapper mapper)
         {
-            _RouteRepository = routeRepository;
+            _RouteService = routeService;
             _mapper = mapper;
         }
         //Request to get all Routes
 
         [HttpGet]
-        public async Task<IActionResult> GetRoutes()
+        public IActionResult GetAll()
         {
-            var route = await _RouteRepository.GetRoutes();
+            var route =  _RouteService.GetRoutes();
             var routeDto = _mapper.Map<IEnumerable<RouteDto>>(route);
-            return Ok(routeDto);
+            var response = new ApiResponse<IEnumerable<RouteDto>>(routeDto);
+            return Ok(response);
         }
         //Request to get Route by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetRoute(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var route = await _RouteRepository.GetRoute(id);
+            var route = await _RouteService.GetRouteById(id);
             var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(route);
+            var response = new ApiResponse<RouteDto>(routeDto);
+
+            return Ok(response);
         }
 
         //Request to create Route
 
         [HttpPost]
 
-        public async Task<IActionResult> PostRoute(RouteDto routeDto)
+        public async Task<IActionResult> Add(RouteDto routeDto)
         {
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
-            await _RouteRepository.PostRoute(route);
-            return Ok(route);
+            await _RouteService.InsertRoute(route);
+
+            routeDto = _mapper.Map<RouteDto>(route);
+            var response = new ApiResponse<RouteDto>(routeDto);
+            return Ok(response);
         }
 
-        //Request to update Route
+        //Request to update route
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRoute(int id)
-        {
-            var route = await _RouteRepository.PutRoute(id);
-            var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(routeDto);
-        }
 
-        //Request to remove Route 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRoute(int id)
+        public async Task<IActionResult> Update(int id, RouteDto routeDto)
         {
-            var route = await _RouteRepository.DeleteRoute(id);
-            var routeDto = _mapper.Map<RouteDto>(route);
-            return Ok(routeDto);
+            var route = _mapper.Map<Core.Entities.Route>(routeDto);
+            route.Id = id;
+
+            var result = await _RouteService.Update(route);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+        //Request to remove route by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            {
+
+               var result = await _RouteService.Delete(id);
+               var response = new ApiResponse<bool>(result);
+               return Ok(response);
+            }
         }
 
     } 

@@ -1,9 +1,10 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -15,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RoleController : ControllerBase
     {
-        private readonly IRolRepository _RolRepository;
+        private readonly IRepository<Role> _RolRepository;
         private readonly IMapper _mapper;
 
-        public RoleController(IRolRepository RolRepository, IMapper mapper)
+        public RoleController(IRepository<Role> RolRepository, IMapper mapper)
         {
             _RolRepository = RolRepository;
             _mapper = mapper;
@@ -26,50 +27,66 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Roles
 
         [HttpGet]
-        public async Task<IActionResult> GetRoles()
+        public IActionResult GetAll()
         {
-            var Role = await _RolRepository.GetRoles();
+            var Role =  _RolRepository.GetAll();
             var RolDto = _mapper.Map<IEnumerable<RolDto>>(Role);
-            return Ok(RolDto);
+            var response = new ApiResponse<IEnumerable<RolDto>>(RolDto);
+
+            return Ok(response);
         }
+
         //Request to get Role by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetRol(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var Role = await _RolRepository.GetRol(id);
+            var Role = await _RolRepository.GetById(id);
             var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
+            var response = new ApiResponse<RolDto>(RolDto);
+            return Ok(response);
         }
 
         //Request to create Role
 
         [HttpPost]
 
-        public async Task<IActionResult> PostRol(RolDto RolDto)
+        public async Task<IActionResult> Add(RolDto RolDto)
         {
             var role = _mapper.Map<Role>(RolDto);
-            await _RolRepository.PostRol(role);
-            return Ok(role);
+            await _RolRepository.Add(role);
+
+            RolDto = _mapper.Map<RolDto>(role);
+            var response = new ApiResponse<RolDto>(RolDto);
+            return Ok(response);
         }
 
-        //Request to update Role
+        //Request to update rol
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRol(int id)
-        {
-            var Role = await _RolRepository.PutRol(id);
-            var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
-        }
 
-        //Request to remove Role 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRol(int id)
+        public async Task<IActionResult> Update(int id, RolDto rolDto)
         {
-            var Role = await _RolRepository.DeleteRol(id);
-            var RolDto = _mapper.Map<RolDto>(Role);
-            return Ok(RolDto);
+            var rol = _mapper.Map<Role>(rolDto);
+            rol.Id = id;
+
+            var result = await _RolRepository.Update(rol);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
+        }
+        //Request to remove rol by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+        
+
+           var result = await _RolRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+
+           return Ok(response);
+        
         }
 
     } 

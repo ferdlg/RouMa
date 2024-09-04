@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class RolesPermission
+public partial class RolesPermission : BaseEntity
 {
-    public int RolPermissionId { get; set; }
+    //public int RolPermissionId { get; set; }
 
     public int PermissionId { get; set; }
 

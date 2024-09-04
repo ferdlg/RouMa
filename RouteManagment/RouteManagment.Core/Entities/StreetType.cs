@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class StreetType
+public partial class StreetType : BaseEntity
 {
-    public int StreetTypeId { get; set; }
+    // public int StreetTypeId { get; set; }
 
     public string Name { get; set; } = null!;
 

@@ -1,9 +1,12 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -16,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class DocumentTypeController : ControllerBase
     {
-        private readonly IDocumentTypeRepository _DocumentTypeRepository;
+        private readonly IRepository<DocumentType> _DocumentTypeRepository;
         private readonly IMapper _mapper;
 
-        public DocumentTypeController(IDocumentTypeRepository DocumentTypeRepository, IMapper mapper)
+        public DocumentTypeController(IRepository<DocumentType> DocumentTypeRepository, IMapper mapper)
         {
             _DocumentTypeRepository = DocumentTypeRepository;
             _mapper = mapper;
@@ -27,52 +30,61 @@ namespace RouteManagment.Server.Controllers
         //Request to get all DocumentTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetdocumentTypes()
+        public IActionResult GetAll()
         {
-            var documentType = await _DocumentTypeRepository.GetDocumentTypes();
+            var documentType =  _DocumentTypeRepository.GetAll();
             var documentTypeDto = _mapper.Map<IEnumerable<DocumentTypeDto>>(documentType);
-            return Ok(documentTypeDto);
+            var response = new ApiResponse<IEnumerable<DocumentTypeDto>>(documentTypeDto);  
+
+            return Ok(response);
         }
         //Request to get DocumentType by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetdocumentType(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var documentType = await _DocumentTypeRepository.GetDocumentType(id);
+            var documentType = await _DocumentTypeRepository.GetById(id);
             var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documentType);
+            var response = new ApiResponse<DocumentTypeDto>(documenTypeDto);
+            
+            return Ok(response);
         }
 
         //Request to create DocumentType
 
         [HttpPost]
 
-        public async Task<IActionResult> PostDocumentType(DocumentTypeDto DocumentTypeDto)
+        public async Task<IActionResult> Add(DocumentTypeDto DocumentTypeDto)
         {
             var documentType = _mapper.Map<DocumentType>(DocumentTypeDto);
-            await _DocumentTypeRepository.PostDocumentType(documentType);
+            await _DocumentTypeRepository.Add(documentType);
             return Ok(documentType);
         }
+            //Request to update documentType
+            [HttpPut("{id}")]
 
-        //Request to update DocumentType
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutDocumentType(int id)
-        {
-            var documentType = await _DocumentTypeRepository.PutDocumentType(id);
-            var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documenTypeDto);
-        }
+            public async Task<IActionResult> Update(int id, DocumentTypeDto documentTypeDto)
+            {
+                var documentType = _mapper.Map<DocumentType>(documentTypeDto);
+                documentType.Id = id;
 
-        //Request to remove DocumentType 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDocumentType(int id)
-        {
-            var documentType = await _DocumentTypeRepository.DeleteDocumentType(id);
-            var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
-            return Ok(documenTypeDto);
-        }
+                var result= await _DocumentTypeRepository.Update(documentType);
+                var response = new ApiResponse<bool>(result);
+            return Ok(response);
+            }
+            //Request to remove documentType by id 
+            [HttpDelete("{id}")]
 
+            public async Task<IActionResult> Delete(int id)
+            {
+             
+
+                var repository= await _DocumentTypeRepository.Delete(id);
+                var result = new ApiResponse<bool>(repository);
+                return Ok(result);
+             
+            }
     } 
 }
 

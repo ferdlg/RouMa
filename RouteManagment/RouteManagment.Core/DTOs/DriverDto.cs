@@ -10,6 +10,12 @@ namespace RouteManagment.Core.DTOs
     {
         public int DriverId { get; set; }
 
+        public int DrivingLicenseNumber { get; set; }
+
         public int DocumentNumber { get; set; }
+
+        public int TypeLicenseId { get; set; }
+
+        public string? PlateTransport { get; set; }
     }
 }

@@ -13,11 +13,13 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<StreetType> builder)
         {
-            builder.HasKey(e => e.StreetTypeId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("street_types");
 
-            builder.Property(e => e.StreetTypeId).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("StreetTypeId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }

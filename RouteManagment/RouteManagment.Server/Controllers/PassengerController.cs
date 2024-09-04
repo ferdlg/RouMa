@@ -1,9 +1,12 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 
@@ -16,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PassengerController : ControllerBase
     {
-        private readonly IPassengerRepository _PassengerRepository;
+        private readonly IRepository<Passenger> _PassengerRepository;
         private readonly IMapper _mapper;
 
-        public PassengerController(IPassengerRepository PassengerRepository, IMapper mapper)
+        public PassengerController(IRepository<Passenger> PassengerRepository, IMapper mapper)
         {
             _PassengerRepository = PassengerRepository;
             _mapper = mapper;
@@ -27,50 +30,60 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Passengers
 
         [HttpGet]
-        public async Task<IActionResult> GetPassengers()
+        public IActionResult GetAll()
         {
-            var passenger = await _PassengerRepository.GetPassengers();
+            var passenger =  _PassengerRepository.GetAll();
             var PassengerDto = _mapper.Map<IEnumerable<PassengerDto>>(passenger);
-            return Ok(PassengerDto);
+            var response = new ApiResponse<IEnumerable<PassengerDto>>(PassengerDto);
+            return Ok(response);
         }
         //Request to get Passenger by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetPassenger(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var passenger = await _PassengerRepository.GetPassenger(id);
+            var passenger = await _PassengerRepository.GetById(id);
             var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
+            var response = new ApiResponse<PassengerDto>(passengerDto);
+            return Ok(response);
         }
 
         //Request to create Passenger
 
         [HttpPost]
 
-        public async Task<IActionResult> PostPassenger(PassengerDto PassengerDto)
+        public async Task<IActionResult> Add(PassengerDto passengerDto)
         {
-            var passenger = _mapper.Map<Passenger>(PassengerDto);
-            await _PassengerRepository.PostPassenger(passenger);
-            return Ok(passenger);
+            var passenger = _mapper.Map<Passenger>(passengerDto);
+            await _PassengerRepository.Add(passenger);
+
+            passengerDto = _mapper.Map<PassengerDto>(passengerDto);
+            var response = new ApiResponse<PassengerDto>(passengerDto);
+            return Ok(response);
         }
 
-        //Request to update Passenger
+        //Request to update passenger
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPassenger(int id)
-        {
-            var passenger = await _PassengerRepository.PutPassenger(id);
-            var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
-        }
 
-        //Request to remove Passenger 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePassenger(int id)
+        public async Task<IActionResult> Update(int id, PassengerDto passengerDto)
         {
-            var passenger = await _PassengerRepository.DeletePassenger(id);
-            var passengerDto = _mapper.Map<PassengerDto>(passenger);
-            return Ok(passengerDto);
+            var passenger = _mapper.Map<Passenger>(passengerDto);
+            passenger.Id = id;
+
+            var result= await _PassengerRepository.Update(passenger);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+        }
+        //Request to remove passenger by id 
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> Delete(int id)
+        {
+           var result= await _PassengerRepository.Delete(id);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+         
         }
 
     } 

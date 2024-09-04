@@ -24,9 +24,10 @@ namespace ManejoRutas.Infrastructure.Repositories
         }
 
         //List Transport by id 
-        public async Task<Transport> GetTransport(int id)
+        public async Task<Transport> GetTransport(string? plate)
         {
-            var transport = await _appDbContext.Transports.FirstOrDefaultAsync(Transport_x => Transport_x.Plate == id);
+            var transport = await _appDbContext.Transports
+                .FirstOrDefaultAsync(Transport_x => Transport_x.Plate == plate);
             return transport;
         }
 
@@ -39,24 +40,27 @@ namespace ManejoRutas.Infrastructure.Repositories
 
         }
 
-        //Update Transport 
-
-        public async Task<Transport> PutTransport(int id)
+        // Update transport by id 
+        public async Task<bool> UpdateTransport(Transport transport)
         {
-            var transport = _appDbContext.Transports.FirstOrDefaultAsync(Transport_x => Transport_x.Plate == id);
-            _appDbContext.Transports.Update(await transport);
-            await _appDbContext.SaveChangesAsync();
-            return await transport;
+            var up_transport = await GetTransport(transport.Plate);
+            up_transport.Capacity = transport.Capacity;
+            up_transport.StateId = transport.StateId;
+            up_transport.RouteId = transport.RouteId;
+            up_transport.TransportTypeId = transport.TransportTypeId;
+
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
 
-        //Remove Transport by id 
 
-        public async Task<Transport> DeleteTransport(int id)
+        // Remove transport by id
+        public async Task<bool> DeleteTransport(string? plate)
         {
-            var transport = await _appDbContext.Transports.FirstOrDefaultAsync(Transport_x => Transport_x.Plate == id);
-            _appDbContext.Transports.Remove(transport);
-            await _appDbContext.SaveChangesAsync();
-            return transport;
+            var up_transport = await GetTransport(plate);
+            _appDbContext.Transports.Remove(up_transport);
+            int rows = await _appDbContext.SaveChangesAsync();
+            return rows > 0;
         }
     }
 }

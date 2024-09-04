@@ -4,7 +4,8 @@ using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -16,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class AdministratorController : ControllerBase
     {
-        private readonly IAdministratorRepository _administratorRepository;
+        private readonly IRepository<Administrator> _administratorRepository;
         private readonly IMapper _mapper;
 
-        public AdministratorController(IAdministratorRepository administratorRepository, IMapper mapper)
+        public AdministratorController(IRepository<Administrator> administratorRepository, IMapper mapper)
         {
             _administratorRepository = administratorRepository;
             _mapper = mapper;
@@ -27,52 +28,59 @@ namespace RouteManagment.Server.Controllers
         //Request to get all administrator
 
         [HttpGet]
-        public async Task<IActionResult> GetAdministrators()
+        public IActionResult GetAll()
         {
-            var administrators = await _administratorRepository.GetAdministrators();
+            var administrators =  _administratorRepository.GetAll();
             var administratorsDto = _mapper.Map<IEnumerable<AdministratorDto>>(administrators);
 
-            return Ok(administratorsDto);
+            var response = new ApiResponse<IEnumerable<AdministratorDto>>(administratorsDto);
+            return Ok(response);
         }
 
         //Request to get administrator by id 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetAdministrator(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var administrator = await _administratorRepository.GetAdministrator(id);
+            var administrator = await _administratorRepository.GetById(id);
             var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-            return Ok(administrator);
+            var response = new ApiResponse<AdministratorDto>(administratorDto);
+            return Ok(response);
         }
 
         //Request to create administrator
         [HttpPost]
-        public async Task<IActionResult> PostAdministrator(AdministratorDto administratorDto)
+        public async Task<IActionResult> Add(AdministratorDto administratorDto)
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
-            await _administratorRepository.PostAdministrator(administrator);
-            return Ok(administrator);
+            await _administratorRepository.Add(administrator);
+
+            administratorDto = _mapper.Map<AdministratorDto>(administrator);
+            var response = new ApiResponse<AdministratorDto>(administratorDto);
+            return Ok(response);
         }
 
         //Request to update administrator
         [HttpPut("{id}")]
 
-        public async Task<IActionResult> PutAdministrator(int id)
+        public async Task<IActionResult> Update(int id, AdministratorDto administratorDto)
         {
-            var administrator = await _administratorRepository.PutAdministrator(id);
-            var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-            return Ok(administratorDto);
+            var administrator = _mapper.Map<Administrator>(administratorDto);
+            administrator.Id = id;
+
+            var result= await _administratorRepository.Update(administrator);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
         //Request to remove administrator by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> DeleteAdministrator(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            {
-                var administrator = await _administratorRepository.DeleteAdministrator(id);
-                var administratorDto = _mapper.Map<AdministratorDto>(administrator);
-                return Ok(administratorDto);
-            }
+            var repository = await _administratorRepository.Delete(id);
+            var response = new ApiResponse<bool>(repository);
+            return Ok(response);
+            
         }
 
     }

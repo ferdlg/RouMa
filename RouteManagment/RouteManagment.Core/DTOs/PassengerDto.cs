@@ -12,5 +12,9 @@ namespace RouteManagment.Core.DTOs
         public int PassengerId { get; set; }
 
         public int DocumentNumber { get; set; }
+
+        public int CompanyId { get; set; }
+        public int RouteId { get; set; }
+
     }
 }

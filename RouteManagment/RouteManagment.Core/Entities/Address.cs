@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace RouteManagment.Core.Entities;
 
-public partial class Address
+public partial class Address : BaseEntity
 {
-    public int AddressId { get; set; }
+   // public int AddressId { get; set; }
 
     public string? StreetName { get; set; }
 
@@ -13,15 +13,14 @@ public partial class Address
 
     public string? Quadrant { get; set; }
 
-    public int? Plate { get; set; }
-
     public string? Prefix { get; set; }
 
     public int StreetTypeId { get; set; }
 
-    public virtual ICollection<Company> Companies { get; set; } = new List<Company>();
+    public virtual ICollection<Headquarter> Headquarters { get; set; } = new List<Headquarter>();
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<People> People { get; set; } = new List<People>();
+    public virtual ICollection<Route> Routes{ get; set; } = new List<Route>();
 
     public virtual ICollection<Stop> Stops { get; set; } = new List<Stop>();
 

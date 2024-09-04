@@ -1,9 +1,10 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -15,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RoutesStopController : ControllerBase
     {
-        private readonly IRouteStopRepository _routeStopRepository;
+        private readonly IRepository<RoutesStop> _routeStopRepository;
         private readonly IMapper _mapper;
 
-        public RoutesStopController(IRouteStopRepository routeStopRepository, IMapper mapper)
+        public RoutesStopController(IRepository<RoutesStop> routeStopRepository, IMapper mapper)
         {
             _routeStopRepository = routeStopRepository;
             _mapper = mapper;
@@ -26,51 +27,61 @@ namespace RouteManagment.Server.Controllers
         //Request to get all companies
 
         [HttpGet]
-        public async Task<IActionResult> GetCompanies()
+        public IActionResult GetAll()
         {
-            var companies = await _routeStopRepository.GetRoutesStops();
+            var companies =  _routeStopRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<RouteStopDto>>(companies);
-            return Ok(companiesDto);
+            var response = new ApiResponse<IEnumerable<RouteStopDto>>(companiesDto);
+            return Ok(response);
         }
         //Request to get RouteStop by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetCompanies(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var RouteStop = await _routeStopRepository.GetRoutesStop(id);
+            var RouteStop = await _routeStopRepository.GetById(id);
             var RouteStopDto = _mapper.Map<RouteStopDto>(RouteStop);
-            return Ok(RouteStop);
+            var response = new ApiResponse<RouteStopDto>(RouteStopDto);
+
+            return Ok(response);
         }
 
         //Request to create RouteStop
 
         [HttpPost]
 
-        public async Task<IActionResult> PostRouteStop(RouteStopDto RouteStopDto)
+        public async Task<IActionResult> Add(RouteStopDto routeStopDto)
         {
-            var RouteStop = _mapper.Map<RoutesStop>(RouteStopDto);
-            await _routeStopRepository.PostRoutesStop(RouteStop);
-            return Ok(RouteStop);
+            var routeStop = _mapper.Map<RoutesStop>(routeStopDto);
+            await _routeStopRepository.Add(routeStop);
+
+            routeStopDto = _mapper.Map<RouteStopDto>(routeStop);
+            var response = new ApiResponse<RouteStopDto>(routeStopDto);
+            return Ok(response);
         }
 
-        //Request to update RouteStop
+        //Request to update routeStop
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRouteStop(int id)
+
+        public async Task<IActionResult> Update(int id, RouteStopDto routeStopDto)
         {
-            var RouteStop = await _routeStopRepository.PutRoutesStop(id);
-            var RouteStopDto = _mapper.Map<RouteStopDto>(RouteStop);
-            return Ok(RouteStopDto);
+            var routeStop = _mapper.Map<RoutesStop>(routeStopDto);
+            routeStop.Id = id;
+
+            var result = await _routeStopRepository.Update(routeStop);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
-
-        //Request to remove RouteStop 
+        //Request to remove routeStop by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRouteStop(int id)
-        {
-            var RouteStop = await _routeStopRepository.DeleteRoutesStop(id);
-            var RouteStopDto = _mapper.Map<RouteStopDto>(RouteStop);
 
-            return Ok(RouteStopDto);
+        public async Task<IActionResult> Delete(int id)
+        {
+           var repository = await _routeStopRepository.Delete(id);
+           var response = new ApiResponse<bool>(repository);
+           return Ok(response);
+        
         }
     }
 }

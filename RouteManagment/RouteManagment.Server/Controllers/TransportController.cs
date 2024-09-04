@@ -1,9 +1,11 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -30,47 +32,58 @@ namespace RouteManagment.Server.Controllers
         {
            var transports = await _transportRepository.GetTransports();
            var transportsDto = _mapper.Map<IEnumerable<TransportDto>>(transports);
-            return Ok(transportsDto);
+           var response = new ApiResponse<IEnumerable<TransportDto>>(transportsDto);
+           return Ok(response);
         }
         //Request to get top by id
 
-        [HttpGet("{id}")]
+        [HttpGet("{plate}")]
 
-        public async Task<IActionResult> GetTransports(int id)
+        public async Task<IActionResult> GetTransports(string? plate)
         {
-           var transport = await _transportRepository.GetTransport(id);
+           var transport = await _transportRepository.GetTransport(plate);
            var transportDto = _mapper.Map<TransportDto>(transport);
-            return Ok(transport);
+           var response = new ApiResponse<TransportDto>(transportDto);
+
+           return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(TransportDto topDto)
+        public async Task<IActionResult> Posttop(TransportDto transportDto)
         {
-           var transport = _mapper.Map<Transport>(topDto);
-            await _transportRepository.PostTransport(transport);
-            return Ok(transport);
+           var transport = _mapper.Map<Transport>(transportDto);
+           await _transportRepository.PostTransport(transport);
+
+           transportDto = _mapper.Map<TransportDto>(_transportRepository);
+           var response = new ApiResponse<TransportDto>(transportDto);
+           return Ok(response);
         }
 
-        //Request to update top
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        //Request to update transport
+        [HttpPut("{plate}")]
+
+        public async Task<IActionResult> UpdateTransport(string? plate, TransportDto transportDto)
         {
-           var transport = await _transportRepository.PutTransport(id);
-           var transportDto = _mapper.Map<TransportDto>(transport);
-            return Ok(transportDto);
+            var transport = _mapper.Map<Transport>(transportDto);
+            transport.Plate = plate;
+
+            var result= await _transportRepository.UpdateTransport(transport);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
+        //Request to remove transport by id 
+        [HttpDelete("{plate}")]
 
-        //Request to remove top 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
+        public async Task<IActionResult> Deletetransport(string? plate)
         {
-           var transport = await _transportRepository.DeleteTransport(id);
-           var transportDto = _mapper.Map<TransportDto>(transport);
-
-            return Ok(transportDto);
+           var result = await _transportRepository.DeleteTransport(plate);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+        
         }
     }
 }

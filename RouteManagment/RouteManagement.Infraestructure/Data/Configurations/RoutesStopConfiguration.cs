@@ -13,7 +13,7 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<RoutesStop> builder)
         {
-           builder.HasKey(e => e.RouteStopId).HasName("PRIMARY");
+           builder.HasKey(e => e.Id).HasName("PRIMARY");
 
            builder.ToTable("routes_stops");
 
@@ -21,7 +21,9 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
            builder.HasIndex(e => e.StopId, "StopId");
 
-           builder.Property(e => e.RouteStopId).HasColumnType("int(11)");
+           builder.Property(e => e.Id)
+                .HasColumnName("RouteStopId")
+                .HasColumnType("int(11)");
            builder.Property(e => e.RouteId).HasColumnType("int(11)");
            builder.Property(e => e.StopId).HasColumnType("int(11)");
 

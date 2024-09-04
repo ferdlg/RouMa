@@ -1,9 +1,10 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -15,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestController : ControllerBase
     {
-        private readonly ITransportRequestRepository _transportRequestRepository;
+        private readonly IRepository<TransportRequest> _transportRequestRepository;
         private readonly IMapper _mapper;
 
-        public TransportRequestController(ITransportRequestRepository TransportRequestRepository, IMapper mapper)
+        public TransportRequestController(IRepository<TransportRequest> TransportRequestRepository, IMapper mapper)
         {
             _transportRequestRepository = TransportRequestRepository;
             _mapper = mapper;
@@ -26,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportRequests
 
         [HttpGet]
-        public async Task<IActionResult> GetTransportRequests()
+        public IActionResult GetAll()
         {
-           var TransportRequests = await _transportRequestRepository.GetTransportRequests();
+           var TransportRequests =  _transportRequestRepository.GetAll();
            var TransportRequestsDto = _mapper.Map<IEnumerable<TransportRequestDto>>(TransportRequests);
             return Ok(TransportRequestsDto);
         }
@@ -36,41 +37,49 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> GetTransportRequests(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-           var TransportRequest = await _transportRequestRepository.GetTransportRequest(id);
+           var TransportRequest = await _transportRequestRepository.GetById(id);
            var TransportRequestDto = _mapper.Map<TransportRequestDto>(TransportRequest);
-            return Ok(TransportRequest);
+           var response = new ApiResponse<TransportRequestDto>(TransportRequestDto);
+           return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(TransportRequestDto topDto)
+        public async Task<IActionResult> Add(TransportRequestDto transportDto)
         {
-           var TransportRequest = _mapper.Map<TransportRequest>(topDto);
-            await _transportRequestRepository.PostTransportRequest(TransportRequest);
-            return Ok(TransportRequest);
+           var TransportRequest = _mapper.Map<TransportRequest>(transportDto);
+           await _transportRequestRepository.Add(TransportRequest);
+
+           transportDto = _mapper.Map<TransportRequestDto>(TransportRequest);
+           var response = new ApiResponse<TransportRequestDto>(transportDto);
+           return Ok(response);
         }
 
-        //Request to update top
+
+        //Request to update transportRequest
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        public async Task<IActionResult> Update(int id, TransportRequestDto transportRequestDto)
         {
-           var TransportRequest = await _transportRequestRepository.PutTransportRequest(id);
-           var TransportRequestDto = _mapper.Map<TransportRequestDto>(TransportRequest);
-            return Ok(TransportRequestDto);
+            var transportRequest = _mapper.Map<TransportRequest>(transportRequestDto);
+            transportRequest.Id = id;
+
+            var result= await _transportRequestRepository.Update(transportRequest);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
         }
-
-        //Request to remove top 
+        //Request to remove transportRequest by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
-        {
-           var TransportRequest = await _transportRequestRepository.DeleteTransportRequest(id);
-           var TransportRequestDto = _mapper.Map<TransportRequestDto>(TransportRequest);
 
-            return Ok(TransportRequestDto);
+        public async Task<IActionResult> Delete(int id)
+        {
+          var result = await _transportRequestRepository.Delete(id);
+          var response = new ApiResponse<bool>(result);
+          return Ok(response);
         }
     }
 }

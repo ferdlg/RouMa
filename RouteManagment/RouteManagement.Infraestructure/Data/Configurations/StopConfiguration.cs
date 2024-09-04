@@ -13,13 +13,15 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Stop> builder)
         {
-            builder.HasKey(e => e.StopId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("stops");
 
             builder.HasIndex(e => e.AddressId, "AddressId");
 
-            builder.Property(e => e.StopId).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("StopId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.AddressId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Address).WithMany(p => p.Stops)

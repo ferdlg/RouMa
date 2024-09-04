@@ -1,12 +1,12 @@
 ﻿namespace RouteManagment.Core.Entities;
 
-public partial class DocumentType
+public partial class DocumentType :BaseEntity
 {
-    public int DocumentTypeId { get; set; }
+    //public int DocumentTypeId { get; set; }
 
     public string Name { get; set; } = null!;
 
     public string? Description { get; set; }
 
-    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
+    public virtual ICollection<People> People { get; set; } = new List<People>();
 }

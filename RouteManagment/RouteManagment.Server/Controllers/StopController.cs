@@ -1,9 +1,12 @@
 
 using AutoMapper;
 using ManejoRutas.Core.Interfaces;
+using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
+using RouteManagment.Server.Responses;
 
 
 namespace RouteManagment.Server.Controllers
@@ -15,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StopController : ControllerBase
     {
-        private readonly IStopRepository _stopRepository;
+        private readonly IRepository<Stop> _stopRepository;
         private readonly IMapper _mapper;
 
-        public StopController(IStopRepository stopRepository, IMapper mapper)
+        public StopController(IRepository<Stop> stopRepository, IMapper mapper)
         {
             _stopRepository = stopRepository;
             _mapper = mapper;
@@ -26,51 +29,61 @@ namespace RouteManagment.Server.Controllers
         //Request to get all stops
 
         [HttpGet]
-        public async Task<IActionResult> Getstops()
+        public IActionResult GetAll()
         {
-            var stops = await _stopRepository.GetStops();
+            var stops =  _stopRepository.GetAll();
             var stopsDto = _mapper.Map<IEnumerable<StopDto>>(stops);
-            return Ok(stopsDto);
+            var response = new ApiResponse<IEnumerable<StopDto>>(stopsDto);
+            return Ok(response);
         }
         //Request to get top by id
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult> Getstops(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var stop = await _stopRepository.GetStop(id);
+            var stop = await _stopRepository.GetById(id);
             var stopDto = _mapper.Map<StopDto>(stop);
-            return Ok(stop);
+            var response = new ApiResponse<StopDto>(stopDto);
+            return Ok(response);
         }
 
         //Request to create top
 
         [HttpPost]
 
-        public async Task<IActionResult> Posttop(StopDto topDto)
+        public async Task<IActionResult> Add(StopDto stopDto)
         {
-            var stop = _mapper.Map<Stop>(topDto);
-            await _stopRepository.PostStop(stop);
-            return Ok(stop);
-        }
+            var stop = _mapper.Map<Stop>(stopDto);
+            await _stopRepository.Add(stop);
 
-        //Request to update top
+            stopDto = _mapper.Map<StopDto>(stop);
+            var response = new ApiResponse<StopDto>(stopDto);
+            return Ok(response);
+        }
+        //Request to update stop
         [HttpPut("{id}")]
-        public async Task<IActionResult> Puttop(int id)
+
+        public async Task<IActionResult> Update(int id, StopDto stopDto)
         {
-            var stop = await _stopRepository.PutStop(id);
-            var stopDto = _mapper.Map<StopDto>(stop);
-            return Ok(stopDto);
+            var stop = _mapper.Map<Stop>(stopDto);
+            stop.Id = id;
+
+            var result = await _stopRepository.Update(stop);
+            var response = new ApiResponse<bool>(result);
+
+            return Ok(response);
         }
-
-        //Request to remove top 
+        //Request to remove stop by id 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Deletetop(int id)
-        {
-            var stop = await _stopRepository.DeleteStop(id);
-            var stopDto = _mapper.Map<StopDto>(stop);
 
-            return Ok(stopDto);
+        public async Task<IActionResult> Delete(int id)
+        {
+
+              var result = await _stopRepository.Delete(id);
+              var response = new ApiResponse<bool>(result);
+              return Ok();
+            
         }
     }
 }

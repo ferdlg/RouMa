@@ -13,13 +13,15 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Passenger> builder)
         {
-            builder.HasKey(e => e.PassengerId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("passengers");
 
             builder.HasIndex(e => e.DocumentNumber, "DocumentNumber");
 
-            builder.Property(e => e.PassengerId).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("PassengerId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.DocumentNumber).HasColumnType("int(11)");
 
             builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.Passengers)

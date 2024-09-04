@@ -13,39 +13,43 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<TransportRequest> builder)
         {
-            builder.HasKey(e => e.RequestId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("transport_requests");
-
-            builder.HasIndex(e => e.AdministratorId, "AdministratorId");
 
             builder.HasIndex(e => e.CompanyId, "CompanyId");
 
             builder.HasIndex(e => e.TransportTypeId, "TransportTypeId");
 
-            builder.Property(e => e.RequestId).HasColumnType("int(11)");
-            builder.Property(e => e.AdministratorId).HasColumnType("int(11)");
+            builder.Property(e => e.Id)
+                .HasColumnName("RequestId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.CompanyId).HasColumnType("int(11)");
             builder.Property(e => e.Date).HasColumnType("datetime");
+            builder.Property(e => e.StateId).HasColumnType("int(11)");
+
             builder.Property(e => e.Description)
                 .HasMaxLength(200)
                 .HasDefaultValueSql("'NULL'");
-            builder.Property(e => e.TransportTypeId).HasColumnType("int(11)");
 
-            builder.HasOne(d => d.Administrator).WithMany(p => p.TransportRequests)
-                .HasForeignKey(d => d.AdministratorId)
+            builder.Property(e => e.TransportTypeId)
+                .HasColumnType("int(11)");
+
+            builder.HasOne(d => d.TransportType).WithMany(p => p.TransportRequests)
+                .HasForeignKey(d => d.TransportTypeId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("transport_requests_ibfk_3");
+                .HasConstraintName("transport_requests_ibfk_1");
 
             builder.HasOne(d => d.Company).WithMany(p => p.TransportRequests)
                 .HasForeignKey(d => d.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transport_requests_ibfk_2");
 
-            builder.HasOne(d => d.TransportType).WithMany(p => p.TransportRequests)
-                .HasForeignKey(d => d.TransportTypeId)
+            builder.HasOne(d => d.TransportRequestState).WithMany(p => p.TransportRequests)
+                .HasForeignKey(d => d.StateId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("transport_requests_ibfk_1");
+                .HasConstraintName("transport_requests_ibfk_3");
+
         }
     }
 }

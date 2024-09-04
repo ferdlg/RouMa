@@ -17,39 +17,29 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.ToTable("transports");
 
-            builder.HasIndex(e => e.CompanyId, "CompanyId");
-
             builder.HasIndex(e => e.RouteId, "RouteId");
 
-            builder.HasIndex(e => e.StatusId, "StatusId");
+            builder.HasIndex(e => e.StateId, "StateId");
 
             builder.HasIndex(e => e.TransportTypeId, "TransportTypeId");
 
-            builder.Property(e => e.Plate).HasColumnType("int(11)");
+            builder.Property(e => e.Plate).HasColumnType("varchar(50)");
             builder.Property(e => e.Capacity).HasColumnType("int(11)");
-            builder.Property(e => e.CompanyId)
-                .HasDefaultValueSql("'NULL'")
-                .HasColumnType("int(11)");
             builder.Property(e => e.RouteId)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");
-            builder.Property(e => e.StatusId).HasColumnType("int(11)");
+            builder.Property(e => e.StateId).HasColumnType("int(11)");
             builder.Property(e => e.TransportTypeId)
                 .HasDefaultValueSql("'NULL'")
                 .HasColumnType("int(11)");
-
-            builder.HasOne(d => d.Company).WithMany(p => p.Transports)
-                .HasForeignKey(d => d.CompanyId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("transports_ibfk_4");
 
             builder.HasOne(d => d.Route).WithMany(p => p.Transports)
                 .HasForeignKey(d => d.RouteId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_2");
 
-            builder.HasOne(d => d.Status).WithMany(p => p.Transports)
-                .HasForeignKey(d => d.StatusId)
+            builder.HasOne(d => d.State).WithMany(p => p.Transports)
+                .HasForeignKey(d => d.StateId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_1");
 

@@ -27,9 +27,13 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<Driver> Drivers { get; set; }
 
+    public virtual DbSet<DrivingLicenseType> DrivingLicenseTypes { get; set; }
+
+    public virtual DbSet<Headquarter> Headquarters { get; set; }
+
     public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
 
-    public virtual DbSet<Employee> Employees { get; set; }
+    public virtual DbSet<People> People{ get; set; }
 
     public virtual DbSet<Passenger> Passengers { get; set; }
 
@@ -51,9 +55,13 @@ public partial class AppDbContext : DbContext
 
     public virtual DbSet<TransportRequest> TransportRequests { get; set; }
 
-    public virtual DbSet<TransportStatus> TransportStatuses { get; set; }
+    public virtual DbSet<TransportRequestState> TransportRequestStates { get; set; }
+
+    public virtual DbSet<TransportState> TransportStates { get; set; }
 
     public virtual DbSet<TransportType> TransportTypes { get; set; }
+
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -68,9 +76,13 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new DriverConfiguration());
 
+        modelBuilder.ApplyConfiguration(new DrivingLicenseTypeConfiguration());
+
+        modelBuilder.ApplyConfiguration(new HeadquarterConfiguration());
+
         modelBuilder.ApplyConfiguration(new EfmigrationshistoryConfiguration());
 
-        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+        modelBuilder.ApplyConfiguration(new PeopleConfiguration());
 
         modelBuilder.ApplyConfiguration(new PassengerConfiguration());
 
@@ -92,9 +104,13 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new TransportRequestConfiguration());
 
-        modelBuilder.ApplyConfiguration(new TransportStatusConfiguration());
+        modelBuilder.ApplyConfiguration(new TransportRequestStateConfiguration());
+
+        modelBuilder.ApplyConfiguration(new TransportStateConfiguration());
 
         modelBuilder.ApplyConfiguration(new TransportTypeConfiguration());
+        
+        modelBuilder.ApplyConfiguration(new UserConfiguration());
 
 
 

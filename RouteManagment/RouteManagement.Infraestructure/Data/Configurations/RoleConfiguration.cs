@@ -13,12 +13,13 @@ namespace RouteManagement.Infraestructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.HasKey(e => e.RolId).HasName("PRIMARY");
+            builder.HasKey(e => e.Id).HasName("PRIMARY");
 
             builder.ToTable("roles");
 
-            builder.Property(e => e.RolId).HasColumnType("int(11)");
-            builder.Property(e => e.Description).HasMaxLength(200);
+            builder.Property(e => e.Id)
+                .HasColumnName("RolId")
+                .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
         }
     }
