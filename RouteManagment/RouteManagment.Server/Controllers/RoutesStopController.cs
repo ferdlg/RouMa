@@ -27,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all companies
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var companies = await _routeStopRepository.GetAll();
+            var companies =  _routeStopRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<RouteStopDto>>(companies);
             var response = new ApiResponse<IEnumerable<RouteStopDto>>(companiesDto);
             return Ok(response);

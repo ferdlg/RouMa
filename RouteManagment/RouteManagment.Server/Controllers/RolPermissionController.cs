@@ -30,9 +30,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all RolPermissions
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var rolPermission = await _RolPermissionRepository.GetAll();
+            var rolPermission =  _RolPermissionRepository.GetAll();
             var rolPermissionDto = _mapper.Map<IEnumerable<RolPermisionDto>>(rolPermission);
             var response = new ApiResponse<IEnumerable<RolPermisionDto>>(rolPermissionDto);
             return Ok(response);

@@ -11,9 +11,9 @@ namespace RouteManagment.Core.Services
         {
             _unitOfWork = iunitOfWork;
         }
-        public async Task<IEnumerable<Route>> GetRoutes()
+        public IEnumerable<Route> GetRoutes()
         {
-            return await _unitOfWork.RouteRepository.GetAll();
+            return  _unitOfWork.RouteRepository.GetAll();
         }
         public async Task<Route> GetRouteById(int id)
         {
@@ -21,16 +21,19 @@ namespace RouteManagment.Core.Services
         }
         public async Task InsertRoute(Route route)
         {
+
             await _unitOfWork.RouteRepository.Add(route);
         }
         public async Task<bool> Update(Route route)
         {
-           
-            return await _unitOfWork.RouteRepository.Update(route);
+            _unitOfWork.RouteRepository.Update(route);
+            await _unitOfWork.SaveChanguesAsync();
+            return true;
         }
         public async Task<bool> Delete(int id)
         { 
-            return await _unitOfWork.RouteRepository.Delete(id);
+           await _unitOfWork.RouteRepository.Delete(id);
+            return true;
         }
     }
 }

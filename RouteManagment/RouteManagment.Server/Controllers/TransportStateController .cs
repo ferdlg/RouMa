@@ -27,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportStates
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-           var TransportStates = await _TransportStateRepository.GetAll();
+           var TransportStates = _TransportStateRepository.GetAll();
            var TransportStatesDto = _mapper.Map<IEnumerable<TransportStateDto>>(TransportStates);
            var response = new ApiResponse<IEnumerable<TransportStateDto>>(TransportStatesDto);
            return Ok(response);

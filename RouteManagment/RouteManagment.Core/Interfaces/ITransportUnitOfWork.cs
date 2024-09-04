@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace RouteManagment.Core.Interfaces
 {
-    public interface ITransportUnitOfWork
+    public interface ITransportUnitOfWork : IDisposable
     {
         ITransportRepository TransportRepository { get; }
+        IRepository<TransportState> TransporStateRepository { get; }
         IRepository<TransportRequest> TransportRequestRepository { get; }
-        IRepository<Driver> DriverRepository { get; }
-        IRepository<Passenger> PassengerRepository { get; }
+        IRepository<TransportRequestState> TransportRequestStateRepository { get; }
+        IRepository<TransportType> TransportTypeRepository { get; }
+
+
+        void SaveChange();
+        Task SaveChangesAsync();
+
     }
 }

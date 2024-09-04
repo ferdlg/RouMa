@@ -10,7 +10,12 @@ namespace RouteManagement.Infraestructure.Repositories
         private readonly IRepository<Route> _routeRepository;
         private readonly IRepository<Stop> _stopRepository;
         private readonly IRepository<RoutesStop> _routeStopRepository;
-        private readonly IRepository<User> _userRepository;
+        private readonly IRepository<Address> _addressRepository;
+        private readonly IRepository<Headquarter> _headquarterRepository;
+        private readonly IRepository<StreetType> _streetTypeRepository;
+
+
+
 
         public RouteUnitOfWork(AppDbContext appDbContext)
         {
@@ -23,15 +28,13 @@ namespace RouteManagement.Infraestructure.Repositories
 
         public IRepository<RoutesStop> RoutesStopRepository => _routeStopRepository ?? new BaseRepository<RoutesStop>(_appDbContext);
 
-        public IRepository<User> UserRepository => _userRepository ?? new BaseRepository<User>(_appDbContext);
+        public IRepository<Address> AddressRepository => throw new NotImplementedException();
 
-        public void Dispose()
-        {
-            if (_appDbContext != null)
-            {
-                _appDbContext.Dispose();
-            }
-        }
+        public IRepository<Headquarter> HeadquarterRepository => throw new NotImplementedException();
+
+        public IRepository<StreetType> StreetTypeRepository => throw new NotImplementedException();
+
+        public void Dispose() => _appDbContext?.Dispose();
 
         public void SaveChanges()
         {

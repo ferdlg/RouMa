@@ -28,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Headquarters
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var Headquarter = await _HeadquarterRepository.GetAll();
+            var Headquarter =  _HeadquarterRepository.GetAll();
             var HeadquarterDto = _mapper.Map<IEnumerable<HeadquarterDto>>(Headquarter);
             var response = new ApiResponse<IEnumerable<HeadquarterDto>>(HeadquarterDto);
             return Ok(response);

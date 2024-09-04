@@ -28,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Persons
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var Person = await _PersonRepository.GetAll();
+            var Person =  _PersonRepository.GetAll();
             var PersonDto = _mapper.Map<IEnumerable<PeopleDto>>(Person);
             var Response = new ApiResponse<IEnumerable<PeopleDto>>(PersonDto);
             return Ok(Response);

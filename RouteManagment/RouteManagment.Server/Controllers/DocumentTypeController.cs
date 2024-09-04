@@ -30,9 +30,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all DocumentTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var documentType = await _DocumentTypeRepository.GetAll();
+            var documentType =  _DocumentTypeRepository.GetAll();
             var documentTypeDto = _mapper.Map<IEnumerable<DocumentTypeDto>>(documentType);
             var response = new ApiResponse<IEnumerable<DocumentTypeDto>>(documentTypeDto);  
 

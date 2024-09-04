@@ -27,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportRequests
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-           var TransportRequests = await _transportRequestRepository.GetAll();
+           var TransportRequests =  _transportRequestRepository.GetAll();
            var TransportRequestsDto = _mapper.Map<IEnumerable<TransportRequestDto>>(TransportRequests);
             return Ok(TransportRequestsDto);
         }

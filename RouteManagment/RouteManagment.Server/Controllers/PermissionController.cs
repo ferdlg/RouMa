@@ -28,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all permissions
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var permission = await _PermissionRepository.GetAll();
+            var permission =  _PermissionRepository.GetAll();
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(permission);
             var response = new ApiResponse<IEnumerable<PermissionDto>>(permissionDto);
             return Ok(response);

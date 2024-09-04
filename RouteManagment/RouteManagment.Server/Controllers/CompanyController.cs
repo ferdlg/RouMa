@@ -30,9 +30,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all companies
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var companies = await _companyRepository.GetAll();
+            var companies =  _companyRepository.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
             var response = new ApiResponse<IEnumerable<CompanyDto>>(companiesDto);
 

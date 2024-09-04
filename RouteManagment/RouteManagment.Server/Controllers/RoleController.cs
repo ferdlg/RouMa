@@ -27,9 +27,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Roles
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var Role = await _RolRepository.GetAll();
+            var Role =  _RolRepository.GetAll();
             var RolDto = _mapper.Map<IEnumerable<RolDto>>(Role);
             var response = new ApiResponse<IEnumerable<RolDto>>(RolDto);
 

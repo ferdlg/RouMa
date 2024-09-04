@@ -29,7 +29,7 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportRequestStates
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
            var TransportRequestStates = await _TransportRequestStateRepository.GetAll();
            var TransportRequestStatesDto = _mapper.Map<IEnumerable<TransportRequestStateDto>>(TransportRequestStates);

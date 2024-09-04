@@ -19,20 +19,20 @@ namespace RouteManagment.Server.Controllers
 
     public class RouteController : ControllerBase
     {
-        private readonly IRepository<Core.Entities.Route> _RouteRepository;
+        private readonly IRouteService _RouteService;
         private readonly IMapper _mapper;
 
-        public RouteController(IRepository<Core.Entities.Route> routeRepository, IMapper mapper)
+        public RouteController(IRouteService routeService, IMapper mapper)
         {
-            _RouteRepository = routeRepository;
+            _RouteService = routeService;
             _mapper = mapper;
         }
         //Request to get all Routes
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var route = await _RouteRepository.GetAll();
+            var route =  _RouteService.GetRoutes();
             var routeDto = _mapper.Map<IEnumerable<RouteDto>>(route);
             var response = new ApiResponse<IEnumerable<RouteDto>>(routeDto);
             return Ok(response);
@@ -43,7 +43,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var route = await _RouteRepository.GetById(id);
+            var route = await _RouteService.GetRouteById(id);
             var routeDto = _mapper.Map<RouteDto>(route);
             var response = new ApiResponse<RouteDto>(routeDto);
 
@@ -57,7 +57,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(RouteDto routeDto)
         {
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
-            await _RouteRepository.Add(route);
+            await _RouteService.InsertRoute(route);
 
             routeDto = _mapper.Map<RouteDto>(route);
             var response = new ApiResponse<RouteDto>(routeDto);
@@ -72,7 +72,7 @@ namespace RouteManagment.Server.Controllers
             var route = _mapper.Map<Core.Entities.Route>(routeDto);
             route.Id = id;
 
-            var result = await _RouteRepository.Update(route);
+            var result = await _RouteService.Update(route);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
@@ -83,7 +83,7 @@ namespace RouteManagment.Server.Controllers
         {
             {
 
-               var result =  await _RouteRepository.Delete(id);
+               var result = await _RouteService.Delete(id);
                var response = new ApiResponse<bool>(result);
                return Ok(response);
             }

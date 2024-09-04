@@ -29,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all stops
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var stops = await _stopRepository.GetAll();
+            var stops =  _stopRepository.GetAll();
             var stopsDto = _mapper.Map<IEnumerable<StopDto>>(stops);
             var response = new ApiResponse<IEnumerable<StopDto>>(stopsDto);
             return Ok(response);

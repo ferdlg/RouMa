@@ -29,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all address
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var addresses = await _addressRepository.GetAll();
+            var addresses =  _addressRepository.GetAll();
             var addressesDto = _mapper.Map<IEnumerable<AddressDto>>(addresses);
             var response = new ApiResponse<IEnumerable<AddressDto>>(addressesDto);
             return Ok(response);
@@ -77,9 +77,9 @@ namespace RouteManagment.Server.Controllers
         //Request to remove address by id 
         [HttpDelete("{id}")]
 
-        public async Task<IActionResult> Delete(int id)
+        public void Delete(int id)
         {
-           var repository = await _addressRepository.Delete(id);
+           var repository =  _addressRepository.Delete(id);
            var response = new ApiResponse<bool>(repository);
            return Ok(response);
         }

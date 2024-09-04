@@ -30,9 +30,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Drivers
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var Driver = await _DriverRepository.GetAll();
+            var Driver =  _DriverRepository.GetAll();
             var DriverDto = _mapper.Map<IEnumerable<DriverDto>>(Driver);
 
             var response = new ApiResponse<IEnumerable<DriverDto>>(DriverDto);

@@ -29,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all TransportTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-           var TransportTypes = await _TransportTypeRepository.GetAll();
+           var TransportTypes = _TransportTypeRepository.GetAll();
            var TransportTypesDto = _mapper.Map<IEnumerable<TransportTypeDto>>(TransportTypes);
            var response = new ApiResponse<IEnumerable<TransportTypeDto>>(TransportTypesDto);
            return Ok(response);

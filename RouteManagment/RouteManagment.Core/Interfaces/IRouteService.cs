@@ -4,7 +4,7 @@ namespace RouteManagment.Core.Interfaces
 {
     public interface IRouteService
     {
-        Task<IEnumerable<Route>> GetRoutes();
+        IEnumerable<Route> GetRoutes();
         Task<Route> GetRouteById(int id);
         Task InsertRoute(Route route);
         Task<bool> Update(Route route);

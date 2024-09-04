@@ -30,9 +30,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all Passengers
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var passenger = await _PassengerRepository.GetAll();
+            var passenger =  _PassengerRepository.GetAll();
             var PassengerDto = _mapper.Map<IEnumerable<PassengerDto>>(passenger);
             var response = new ApiResponse<IEnumerable<PassengerDto>>(PassengerDto);
             return Ok(response);

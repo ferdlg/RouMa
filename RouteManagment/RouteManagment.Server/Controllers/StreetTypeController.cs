@@ -29,9 +29,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all StreetTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-           var streetTypes = await _streetTypeRepository.GetAll();
+           var streetTypes =  _streetTypeRepository.GetAll();
            var streetTypesDto = _mapper.Map<IEnumerable<StreetTypeDto>>(streetTypes);
            var response = new ApiResponse<IEnumerable<StreetTypeDto>>(streetTypesDto);
            return Ok(response);

@@ -10,33 +10,32 @@ namespace RouteManagement.Infraestructure.Repositories
     {
         private readonly AppDbContext _appDbContext;
         private readonly ITransportRepository _transportRepository;
+        private readonly IRepository<TransportState> _transportStateRepository;
         private readonly IRepository<TransportRequest> _transportRequestRepository;
-        private readonly IRepository<Driver> _driverRepository;
-        private readonly IRepository<Passenger> _passengerRepository;
+        private readonly IRepository<TransportRequestState> _transportRequestStateRepository;
+        private readonly IRepository<TransportType> _transportTypeRepository;
 
         public ITransportRepository TransportRepository => _transportRepository ?? new TransportRepository(_appDbContext);
 
         public IRepository<TransportRequest> TransportRequestRepository => _transportRequestRepository ?? new BaseRepository<TransportRequest>(_appDbContext);
 
-        public IRepository<Driver> DriverRepository => _driverRepository ?? new BaseRepository<Driver>(_appDbContext);
+        public IRepository<TransportState> TransporStateRepository => _transportStateRepository ?? new BaseRepository<TransportState>(_appDbContext);
 
-        public IRepository<Passenger> PassengerRepository => _passengerRepository ?? new BaseRepository<Passenger>(_appDbContext);
-        public void Dispose()
+        public IRepository<TransportRequestState> TransportRequestStateRepository => _transportRequestStateRepository ?? new BaseRepository<TransportRequestState>(_appDbContext);
+
+        public IRepository<TransportType> TransportTypeRepository => _transportTypeRepository ?? new BaseRepository<TransportType>(_appDbContext);
+
+        public void Dispose() => _appDbContext?.Dispose();
+
+        public void SaveChange()
         {
-            if (_appDbContext != null)
-            {
-                _appDbContext.Dispose();
-            }
+            throw new NotImplementedException();
         }
 
-        public void SaveChanges()
+        public Task SaveChangesAsync()
         {
-            _appDbContext.SaveChanges();
+            throw new NotImplementedException();
         }
 
-        public async Task SaveChanguesAsync()
-        {
-            await _appDbContext.SaveChangesAsync();
-        }
     }
 }

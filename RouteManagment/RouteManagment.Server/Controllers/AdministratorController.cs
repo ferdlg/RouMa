@@ -28,9 +28,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all administrator
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var administrators = await _administratorRepository.GetAll();
+            var administrators =  _administratorRepository.GetAll();
             var administratorsDto = _mapper.Map<IEnumerable<AdministratorDto>>(administrators);
 
             var response = new ApiResponse<IEnumerable<AdministratorDto>>(administratorsDto);

@@ -33,9 +33,9 @@ namespace RouteManagment.Server.Controllers
         //Request to get all DrivingLicenseTypes
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public IActionResult GetAll()
         {
-            var DrivingLicenseType = await _DrivingLicenseTypeRepository.GetAll();
+            var DrivingLicenseType =  _DrivingLicenseTypeRepository.GetAll();
             var DrivingLicenseTypeDto = _mapper.Map<IEnumerable<DrivingLicenseTypeDto>>(DrivingLicenseType);
             var response = new ApiResponse<IEnumerable<DrivingLicenseTypeDto>>(DrivingLicenseTypeDto);
             return Ok(DrivingLicenseTypeDto);
@@ -69,25 +69,22 @@ namespace RouteManagment.Server.Controllers
             //Request to update DrivingLicenseType
             [HttpPut("{id}")]
 
-            public async Task<IActionResult> Update(int id, DrivingLicenseTypeDto DrivingLicenseTypeDto)
+            public void Update(int id, DrivingLicenseTypeDto DrivingLicenseTypeDto)
             {
                 var DrivingLicenseType = _mapper.Map<DrivingLicenseType>(DrivingLicenseTypeDto);
                 DrivingLicenseType.Id = id;
 
-                var result = await _DrivingLicenseTypeRepository.Update(DrivingLicenseType);
-                var response = new ApiResponse<bool>(result);
-                return Ok(response);
+                _DrivingLicenseTypeRepository.Update(DrivingLicenseType);
+                
             }
             //Request to remove DrivingLicenseType by id 
             [HttpDelete("{id}")]
 
             public async Task<IActionResult> Delete(int id)
             {
-            
-
-               var result = await _DrivingLicenseTypeRepository.Delete(id);
-               var response = new ApiResponse<bool>(result);
-               return Ok(response);
+           
+               await _DrivingLicenseTypeRepository.Delete(id);
+              
             
             }
     } 
