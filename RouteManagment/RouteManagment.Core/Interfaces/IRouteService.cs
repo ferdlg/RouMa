@@ -9,5 +9,22 @@ namespace RouteManagment.Core.Interfaces
         Task InsertRoute(Route route);
         Task<bool> Update(Route route);
         Task<bool> Delete(int id);
+
+    }
+
+    public interface IAddressService : IService<Address>
+    {
+    }
+    public interface IStopService : IService<Stop>
+    {
+    }
+    public interface IRouteStopService : IService<RoutesStop>
+    {
+    }
+    public interface IHeadquarterService : IService <Headquarter>
+    {
+    }
+    public interface IStreetTypeService : IService<StreetType> 
+    {
     }
 }

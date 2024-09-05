@@ -16,12 +16,12 @@ namespace RouteManagment.Server.Controllers
 
     public class RoleController : ControllerBase
     {
-        private readonly IRepository<Role> _RolRepository;
+        private readonly IService<Role> _RolService;
         private readonly IMapper _mapper;
 
-        public RoleController(IRepository<Role> RolRepository, IMapper mapper)
+        public RoleController(IService<Role> RolService, IMapper mapper)
         {
-            _RolRepository = RolRepository;
+            _RolService = RolService;
             _mapper = mapper;
         }
         //Request to get all Roles
@@ -29,7 +29,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var Role =  _RolRepository.GetAll();
+            var Role =  _RolService.GetAll();
             var RolDto = _mapper.Map<IEnumerable<RolDto>>(Role);
             var response = new ApiResponse<IEnumerable<RolDto>>(RolDto);
 
@@ -42,7 +42,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var Role = await _RolRepository.GetById(id);
+            var Role = await _RolService.GetById(id);
             var RolDto = _mapper.Map<RolDto>(Role);
             var response = new ApiResponse<RolDto>(RolDto);
             return Ok(response);
@@ -55,7 +55,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(RolDto RolDto)
         {
             var role = _mapper.Map<Role>(RolDto);
-            await _RolRepository.Add(role);
+            await _RolService.Add(role);
 
             RolDto = _mapper.Map<RolDto>(role);
             var response = new ApiResponse<RolDto>(RolDto);
@@ -70,8 +70,8 @@ namespace RouteManagment.Server.Controllers
             var rol = _mapper.Map<Role>(rolDto);
             rol.Id = id;
 
-            var result = await _RolRepository.Update(rol);
-            var response = new ApiResponse<bool>(result);
+            var result = await _RolService.Update(rol);
+            var response = new ApiResponse<Role>(result);
 
             return Ok(response);
         }
@@ -82,8 +82,8 @@ namespace RouteManagment.Server.Controllers
         {
         
 
-           var result = await _RolRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var result = await _RolService.Delete(id);
+           var response = new ApiResponse<Role>(result);
 
            return Ok(response);
         

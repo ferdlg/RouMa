@@ -19,12 +19,12 @@ namespace RouteManagment.Server.Controllers
 
     public class DriverController : ControllerBase
     {
-        private readonly IRepository<Driver> _DriverRepository;
+        private readonly IService<Driver> _DriverService;
         private readonly IMapper _mapper;
 
-        public DriverController(IRepository<Driver> DriverRepository, IMapper mapper)
+        public DriverController(IService<Driver> DriverService, IMapper mapper)
         {
-            _DriverRepository = DriverRepository;
+            _DriverService = DriverService;
             _mapper = mapper;
         }
         //Request to get all Drivers
@@ -32,7 +32,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var Driver =  _DriverRepository.GetAll();
+            var Driver =  _DriverService.GetAll();
             var DriverDto = _mapper.Map<IEnumerable<DriverDto>>(Driver);
 
             var response = new ApiResponse<IEnumerable<DriverDto>>(DriverDto);
@@ -44,7 +44,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var Driver = await _DriverRepository.GetById(id);
+            var Driver = await _DriverService.GetById(id);
             var driverDto = _mapper.Map<DriverDto>(Driver);
             var response = new ApiResponse<DriverDto>(driverDto);
             return Ok(response);
@@ -57,7 +57,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(DriverDto driverDto)
         {
             var driver = _mapper.Map<Driver>(driverDto);
-            await _DriverRepository.Add(driver);
+            await _DriverService.Add(driver);
 
             driverDto = _mapper.Map<DriverDto>(driver);
             var response = new ApiResponse<DriverDto>(driverDto);
@@ -72,8 +72,8 @@ namespace RouteManagment.Server.Controllers
             var driver = _mapper.Map<Driver>(driverDto);
             driver.Id = id;
 
-            var result = await _DriverRepository.Update(driver);
-            var respose = new ApiResponse<bool>(result);
+            var result = await _DriverService.Update(driver);
+            var respose = new ApiResponse<Driver>(result);
             return Ok(respose);
         }
         //Request to remove driver by id 
@@ -81,8 +81,8 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-           var result = await _DriverRepository.Delete(id);
-           var respose = new ApiResponse<bool>(result);
+           var result = await _DriverService.Delete(id);
+           var respose = new ApiResponse<Driver>(result);
            return Ok(respose);
         
         }

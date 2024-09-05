@@ -17,12 +17,12 @@ namespace RouteManagment.Server.Controllers
 
     public class PeopleController : ControllerBase
     {
-        private readonly IRepository<People> _PersonRepository;
+        private readonly IPeopleService _PersonService;
         private readonly IMapper _mapper;
 
-        public PeopleController(IRepository<People> PersonRepository, IMapper mapper)
+        public PeopleController(IPeopleService PersonService, IMapper mapper)
         {
-            _PersonRepository = PersonRepository;
+            _PersonService = PersonService;
             _mapper = mapper;
         }
         //Request to get all Persons
@@ -30,7 +30,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var Person =  _PersonRepository.GetAll();
+            var Person =  _PersonService.GetPeople();
             var PersonDto = _mapper.Map<IEnumerable<PeopleDto>>(Person);
             var Response = new ApiResponse<IEnumerable<PeopleDto>>(PersonDto);
             return Ok(Response);
@@ -41,7 +41,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var person = await _PersonRepository.GetById(id);
+            var person = await _PersonService.GetPeopleById(id);
             var personDto = _mapper.Map<PeopleDto>(person);
             var response = new ApiResponse<PeopleDto>(personDto);
             return Ok(response);
@@ -54,7 +54,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(PeopleDto personDto)
         {
             var person = _mapper.Map<People>(personDto);
-            await _PersonRepository.Add(person);
+            await _PersonService.InsertPeople(person);
 
             personDto = _mapper.Map<PeopleDto>(person);
             var response = new ApiResponse<PeopleDto>(personDto);
@@ -69,7 +69,7 @@ namespace RouteManagment.Server.Controllers
             var person = _mapper.Map<People>(personDto);
             person.Id= id;
 
-            var result = await _PersonRepository.Update(person);
+            var result = await _PersonService.Update(person);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
@@ -78,7 +78,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var repository =  await _PersonRepository.Delete(id);
+            var repository =  await _PersonService.Delete(id);
             var response = new ApiResponse<bool>(repository);
             return Ok(response);
             

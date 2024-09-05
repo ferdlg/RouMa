@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestController : ControllerBase
     {
-        private readonly IRepository<TransportRequest> _transportRequestRepository;
+        private readonly IService<TransportRequest> _transportRequestRepository;
         private readonly IMapper _mapper;
 
-        public TransportRequestController(IRepository<TransportRequest> TransportRequestRepository, IMapper mapper)
+        public TransportRequestController(IService<TransportRequest> TransportRequestRepository, IMapper mapper)
         {
             _transportRequestRepository = TransportRequestRepository;
             _mapper = mapper;
@@ -69,7 +69,7 @@ namespace RouteManagment.Server.Controllers
             transportRequest.Id = id;
 
             var result= await _transportRequestRepository.Update(transportRequest);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportRequest>(result);
             return Ok(response);
         }
         //Request to remove transportRequest by id 
@@ -78,7 +78,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
           var result = await _transportRequestRepository.Delete(id);
-          var response = new ApiResponse<bool>(result);
+          var response = new ApiResponse<TransportRequest>(result);
           return Ok(response);
         }
     }

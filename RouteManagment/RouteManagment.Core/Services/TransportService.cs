@@ -5,21 +5,14 @@ namespace RouteManagment.Core.Services
 {
     public class TransportService : ITransportService
     {
-        public Task<bool> DeleteTransport(string? plate)
+        IEnumerable<Transport> ITransportService.GetTransports()
         {
             throw new NotImplementedException();
         }
-
         public Task<Transport> GetTransport(string? plate)
         {
             throw new NotImplementedException();
         }
-
-        public Task<IEnumerable<Transport>> GetTransports()
-        {
-            throw new NotImplementedException();
-        }
-
         public Task PostTransport(Transport Transport)
         {
             throw new NotImplementedException();
@@ -29,5 +22,10 @@ namespace RouteManagment.Core.Services
         {
             throw new NotImplementedException();
         }
+        public Task<bool> DeleteTransport(string? plate)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

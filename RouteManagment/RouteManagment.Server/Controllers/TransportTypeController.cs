@@ -18,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportTypeController : ControllerBase
     {
-        private readonly IRepository<TransportType> _TransportTypeRepository;
+        private readonly IService<TransportType> _TransportTypeRepository;
         private readonly IMapper _mapper;
 
-        public TransportTypeController(IRepository<TransportType>  TransportTypeRepository, IMapper mapper)
+        public TransportTypeController(IService<TransportType>  TransportTypeRepository, IMapper mapper)
         {
             _TransportTypeRepository = TransportTypeRepository;
             _mapper = mapper;
@@ -69,7 +69,7 @@ namespace RouteManagment.Server.Controllers
             transportType.Id = id;
 
             var result = await _TransportTypeRepository.Update(transportType);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportType>(result);
             return Ok(response);
         }
         //Request to remove transportType by id 
@@ -77,10 +77,8 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-         
-
             var result = await _TransportTypeRepository.Delete(id);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportType>(result);
 
             return Ok(response);
          

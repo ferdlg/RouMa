@@ -17,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class HeadquarterController : ControllerBase
     {
-        private readonly IRepository<Headquarter> _HeadquarterRepository;
+        private readonly IService<Headquarter> _HeadquarterRepository;
         private readonly IMapper _mapper;
 
-        public HeadquarterController(IRepository<Headquarter> HeadquarterRepository, IMapper mapper)
+        public HeadquarterController(IService<Headquarter> HeadquarterRepository, IMapper mapper)
         {
             _HeadquarterRepository = HeadquarterRepository;
             _mapper = mapper;
@@ -69,7 +69,7 @@ namespace RouteManagment.Server.Controllers
                 Headquarter.Id = id;
 
                 var result = await _HeadquarterRepository.Update(Headquarter);
-                var response = new ApiResponse<bool>(result);
+                var response = new ApiResponse<Headquarter>(result);
                 return Ok(response);
             }
             //Request to remove Headquarter by id 
@@ -78,7 +78,7 @@ namespace RouteManagment.Server.Controllers
             public async Task<IActionResult> Delete(int id)
             { 
                var result = await _HeadquarterRepository.Delete(id);
-               var response = new ApiResponse<bool>(result);
+               var response = new ApiResponse<Headquarter>(result);
                return Ok(response);
             }
     } 

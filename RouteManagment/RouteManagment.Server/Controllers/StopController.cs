@@ -1,7 +1,5 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -18,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StopController : ControllerBase
     {
-        private readonly IRepository<Stop> _stopRepository;
+        private readonly IService<Stop> _stopRepository;
         private readonly IMapper _mapper;
 
-        public StopController(IRepository<Stop> stopRepository, IMapper mapper)
+        public StopController(IService<Stop> stopRepository, IMapper mapper)
         {
             _stopRepository = stopRepository;
             _mapper = mapper;
@@ -70,7 +68,7 @@ namespace RouteManagment.Server.Controllers
             stop.Id = id;
 
             var result = await _stopRepository.Update(stop);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<Stop>(result);
 
             return Ok(response);
         }
@@ -81,7 +79,7 @@ namespace RouteManagment.Server.Controllers
         {
 
               var result = await _stopRepository.Delete(id);
-              var response = new ApiResponse<bool>(result);
+              var response = new ApiResponse<Stop>(result);
               return Ok();
             
         }

@@ -8,7 +8,7 @@ namespace RouteManagement.Infraestructure.Repositories
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly AppDbContext _appDbContext;
-        private DbSet<T> _entities;
+        private readonly DbSet<T> _entities;
         public BaseRepository(AppDbContext appDbContext) 
         { 
             _appDbContext = appDbContext;

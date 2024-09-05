@@ -19,12 +19,12 @@ namespace RouteManagment.Server.Controllers
 
     public class RolPermissionController : ControllerBase
     {
-        private readonly IRepository<RolesPermission> _RolPermissionRepository;
+        private readonly IService<RolesPermission> _RolPermissionService;
         private readonly IMapper _mapper;
 
-        public RolPermissionController(IRepository<RolesPermission>  RolPermissionRepository, IMapper mapper)
+        public RolPermissionController(IService<RolesPermission>  RolPermissionService, IMapper mapper)
         {
-            _RolPermissionRepository = RolPermissionRepository;
+            _RolPermissionService = RolPermissionService;
             _mapper = mapper;
         }
         //Request to get all RolPermissions
@@ -32,7 +32,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var rolPermission =  _RolPermissionRepository.GetAll();
+            var rolPermission =  _RolPermissionService.GetAll();
             var rolPermissionDto = _mapper.Map<IEnumerable<RolPermisionDto>>(rolPermission);
             var response = new ApiResponse<IEnumerable<RolPermisionDto>>(rolPermissionDto);
             return Ok(response);
@@ -43,7 +43,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var rolPermission = await _RolPermissionRepository.GetById(id);
+            var rolPermission = await _RolPermissionService.GetById(id);
             var rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
             var response = new ApiResponse<RolPermisionDto>(rolPermissionDto);
 
@@ -57,7 +57,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(RolPermisionDto rolPermissionDto)
         {
             var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
-            await _RolPermissionRepository.Add(rolPermission);
+            await _RolPermissionService.Add(rolPermission);
 
             rolPermissionDto = _mapper.Map<RolPermisionDto>(rolPermission);
             var response = new ApiResponse<RolPermisionDto>(rolPermissionDto);
@@ -72,8 +72,8 @@ namespace RouteManagment.Server.Controllers
             var rolPermission = _mapper.Map<RolesPermission>(rolPermissionDto);
             rolPermission.Id = id;
 
-            var result= await _RolPermissionRepository.Update(rolPermission);
-            var response = new ApiResponse<bool>(result);
+            var result= await _RolPermissionService.Update(rolPermission);
+            var response = new ApiResponse<RolesPermission>(result);
             return Ok(response);
         }
         //Request to remove rolPermission by id 
@@ -83,8 +83,8 @@ namespace RouteManagment.Server.Controllers
         {
         
 
-           var result= await _RolPermissionRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var result= await _RolPermissionService.Delete(id);
+           var response = new ApiResponse<RolesPermission>(result);
            return Ok(response);
         
         }

@@ -2,13 +2,13 @@
 
 namespace RouteManagment.Core.Interfaces
 {
-    public interface IRouteUnitOfWork : IDisposable
+    public interface IPeopleUnitOfWork : IDisposable
     {
-        IRepository<Route> RouteRepository { get; }
+        IRepository<User> UserRepository { get; }
+        IRepository<People> PeopleRepository { get; }
         IRepository<T> GetRepository<T>() where T : BaseEntity;
 
-
         void SaveChanges();
-        Task SaveChanguesAsync();
+        Task SaveChangesAsync();
     }
 }

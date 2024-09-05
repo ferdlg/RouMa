@@ -19,12 +19,12 @@ namespace RouteManagment.Server.Controllers
 
     public class CompanyController : ControllerBase
     {
-        private readonly IRepository<Company> _companyRepository;
+        private readonly IService<Company> _companyService;
         private readonly IMapper _mapper;
 
-        public CompanyController(IRepository<Company> companyRepository, IMapper mapper)
+        public CompanyController(IService<Company> companyService, IMapper mapper)
         {
-            _companyRepository = companyRepository;
+            _companyService = companyService;
             _mapper = mapper;
         }
         //Request to get all companies
@@ -32,7 +32,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var companies =  _companyRepository.GetAll();
+            var companies =  _companyService.GetAll();
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
             var response = new ApiResponse<IEnumerable<CompanyDto>>(companiesDto);
 
@@ -44,7 +44,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var company = await _companyRepository.GetById(id);
+            var company = await _companyService.GetById(id);
             var companyDto = _mapper.Map<CompanyDto>(company);
             var response = new ApiResponse<CompanyDto>(companyDto);
             return Ok(response);
@@ -57,7 +57,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(CompanyDto companyDto)
         {
             var company = _mapper.Map<Company>(companyDto);
-            await _companyRepository.Add(company);
+            await _companyService.Add(company);
 
             companyDto = _mapper.Map<CompanyDto>(company);
             var response = new ApiResponse<CompanyDto>(companyDto);
@@ -72,8 +72,8 @@ namespace RouteManagment.Server.Controllers
             var company = _mapper.Map<Company>(companyDto);
             company.Id = id;
 
-            var result = await _companyRepository.Update(company);
-            var response = new ApiResponse<bool>(result);
+            var result = await _companyService.Update(company);
+            var response = new ApiResponse<Company>(result);
             return Ok(response);
         }
         //Request to remove company by id 
@@ -82,8 +82,8 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
     
-            var result = await _companyRepository.Delete(id);
-            var response = new ApiResponse<bool>(result);
+            var result = await _companyService.Delete(id);
+            var response = new ApiResponse<Company>(result);
             return Ok(response);
         }
 

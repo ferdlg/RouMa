@@ -1,7 +1,5 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -81,12 +79,10 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            {
-
-               var result = await _RouteService.Delete(id);
-               var response = new ApiResponse<bool>(result);
-               return Ok(response);
-            }
+           var result = await _RouteService.Delete(id);
+           var response = new ApiResponse<bool>(result);
+           return Ok(response);
+            
         }
 
     } 
