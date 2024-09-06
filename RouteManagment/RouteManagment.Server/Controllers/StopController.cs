@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StopController : ControllerBase
     {
-        private readonly IService<Stop> _stopRepository;
+        private readonly IServiceR<Stop> _stopRepository;
         private readonly IMapper _mapper;
 
-        public StopController(IService<Stop> stopRepository, IMapper mapper)
+        public StopController(IServiceR<Stop> stopRepository, IMapper mapper)
         {
             _stopRepository = stopRepository;
             _mapper = mapper;

@@ -19,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RolPermissionController : ControllerBase
     {
-        private readonly IService<RolesPermission> _RolPermissionService;
+        private readonly IServiceP<RolesPermission> _RolPermissionService;
         private readonly IMapper _mapper;
 
-        public RolPermissionController(IService<RolesPermission>  RolPermissionService, IMapper mapper)
+        public RolPermissionController(IServiceP<RolesPermission>  RolPermissionService, IMapper mapper)
         {
             _RolPermissionService = RolPermissionService;
             _mapper = mapper;

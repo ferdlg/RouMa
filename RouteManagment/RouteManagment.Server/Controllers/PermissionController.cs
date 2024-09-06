@@ -17,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PermissionController : ControllerBase
     {
-        private readonly IService<Permission> _permissionService;
+        private readonly IServiceP<Permission> _permissionService;
         private readonly IMapper _mapper;
 
-        public PermissionController(IService<Permission> permissionService, IMapper mapper)
+        public PermissionController(IServiceP<Permission> permissionService, IMapper mapper)
         {
             _permissionService = permissionService;
             _mapper = mapper;

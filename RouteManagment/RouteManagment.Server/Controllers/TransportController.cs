@@ -30,7 +30,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTransports()
         {
-           var transports = await _transportRepository.GetTransports();
+           var transports = _transportRepository.GetTransports();
            var transportsDto = _mapper.Map<IEnumerable<TransportDto>>(transports);
            var response = new ApiResponse<IEnumerable<TransportDto>>(transportsDto);
            return Ok(response);

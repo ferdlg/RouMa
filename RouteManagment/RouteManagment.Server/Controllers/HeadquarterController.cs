@@ -17,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class HeadquarterController : ControllerBase
     {
-        private readonly IService<Headquarter> _HeadquarterRepository;
+        private readonly IServiceR<Headquarter> _HeadquarterRepository;
         private readonly IMapper _mapper;
 
-        public HeadquarterController(IService<Headquarter> HeadquarterRepository, IMapper mapper)
+        public HeadquarterController(IServiceR<Headquarter> HeadquarterRepository, IMapper mapper)
         {
             _HeadquarterRepository = HeadquarterRepository;
             _mapper = mapper;

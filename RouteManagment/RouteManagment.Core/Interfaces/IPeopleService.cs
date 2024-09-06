@@ -19,40 +19,15 @@ namespace RouteManagment.Core.Interfaces
         Task<bool> Delete(int id);
     }
 
-    public interface IAdministratorService : IService<Administrator>
+    public interface IServiceP<T> where T : BaseEntity
     {
+        IEnumerable<T> GetAll();
 
-    }
-    public interface ICompanyService : IService<Company>
-    {
+        Task<T> GetById(int id);
 
-    }
-    public interface IDriverService : IService<Driver>
-    {
-
-    }
-    public interface IPassengerService : IService<Passenger>
-    {
-
-    }
-    public interface IPermissionService : IService<Permission>
-    {
-
-    }
-    public interface IRolService : IService<Role>
-    {
-
-    }
-    public interface IRolPermissionService : IService<RolesPermission>
-    {
-
-    }
-    public interface IDocumentTypeService : IService<DocumentType>
-    {
-
-    }
-    public interface IDrivingLicenseTypeService : IService<DrivingLicenseType>
-    {
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(int id);
 
     }
 

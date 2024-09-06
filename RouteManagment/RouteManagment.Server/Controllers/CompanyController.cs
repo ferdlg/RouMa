@@ -19,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class CompanyController : ControllerBase
     {
-        private readonly IService<Company> _companyService;
+        private readonly IServiceP<Company> _companyService;
         private readonly IMapper _mapper;
 
-        public CompanyController(IService<Company> companyService, IMapper mapper)
+        public CompanyController(IServiceP<Company> companyService, IMapper mapper)
         {
             _companyService = companyService;
             _mapper = mapper;

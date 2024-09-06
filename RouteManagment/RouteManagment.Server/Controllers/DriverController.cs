@@ -19,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class DriverController : ControllerBase
     {
-        private readonly IService<Driver> _DriverService;
+        private readonly IServiceP<Driver> _DriverService;
         private readonly IMapper _mapper;
 
-        public DriverController(IService<Driver> DriverService, IMapper mapper)
+        public DriverController(IServiceP<Driver> DriverService, IMapper mapper)
         {
             _DriverService = DriverService;
             _mapper = mapper;

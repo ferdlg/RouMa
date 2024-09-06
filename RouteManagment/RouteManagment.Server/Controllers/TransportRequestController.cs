@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestController : ControllerBase
     {
-        private readonly IService<TransportRequest> _transportRequestRepository;
+        private readonly IServiceT<TransportRequest> _transportRequestRepository;
         private readonly IMapper _mapper;
 
-        public TransportRequestController(IService<TransportRequest> TransportRequestRepository, IMapper mapper)
+        public TransportRequestController(IServiceT<TransportRequest> TransportRequestRepository, IMapper mapper)
         {
             _transportRequestRepository = TransportRequestRepository;
             _mapper = mapper;

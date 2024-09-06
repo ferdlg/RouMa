@@ -62,5 +62,10 @@ namespace ManejoRutas.Infrastructure.Repositories
             int rows = await _appDbContext.SaveChangesAsync();
             return rows > 0;
         }
+
+        IEnumerable<Transport> ITransportRepository.GetTransports()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

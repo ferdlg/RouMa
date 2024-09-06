@@ -6,6 +6,7 @@ using RouteManagment.Core.DTOs;
 using AutoMapper;
 using RouteManagment.Core.Interfaces;
 using RouteManagment.Server.Responses;
+using Microsoft.AspNetCore.Hosting.Server;
 
 
 
@@ -18,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class AddressController : ControllerBase
     {
-        private readonly IService<Address> _addressService;
+        private readonly IServiceR<Address> _addressService;
         private readonly IMapper _mapper;
 
-        public AddressController(IService<Address> addressService, IMapper mapper)
+        public AddressController(IServiceR<Address> addressService, IMapper mapper)
         {
             _addressService = addressService;
             _mapper = mapper;

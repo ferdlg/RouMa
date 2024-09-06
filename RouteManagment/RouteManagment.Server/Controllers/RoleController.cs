@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RoleController : ControllerBase
     {
-        private readonly IService<Role> _RolService;
+        private readonly IServiceP<Role> _RolService;
         private readonly IMapper _mapper;
 
-        public RoleController(IService<Role> RolService, IMapper mapper)
+        public RoleController(IServiceP<Role> RolService, IMapper mapper)
         {
             _RolService = RolService;
             _mapper = mapper;

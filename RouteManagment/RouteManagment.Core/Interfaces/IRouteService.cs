@@ -12,19 +12,14 @@ namespace RouteManagment.Core.Interfaces
 
     }
 
-    public interface IAddressService : IService<Address>
+    public interface IServiceR<T> where T : BaseEntity
     {
-    }
-    public interface IStopService : IService<Stop>
-    {
-    }
-    public interface IRouteStopService : IService<RoutesStop>
-    {
-    }
-    public interface IHeadquarterService : IService <Headquarter>
-    {
-    }
-    public interface IStreetTypeService : IService<StreetType> 
-    {
+        IEnumerable<T> GetAll();
+
+        Task<T> GetById(int id);
+
+        Task<T> Add(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(int id);
     }
 }

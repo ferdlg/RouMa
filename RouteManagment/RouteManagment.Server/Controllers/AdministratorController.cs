@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class AdministratorController : ControllerBase
     {
-        private readonly IService<Administrator> _administratorService;
+        private readonly IServiceP<Administrator> _administratorService;
         private readonly IMapper _mapper;
 
-        public AdministratorController(IService<Administrator> administratorService, IMapper mapper)
+        public AdministratorController(IServiceP<Administrator> administratorService, IMapper mapper)
         {
             _administratorService = administratorService;
             _mapper = mapper;

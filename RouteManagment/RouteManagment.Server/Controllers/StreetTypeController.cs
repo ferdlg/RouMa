@@ -18,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StreetTypeController : ControllerBase
     {
-        private readonly IService<StreetType> _streetTypeRepository;
+        private readonly IServiceR<StreetType> _streetTypeRepository;
         private readonly IMapper _mapper;
 
-        public StreetTypeController(IService<StreetType> StreetTypeRepository, IMapper mapper)
+        public StreetTypeController(IServiceR<StreetType> StreetTypeRepository, IMapper mapper)
         {
             _streetTypeRepository = StreetTypeRepository;
             _mapper = mapper;

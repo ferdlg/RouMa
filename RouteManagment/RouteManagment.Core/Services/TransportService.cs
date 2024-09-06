@@ -5,26 +5,34 @@ namespace RouteManagment.Core.Services
 {
     public class TransportService : ITransportService
     {
+        private readonly ITransportUnitOfWork _unitOfwork;
+        public TransportService(ITransportUnitOfWork unitOfwork)
+        {
+            _unitOfwork = unitOfwork;
+        }
         IEnumerable<Transport> ITransportService.GetTransports()
         {
-            throw new NotImplementedException();
+            return _unitOfwork.TransportRepository.GetTransports();
         }
-        public Task<Transport> GetTransport(string? plate)
+        public async  Task<Transport> GetTransport(string? plate)
         {
-            throw new NotImplementedException();
+            return await _unitOfwork.TransportRepository.GetTransport(plate);
         }
-        public Task PostTransport(Transport Transport)
+        public async Task InsertTransport(Transport Transport)
         {
-            throw new NotImplementedException();
+            await _unitOfwork.TransportRepository.PostTransport(Transport);
         }
 
-        public Task<bool> UpdateTransport(Transport transport)
+        public async Task<bool> UpdateTransport(Transport transport)
         {
-            throw new NotImplementedException();
+            await _unitOfwork.TransportRepository.UpdateTransport(transport);
+            await _unitOfwork.SaveChangesAsync();
+            return true;
         }
-        public Task<bool> DeleteTransport(string? plate)
+        public async Task<bool> DeleteTransport(string? plate)
         {
-            throw new NotImplementedException();
+            await _unitOfwork.TransportRepository.DeleteTransport(plate);
+            return true;
         }
 
     }

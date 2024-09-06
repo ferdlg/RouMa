@@ -18,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportTypeController : ControllerBase
     {
-        private readonly IService<TransportType> _TransportTypeRepository;
+        private readonly IServiceT<TransportType> _TransportTypeRepository;
         private readonly IMapper _mapper;
 
-        public TransportTypeController(IService<TransportType>  TransportTypeRepository, IMapper mapper)
+        public TransportTypeController(IServiceT<TransportType> TransportTypeRepository, IMapper mapper)
         {
             _TransportTypeRepository = TransportTypeRepository;
             _mapper = mapper;

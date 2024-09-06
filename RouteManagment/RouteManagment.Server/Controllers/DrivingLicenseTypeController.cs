@@ -22,10 +22,10 @@ namespace RouteManagment.Server.Controllers
 
     public class DrivingLicenseTypeController : ControllerBase
     {
-        private readonly IService<DrivingLicenseType> _DrivingLicenseTypeService;
+        private readonly IServiceP<DrivingLicenseType> _DrivingLicenseTypeService;
         private readonly IMapper _mapper;
 
-        public DrivingLicenseTypeController(IService<DrivingLicenseType> DrivingLicenseTypeService, IMapper mapper)
+        public DrivingLicenseTypeController(IServiceP<DrivingLicenseType> DrivingLicenseTypeService, IMapper mapper)
         {
             _DrivingLicenseTypeService = DrivingLicenseTypeService;
             _mapper = mapper;

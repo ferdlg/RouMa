@@ -17,10 +17,10 @@ namespace RouteManagment.Server.Controllers
 
     public class DocumentTypeController : ControllerBase
     {
-        private readonly IService<DocumentType> _documentTypeService;
+        private readonly IServiceP<DocumentType> _documentTypeService;
         private readonly IMapper _mapper;
 
-        public DocumentTypeController(IService<DocumentType> documentTypeService, IMapper mapper)
+        public DocumentTypeController(IServiceP<DocumentType> documentTypeService, IMapper mapper)
         {
             _documentTypeService = documentTypeService;
             _mapper = mapper;

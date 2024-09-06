@@ -36,4 +36,48 @@ namespace RouteManagment.Core.Services
             return true;
         }
     }
+    public class BaseServiceR <T>: IServiceR<T> where T : BaseEntity
+    {
+        private readonly IRouteUnitOfWork _unitOfWork;
+        public BaseServiceR(IRouteUnitOfWork iunitOfWork)
+        {
+            _unitOfWork = iunitOfWork;
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            return _unitOfWork.GetRepository<T>().GetAll();
+
+        }
+        public async Task<T> GetById(int id)
+        {
+            return await _unitOfWork.GetRepository<T>().GetById(id);
+
+        }
+
+        public async Task<T> Add(T entity)
+        {
+            await _unitOfWork.GetRepository<T>().Add(entity);
+            return entity;
+        }
+
+        public async Task<T> Update(T entity)
+        {
+            _unitOfWork.GetRepository<T>().Update(entity);
+            await _unitOfWork.SaveChanguesAsync();
+            return entity;
+        }
+        public async Task<T> Delete(int id)
+        {
+            var entity = await _unitOfWork.GetRepository<T>().GetById(id);
+
+            if (entity != null)
+            {
+                await _unitOfWork.GetRepository<T>().Delete(id);
+            }
+            return entity;
+        }
+
+
+    }
 }

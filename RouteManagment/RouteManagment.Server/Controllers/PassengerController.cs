@@ -19,10 +19,10 @@ namespace RouteManagment.Server.Controllers
 
     public class PassengerController : ControllerBase
     {
-        private readonly IService<Passenger> _PassengerService;
+        private readonly IServiceP<Passenger> _PassengerService;
         private readonly IMapper _mapper;
 
-        public PassengerController(IService<Passenger> PassengerService, IMapper mapper)
+        public PassengerController(IServiceP<Passenger> PassengerService, IMapper mapper)
         {
             _PassengerService = PassengerService;
             _mapper = mapper;

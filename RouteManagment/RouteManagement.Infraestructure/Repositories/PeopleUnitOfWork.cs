@@ -4,14 +4,14 @@ using RouteManagment.Server.Data;
 
 namespace RouteManagement.Infraestructure.Repositories
 {
-    public class AuthenticateUnitOfWork : IPeopleUnitOfWork
+    public class PeopleUnitOfWork : IPeopleUnitOfWork
     {
         private readonly AppDbContext _appDbContext;
         private readonly Dictionary<Type, object> _repositories;
         private readonly IRepository<User> _userRepository;
         private readonly IRepository<People> _peopleRepository;
 
-        public AuthenticateUnitOfWork(AppDbContext appDbContext)
+        public PeopleUnitOfWork(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
             _repositories = new Dictionary<Type, object>
