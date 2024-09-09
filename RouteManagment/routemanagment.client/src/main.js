@@ -1,4 +1,4 @@
-import './assets/main.css'
+import './assets/css/main.css'
 
 import { createApp } from 'vue'
 
@@ -15,4 +15,3 @@ const vuetify = createVuetify({
 })
 
 createApp(App).use(vuetify).mount('#app')
-

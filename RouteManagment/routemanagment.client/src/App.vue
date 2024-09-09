@@ -1,9 +1,9 @@
 <script setup>
-import Index from './pages/landingPage/Index.vue';
+  import LandingPage from './pages/LandingPage/LandingPage.vue';
 </script>
 
 <template>
-      <Index />
+  <LandingPage/>
 </template>
 
 <style scoped>

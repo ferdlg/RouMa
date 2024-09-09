@@ -1,10 +1,9 @@
 <script setup>
     import ButtonLogin from './ButtonLogin.vue';
 </script>
-
 <template>
-    <v-layout>
-      <v-app-bar class="nav-bar" elevation="0" border>
+ <v-layout>
+      <v-app-bar class="nav-bar" elevation="0" border >
         <v-toolbar-title> V.1.0 </v-toolbar-title>
         <v-list class="d-flex">
           <v-list-item v-for="(item, index) in items" :Key="index">
@@ -20,21 +19,20 @@
 </template>
 
 <style scoped>
-  .nav-bar{
+    .nav-bar{
     background-color: transparent;
     color: white;
   }
   .btn-login{
-    margin:0% 5em 0% 0%;
+    margin: 10px;
   }
   .d-flex{
     background-color:transparent;
     color:white;
   }
-
 </style>
-<script>
-  import {ref, watch} from "vue";
 
-  let items = ref(["About Us","Blog", "How to use"]);
+<script>
+    import {ref, watch} from "vue";
+    let items = ref(["About Us", "Blog", "How to use"]);
 </script>

@@ -1,18 +1,15 @@
 <script setup>
-
 </script>
 
 <template>
-    <v-btn variant="outlined" class="btn-login">
-        Login
-    </v-btn>
+    <v-col cols="12" md="4" sm="6">
+        <v-btn rounded="xl" size="x-large" block class="btn-get">Get Started</v-btn>
+    </v-col>
 </template>
 
 <style scoped>
-    .btn-login{
+    .btn-get{
         background-color: var(--color-primary-button);
         border-color: var(--color-primary-button);
-        border-radius: 30px;
-        color: black;
     }
 </style>
