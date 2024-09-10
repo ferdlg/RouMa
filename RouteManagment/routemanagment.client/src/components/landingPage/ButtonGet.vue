@@ -4,7 +4,7 @@
 <template>
     <v-col cols="12" md="4" sm="6" class="container-btn">
         <v-col cols="auto" class="container-btn">
-            <v-btn rounded="xl" size="x-large" class="btn-get" border-b-lg>
+            <v-btn rounded="xl" size="x-large" class="btn-get" >
                 Get Sarted
                 <img src="../../assets/icons/flecha-derecha.svg" >
             </v-btn>

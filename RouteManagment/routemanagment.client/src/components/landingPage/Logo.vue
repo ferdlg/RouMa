@@ -8,4 +8,15 @@
 </template>
 
 <style scoped>
+.container-logosgv{
+    /* background-color: rgba(245, 245, 220, 0.322); */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container-logosgv img{
+    min-height: 100%;
+    max-width: 100%;
+}
 </style>
