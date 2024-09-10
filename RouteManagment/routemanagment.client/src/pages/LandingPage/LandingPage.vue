@@ -35,6 +35,7 @@ main{
   width: 100%;
   height: 92vh;
   margin-top: 80px;
+  padding: 0px 50px 0px 50px;
   display: grid;
   grid-template-areas: "logo svgAuto" "btnGet svgAuto" "svgRoad svgAuto";
   grid-template-columns: 65% 35%;
@@ -54,6 +55,7 @@ main .container-btn-get{
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-content: center;
 }
 main .container-svg-road{
   grid-area: svgRoad;

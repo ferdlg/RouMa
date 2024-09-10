@@ -17,6 +17,5 @@
 
 .container-logosgv img{
     min-height: 100%;
-    max-width: 100%;
 }
 </style>
