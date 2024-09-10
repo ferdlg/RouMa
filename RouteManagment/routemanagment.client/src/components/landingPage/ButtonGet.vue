@@ -9,7 +9,6 @@
 
 <style scoped>
     .container-btn{
-        background-color: rgba(250, 235, 215, 0.712);
         display: flex;
         justify-content: flex-end;
         align-items: flex-start;

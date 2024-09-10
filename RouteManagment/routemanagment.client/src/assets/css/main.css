@@ -19,8 +19,8 @@ body {
   display: flex;
   min-height: 100vh;
   background: linear-gradient(to left,
-  #FDA901 25% 25%,
-  #211245 25% 75%);
+  #FDA901 35% 35%,
+  #211245 35% 65%);
 }
 
 #app {
