@@ -14,8 +14,9 @@ import ButtonGet from './ButtonGet.vue';
         width: 100%;
     }
     .container-auto img{
-        min-width: 60%;
+        min-width: 70%;
         max-width: 100%;
-    
+        margin-bottom: 6%;
+        
     }
 </style>

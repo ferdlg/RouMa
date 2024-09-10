@@ -45,15 +45,15 @@ main .container-logo{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
 }
 main .container-btn-get{
   grid-area: btnGet;
   /* background-color: rgba(155, 243, 96, 0.322); */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
 }
 main .container-svg-road{
   grid-area: svgRoad;
