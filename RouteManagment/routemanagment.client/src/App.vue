@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <LandingPage/>
+    <LandingPage/>
 </template>
 
 <style scoped>

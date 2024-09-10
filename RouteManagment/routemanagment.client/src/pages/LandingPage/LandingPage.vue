@@ -27,5 +27,19 @@ import Footer from '../../components/LandingPage/Footer.vue';
 </template>
 
 <style scoped>
-
+main{
+  display: grid;
+  width: 100%;
+  height: 100hv;
+}
+.container-btn-get{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+}
+.container-svg-roadauto{
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
 </style>

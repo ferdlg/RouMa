@@ -2,36 +2,42 @@
 </script>
 
 <template>
-    <section class="container-road-auto">
-        <div class="road">
-            <img src="../../assets/svg/road.svg" alt="road svg">
-        </div>
-        <div class="auto">
-            <img src="../../assets/svg/auto.svg" alt="auto svg">
-        </div>
-    </section>
+    <div class="container-road">
+        <img src="../../assets/svg/road.svg" alt="road svg">
+    </div>
+
+    <div class="container-auto">
+        <img src="../../assets/svg/auto.svg" alt="auto svg">
+    </div>
 </template>
 
 <style scoped>
-    .container-road-auto{
-        background-color: pink;
-        display: flex;
-        margin: 0;
+    .container-road{
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: flex-start;
+        margin-top: auto;
+
     }
-    .road{
+    /* .road{
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
         align-items: flex-start;
-        max-width: 95%;
-        max-height: 100vh;
-    }
-    .road img{
-        max-width: 95%;
+     
+    } */
+    .container-road img{
+        min-width: 100%;
+        max-width: 100%;
     }
 
-    .auto{
-        background-color: blueviolet;
-        padding: 10px;
+    .container-auto{
+        display: grid;
+    }
+    .container-auto img{
+        margin: auto;
+        min-width: 100%;
+        max-width: 100%;
+        margin-bottom: 22%;
     }
 </style>
