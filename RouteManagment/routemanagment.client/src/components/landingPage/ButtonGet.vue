@@ -2,12 +2,11 @@
 </script>
 
 <template>
-    <div class="container-btn">
-        <v-btn class="btn-get" >
+    <div class="container-btn"></div>
+        <v-btn class="btn-get">
             Get Stared
-            <v-icon>mdi-arrow_forward</v-icon>
+            <v-icon>mdi-star</v-icon>
         </v-btn>
-    </div>
 </template>
 
 <style scoped>
@@ -20,6 +19,7 @@
     }
     .btn-get{
         background-color: var(--color-secundary-background);
+        border-radius: 50px;
     }
     
 
