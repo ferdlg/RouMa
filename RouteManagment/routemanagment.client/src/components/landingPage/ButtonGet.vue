@@ -3,7 +3,7 @@
 
 <template>
     <div class="container-btn">
-        <button class="btn-get" type="button">Get Stared</button>
+        <button class="btn-get" type="button"><p>Get Stared</p></button>
     </div>
 </template>
 
@@ -21,6 +21,9 @@
         background-color: var(--color-secundary-background);
         border-radius: 50px;
         border-style: inset;
+    }
+    .btn-get b{
+        font-weight: 300;
     }
 
 </style>

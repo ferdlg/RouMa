@@ -3,6 +3,11 @@
   box-sizing: border-box;
   padding: 0;
 }
+@font-face {
+  font-family: "Ubuntu";
+  src:   url(../../../public/fonts/Ubuntu-vf.ttf) format("truetype"),
+
+}
 
 :root {
   --color-primary-background:#211245;
@@ -20,6 +25,8 @@ body {
   display: flex;
   width: 100%;
   height: 100vh;
+  font-family: "Ubuntu";
+
 }
 
 #app {

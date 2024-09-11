@@ -18,8 +18,8 @@
 }
 
 .container-logosgv img{
-    min-width: 70%;
-    max-width: 70%;
+    min-width: 50%;
+    max-width: 50%;
    
 }
 </style>

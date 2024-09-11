@@ -11,7 +11,7 @@
 <style scoped>
     .btn-login{
         background-color: var(--color-secundary-background);
-        border-color: var(--color-secundary-background);
+        /* border-color: var(--color-secundary-background); */
         border-radius: 30px;
         color: black;
         border-style: inset;

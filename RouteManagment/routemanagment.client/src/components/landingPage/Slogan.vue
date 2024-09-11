@@ -24,7 +24,7 @@
         font-family: "Ubuntu";
         font-size: 3rem;
         text-align: center;
-        text-shadow: ;
+   
     }
     .container-slogan p{
         color: var(--color-primary-background);
