@@ -3,7 +3,10 @@
 
 <template>
     <div class="container-btn">
-        <button class="btn-get" type="button"><p>Get Stared</p></button>
+        <v-btn class="btn-get" >
+            Get Stared
+            <v-icon>mdi-arrow_forward</v-icon>
+        </v-btn>
     </div>
 </template>
 
@@ -16,14 +19,8 @@
         width: 40%;
     }
     .btn-get{
-        padding: 3% 1% 3% 1%;
-        width: 100%;
         background-color: var(--color-secundary-background);
-        border-radius: 50px;
-        border-style: inset;
     }
-    .btn-get b{
-        font-weight: 300;
-    }
+    
 
 </style>

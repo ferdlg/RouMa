@@ -5,6 +5,7 @@
 <template>
     <v-btn variant="outlined" class="btn-login">
         Login
+        <v-icon>mdi-login</v-icon>
     </v-btn>
 </template>
 

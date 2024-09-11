@@ -2,14 +2,14 @@
     import ButtonLogin from './ButtonLogin.vue';
 </script>
 <template>
-  <div class="container-nav">
     <v-layout>
          <v-app-bar class="nav-bar" elevation="0" border >
            <v-toolbar-title> V.1.0 </v-toolbar-title>
            <v-spacer></v-spacer>
-           <v-list class="d-flex">
+           <v-list class="nav-list" dense>
              <v-list-item v-for="(item, index) in items" :Key="index">
-               <v-list-item-title>{{item}}</v-list-item-title>
+                <v-icon>{{ item.icon }}</v-icon>
+               <v-list-item-title >{{item.text}}</v-list-item-title>
              </v-list-item>
            </v-list>
            <v-spacer></v-spacer>
@@ -19,8 +19,16 @@
            <v-spacer></v-spacer>
          </v-app-bar>
        </v-layout>
-  </div>
 </template>
+<script>
+    import {ref} from "vue";
+    
+    const items = ref ([
+      {text: "About Us", icon:"mdi-information"},
+      {text: "Blog", icon:"mdi-newspaper"},
+      {text: "How to use", icon:"mdi-help-circle"},
+    ]);
+</script> 
 
 <style scoped>
   .nav-bar{
@@ -33,13 +41,9 @@
   .btn-login{
     margin: 10px;
   }
-  .d-flex{
+  .nav-list{
+    display: flex;
     background-color:transparent;
     color:white;
   }
 </style>
-
-<script>
-    import {ref, watch} from "vue";
-    let items = ref(["About Us", "Blog", "How to use"]);
-</script> 
