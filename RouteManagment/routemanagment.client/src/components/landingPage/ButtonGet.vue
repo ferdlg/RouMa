@@ -13,7 +13,7 @@
         justify-content: flex-end;
         align-items: flex-start;
         flex-direction: column;
-        width: 50%;
+        width: 40%;
     }
     .btn-get{
         padding: 3% 1% 3% 1%;

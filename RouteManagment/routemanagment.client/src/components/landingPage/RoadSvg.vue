@@ -10,7 +10,7 @@ import ButtonGet from './ButtonGet.vue';
 
 <style scoped>
 .container-road{
-    /* background-color: rgba(240, 248, 255, 0.363); */
+    /* background-color: rgba(240, 248, 255, 0.363);  */
     width: 100%;
     max-height: 80%;
 }

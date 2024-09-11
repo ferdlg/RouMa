@@ -11,9 +11,7 @@ import Slogan from '../../components/LandingPage/Slogan.vue';
 
 <template>
   <header>
-    <div>
       <NavBar />
-    </div>
   </header>
   <main>
     <div class="container-logo">
@@ -36,6 +34,7 @@ import Slogan from '../../components/LandingPage/Slogan.vue';
 </template>
 
 <style scoped>
+
 main{
   width: 100%;
   height: 92vh;
@@ -75,10 +74,12 @@ main .container-svg-road{
   grid-area: svgRoad;
     /* background-color: rgba(255, 0, 0, 0.418);  */
     display: flex;
+    width: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-end;
-    
   }
 .container-svg-auto{
   grid-area: svgAuto;

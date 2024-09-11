@@ -22,11 +22,13 @@
         color: var(--color-primary-background) ;
         padding: 10px;
         font-family: "Ubuntu";
-        font-size: 3rem;
+        font-size: 2em;
         text-align: center;
    
     }
     .container-slogan p{
         color: var(--color-primary-background);
+        padding: 20px;
+        font-size: 1em;
     }
 </style>

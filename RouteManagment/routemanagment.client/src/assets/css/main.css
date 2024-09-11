@@ -30,7 +30,6 @@ body {
 }
 
 #app {
-  margin: 0;
   overflow: hidden;
   display: flex;
   max-height: 100vh;
