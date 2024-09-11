@@ -4,6 +4,8 @@ import ButtonGet from '../../components/LandingPage/ButtonGet.vue';
 import Logo from '../../components/LandingPage/Logo.vue';
 import Auto from '../../components/LandingPage/Auto.vue';
 import RoadSvg from '../../components/LandingPage/RoadSvg.vue';
+import Header from '../../components/LandingPage/Slogan.vue';
+import Slogan from '../../components/LandingPage/Slogan.vue';
 
 </script>
 
@@ -16,6 +18,9 @@ import RoadSvg from '../../components/LandingPage/RoadSvg.vue';
   <main>
     <div class="container-logo">
       <Logo/>
+    </div>
+    <div class="container-slogan">
+      <Slogan/>
     </div>
     <div class="container-btn-get">
       <ButtonGet/>
@@ -35,10 +40,10 @@ main{
   width: 100%;
   height: 92vh;
   margin-top: 80px;
-  padding: 0px 50px 0px 50px;
   display: grid;
-  grid-template-areas: "logo svgAuto" "btnGet svgAuto" "svgRoad svgAuto";
+  grid-template-areas: "logo slogan" "btnGet slogan" "svgRoad svgAuto";
   grid-template-columns: 65% 35%;
+  grid-template-rows: 1fr 1fr 0.5fr;
 }
 main .container-logo{
   grid-area: logo;
@@ -46,6 +51,15 @@ main .container-logo{
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  align-items: center;
+
+}
+
+main .container-slogan{
+  grid-area: slogan;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 main .container-btn-get{
@@ -59,18 +73,19 @@ main .container-btn-get{
 }
 main .container-svg-road{
   grid-area: svgRoad;
-    /* background-color: rgba(255, 0, 0, 0.418); */
+    /* background-color: rgba(255, 0, 0, 0.418);  */
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: flex-end;
+    
   }
 .container-svg-auto{
   grid-area: svgAuto;
   /* background-color: rgba(240, 248, 255, 0.322); */
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
+  justify-content: flex-start;
+  align-items: center;
 }
 </style>

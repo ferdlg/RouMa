@@ -11,7 +11,7 @@
 :root {
   --color-primary-background:#211245;
   --color-secundary-background:#FDA901;
-  --color-primary-button:#FFD88A;
+  --color-secundary-ligth:#FFD88A;
   --color-dashboard-group1:#FFFCF3;
   --color-icons-dasboard-group1:#E5A000;
 
@@ -22,15 +22,17 @@
 body {
   margin: 0 ;
   display: flex;
-  min-height: 100vh;
-  background: linear-gradient(to left,
-  #FDA901 35% 35%,
-  #211245 35% 65%);
+  width: 100%;
+  height: 100vh;
 }
 
 #app {
   margin: 0;
+  overflow: hidden;
   display: flex;
   max-height: 100vh;
   width: 100%;
+  background: linear-gradient(to left,
+  #FDA901 35% 35%,
+  #211245 35% 65%);
 }

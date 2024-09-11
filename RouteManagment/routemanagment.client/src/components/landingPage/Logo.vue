@@ -9,13 +9,17 @@
 
 <style scoped>
 .container-logosgv{
-    /* background-color: rgba(245, 245, 220, 0.322); */
+    /* background-color: rgba(245, 245, 220, 0.322);  */
     width: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
 .container-logosgv img{
-    min-height: 100%;
+    min-width: 70%;
+    max-width: 70%;
+   
 }
 </style>

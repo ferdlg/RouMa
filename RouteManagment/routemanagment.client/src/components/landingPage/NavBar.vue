@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
+    background-color: var(--color-primary-background);
     color: white;
   }
   .btn-login{

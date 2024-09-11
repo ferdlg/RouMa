@@ -2,33 +2,24 @@
 </script>
 
 <template>
-    <v-col cols="12" md="4" sm="6" class="container-btn">
-        <v-col cols="auto" class="container-btn">
-            <v-btn rounded="xl" size="x-large" class="btn-get" >
-                Get Sarted
-                <img src="../../assets/icons/flecha-derecha.svg" >
-            </v-btn>
-        </v-col>
-    </v-col>
+    <div class="container-btn">
+        <button class="btn-get" type="button">Get Stared</button>
+    </div>
 </template>
 
 <style scoped>
     .container-btn{
-        /* display: flex; */
+        display: flex; 
         justify-content: flex-end;
         align-items: flex-start;
         flex-direction: column;
+        width: 50%;
     }
     .btn-get{
-        padding: 10px;
-        background-color: var(--color-primary-button);
-        border-color: var(--color-primary-button);
-        
-    }
-
-    .btn-get img{
-        width: 10%;
-        margin-left: 20px;
+        padding: 3% 1% 3% 1%;
+        width: 100%;
+        background-color: var(--color-secundary-background);
+        border-radius: 50px;
     }
 
 </style>

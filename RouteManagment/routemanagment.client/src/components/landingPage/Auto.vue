@@ -10,13 +10,13 @@ import ButtonGet from './ButtonGet.vue';
 
 <style scoped>
     .container-auto{
-        max-height: 100%;
+        max-height: 50%;
         width: 100%;
     }
     .container-auto img{
-        min-width: 100%;
-        max-width: 100%;
-        margin-bottom: 6%;
+        min-width: 50%;
+        max-width: 50%;
+        margin-bottom: 12%;
         
     }
 </style>

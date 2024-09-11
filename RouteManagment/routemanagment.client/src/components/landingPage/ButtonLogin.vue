@@ -10,8 +10,8 @@
 
 <style scoped>
     .btn-login{
-        background-color: var(--color-primary-button);
-        border-color: var(--color-primary-button);
+        background-color: var(--color-secundary-background);
+        border-color: var(--color-secundary-background);
         border-radius: 30px;
         color: black;
     }
