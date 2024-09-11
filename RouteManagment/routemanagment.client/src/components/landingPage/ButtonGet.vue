@@ -20,6 +20,7 @@
         width: 100%;
         background-color: var(--color-secundary-background);
         border-radius: 50px;
+        border-style: inset;
     }
 
 </style>

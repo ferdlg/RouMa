@@ -9,12 +9,22 @@
 </template>
 
 <style>
+
+@font-face {
+  font-family: "Ubuntu";
+  src:   url(../../../public/fonts/Ubuntu-vf.ttf) format("truetype"),
+
+}
     .container-slogan{
         padding: 15px;
     }
     .container-slogan h1{
         color: var(--color-primary-background) ;
-        padding-bottom: 10px;
+        padding: 10px;
+        font-family: "Ubuntu";
+        font-size: 3rem;
+        text-align: center;
+        text-shadow: ;
     }
     .container-slogan p{
         color: var(--color-primary-background);

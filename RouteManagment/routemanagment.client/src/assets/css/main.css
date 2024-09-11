@@ -3,11 +3,7 @@
   box-sizing: border-box;
   padding: 0;
 }
-@font-face {
-  font-family: "Ubuntu";
-  src: url(../../../public/fonts/ubinto-vf.woff2),
-  url(../../../public/fonts/ubinto-vf.ttf);
-}
+
 :root {
   --color-primary-background:#211245;
   --color-secundary-background:#FDA901;
