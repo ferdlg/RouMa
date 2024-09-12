@@ -26,12 +26,13 @@ body {
   width: 100%;
   height: 100vh;
   font-family: "Ubuntu";
+  background-color: rgba(0, 0, 0, 0.212);
 
 }
 
 #app {
   display: flex;
-  max-height: 100vh;
+  height: 100vh;
   width: 100%;
   background: linear-gradient(to left,
   #FDA901 35% 35%,

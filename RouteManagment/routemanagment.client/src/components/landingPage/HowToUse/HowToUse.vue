@@ -4,8 +4,10 @@ import Steppers from './Steppers.vue';
 </script>
 
 <template>
-    <HeaderHow />
-    <Steppers/>
+    <v-container>
+        <HeaderHow />
+        <Steppers/>
+    </v-container>
 </template>
 
 <style>

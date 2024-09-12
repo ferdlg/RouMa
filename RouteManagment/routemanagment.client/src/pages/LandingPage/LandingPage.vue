@@ -8,6 +8,7 @@ import Header from '../../components/LandingPage/Slogan.vue';
 import Slogan from '../../components/LandingPage/Slogan.vue';
 import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
 import HowToUse from '../../components/LandingPage/HowToUse/HowToUse.vue';
+import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
 
 </script>
 
@@ -41,7 +42,9 @@ import HowToUse from '../../components/LandingPage/HowToUse/HowToUse.vue';
       </div>
       
     </main>
-
+    <footer>
+      <FooterLanding/>
+    </footer>
 </template>
 
 <style scoped>
