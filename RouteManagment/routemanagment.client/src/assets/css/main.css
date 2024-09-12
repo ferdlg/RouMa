@@ -30,7 +30,6 @@ body {
 }
 
 #app {
-  overflow: hidden;
   display: flex;
   max-height: 100vh;
   width: 100%;

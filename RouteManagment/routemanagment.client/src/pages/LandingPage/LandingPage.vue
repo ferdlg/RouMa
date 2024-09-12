@@ -6,31 +6,42 @@ import Auto from '../../components/LandingPage/Auto.vue';
 import RoadSvg from '../../components/LandingPage/RoadSvg.vue';
 import Header from '../../components/LandingPage/Slogan.vue';
 import Slogan from '../../components/LandingPage/Slogan.vue';
+import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
+import HowToUse from '../../components/LandingPage/HowToUse/HowToUse.vue';
 
 </script>
 
 <template>
-  <header>
-      <NavBar />
-  </header>
-  <main>
-    <div class="container-logo">
-      <Logo/>
-    </div>
-    <div class="container-slogan">
-      <Slogan/>
-    </div>
-    <div class="container-btn-get">
-      <ButtonGet/>
-    </div>
-    <div class="container-svg-road">
-      <RoadSvg/>
-    </div>
-    <div class="container-svg-auto">
-      <Auto/>
-    </div>
-    
-  </main>
+    <header>
+        <NavBar />
+    </header>
+    <main>
+      <div class="container-logo">
+        <Logo/>
+      </div>
+      <div class="container-slogan">
+        <Slogan/>
+      </div>
+      <div class="container-btn-get">
+        <ButtonGet/>
+      </div>
+      <div class="container-svg-road">
+        <RoadSvg/>
+      </div>
+      <div class="container-svg-auto">
+        <Auto/>
+      </div>
+  
+      <div class="div-AboutUs">
+        <AboutUs/>
+      </div>
+
+      <div class="div-HowToUse">
+        <HowToUse/>
+      </div>
+      
+    </main>
+
 </template>
 
 <style scoped>
@@ -40,9 +51,9 @@ main{
   height: 92vh;
   margin-top: 80px;
   display: grid;
-  grid-template-areas: "logo slogan" "btnGet slogan" "svgRoad svgAuto";
+  grid-template-areas: "logo slogan" "btnGet slogan" "svgRoad svgAuto" "aboutUs aboutUs" "howToUse howToUse";
   grid-template-columns: 65% 35%;
-  grid-template-rows: 1fr 1fr 0.5fr;
+  grid-template-rows: 1fr 1fr 3fr 1fr;
 }
 main .container-logo{
   grid-area: logo;
@@ -51,7 +62,6 @@ main .container-logo{
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-
 }
 
 main .container-slogan{
@@ -81,7 +91,7 @@ main .container-svg-road{
     flex-direction: column;
     justify-content: center;
   }
-.container-svg-auto{
+main .container-svg-auto{
   grid-area: svgAuto;
   /* background-color: rgba(240, 248, 255, 0.322); */
   display: flex;
@@ -89,4 +99,12 @@ main .container-svg-road{
   justify-content: flex-start;
   align-items: center;
 }
+
+main .div-AboutUs{
+  grid-area: aboutUs;
+}
+main .div-HowToUse{
+  grid-area: howToUse;
+}
+
 </style>

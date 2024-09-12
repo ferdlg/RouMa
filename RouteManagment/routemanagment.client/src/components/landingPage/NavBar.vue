@@ -9,7 +9,7 @@
            <v-list class="nav-list" dense>
              <v-list-item v-for="(item, index) in items" :Key="index">
                 <v-icon>{{ item.icon }}</v-icon>
-               <v-list-item-title >{{item.text}}</v-list-item-title>
+                <RouterLink :to= "item.path">{{item.text}}</RouterLink>
              </v-list-item>
            </v-list>
            <v-spacer></v-spacer>
@@ -24,9 +24,9 @@
     import {ref} from "vue";
     
     const items = ref ([
-      {text: "About Us", icon:"mdi-information"},
-      {text: "Blog", icon:"mdi-newspaper"},
-      {text: "How to use", icon:"mdi-help-circle"},
+      {text: "About Us", icon:"mdi-information" ,path:'/AboutUs'},
+      {text: "Blog", icon:"mdi-newspaper" ,path:'/Blog'},
+      {text: "How to use", icon:"mdi-help-circle" ,path:'/How'},
     ]);
 </script> 
 
