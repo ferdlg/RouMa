@@ -9,14 +9,18 @@ import Slogan from '../../components/LandingPage/Slogan.vue';
 import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
 import HowToUse from '../../components/LandingPage/HowToUse/HowToUse.vue';
 import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
+import Blog from '../../components/LandingPage/Blog/Blog.vue';
 
 </script>
 
 <template>
-    <header>
-        <NavBar />
-    </header>
+  <header>
+    <v-layout>
+      <NavBar/>
+    </v-layout>
+  </header>
     <main>
+      
       <div class="container-logo">
         <Logo/>
       </div>
@@ -40,27 +44,36 @@ import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
       <div class="div-HowToUse">
         <HowToUse/>
       </div>
+
+      <div class="div-Blog">
+        <Blog/>
+      </div>
       
     </main>
-    <footer>
+    <!-- <footer>
       <FooterLanding/>
-    </footer>
+    </footer> -->
 </template>
 
 <style scoped>
-
+header{
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+}
 main{
   width: 100%;
-  height: 92vh;
-  margin-top: 80px;
+  margin-top: 2vh;
   display: grid;
-  grid-template-areas: "logo slogan" "btnGet slogan" "svgRoad svgAuto" "aboutUs aboutUs" "howToUse howToUse";
+  /* background-color: rgba(240, 248, 255, 0.623); */
+  grid-template-areas: "logo slogan" "btnGet slogan" "svgRoad svgAuto" "aboutUs aboutUs" "howToUse howToUse" "blog blog";
   grid-template-columns: 65% 35%;
-  grid-template-rows: 1fr 1fr 3fr 1fr;
+
 }
 main .container-logo{
   grid-area: logo;
-  /* background-color: rgba(38, 45, 105, 0.322); */
+  /* background-color: rgba(38, 45, 105, 0.322);  */
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -71,8 +84,7 @@ main .container-slogan{
   grid-area: slogan;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 main .container-btn-get{
   grid-area: btnGet;
@@ -101,13 +113,23 @@ main .container-svg-auto{
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
 }
 
 main .div-AboutUs{
   grid-area: aboutUs;
+
+  background-color: rgb(255, 255, 255);
 }
 main .div-HowToUse{
   grid-area: howToUse;
+  padding: 10px;
+  background-color: rgb(255, 255, 255);
+}
+
+main .div-Blog{
+  grid-area: blog;
+  background-color: rgb(253, 253, 253);
 }
 
 </style>

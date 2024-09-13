@@ -22,11 +22,12 @@ import ListItems from './ListItems.vue'
 
 <style scoped>
 .container-items{
-    background-color: rgba(137, 43, 226, 0.11);
+    /* background-color: rgba(137, 43, 226, 0.11); */
     padding: 5%;
     display: grid;
     grid-template-areas: "carousel card" "list list" ;
-    grid-template-columns: 60% 38%;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
 }
 
 .container-items .container-carousel{

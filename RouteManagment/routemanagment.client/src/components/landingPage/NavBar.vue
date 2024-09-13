@@ -2,23 +2,30 @@
     import ButtonLogin from './ButtonLogin.vue';
 </script>
 <template>
-    <v-layout>
-         <v-app-bar class="nav-bar" elevation="0" border >
-           <v-toolbar-title> V.1.0 </v-toolbar-title>
-           <v-spacer></v-spacer>
+   <v-responsive>
+     <v-app-bar class="nav-bar d-flex">
+         <v-toolbar-title>V1.0.0</v-toolbar-title>
+         <v-toolbar-items class="d-sm-flex">
            <v-list class="nav-list" dense>
-             <v-list-item v-for="(item, index) in items" :Key="index">
-                <v-icon>{{ item.icon }}</v-icon>
-                <RouterLink :to= "item.path">{{item.text}}</RouterLink>
+             <v-list-item
+               v-for="(item, index) in items"
+               :key="index"
+               class="nav-list-item"
+             >
+               <v-list-item-icon>
+                 <v-icon>{{ item.icon }}</v-icon>
+               </v-list-item-icon>
+               <v-list-item-content>
+                 <RouterLink :to="item.path" class="nav-link">
+                   {{ item.text }}
+                 </RouterLink>
+               </v-list-item-content>
              </v-list-item>
-           </v-list>
-           <v-spacer></v-spacer>
-           <div class=".btn-login">
              <ButtonLogin/>
-           </div> 
-           <v-spacer></v-spacer>
-         </v-app-bar>
-       </v-layout>
+           </v-list>
+         </v-toolbar-items>
+       </v-app-bar>
+   </v-responsive>
 </template>
 <script>
     import {ref} from "vue";
@@ -31,12 +38,19 @@
 </script> 
 
 <style scoped>
+  .v-app-bar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
   .nav-bar{
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-primary-background);
-    color: white;
+    color: rgba(255, 255, 255, 0.527);
   }
   .btn-login{
     margin: 10px;
@@ -45,5 +59,13 @@
     display: flex;
     background-color:transparent;
     color:white;
+  }
+
+  .nav-link{
+    color: white;
+    text-decoration: none;
+  }
+  .nav-link:hover{
+    color: var(--color-secundary-background);
   }
 </style>

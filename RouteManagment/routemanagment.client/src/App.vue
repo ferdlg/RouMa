@@ -3,7 +3,9 @@
 </script>
 
 <template>
-      <LandingPage/>
+  <v-container fluid>
+    <LandingPage/>
+  </v-container>
 </template>
 
 <style scoped>
