@@ -1,10 +1,12 @@
 <script setup>
+import About from '../../../assets/images/About.jpg'
+  
 </script>
 
 <template>
     <v-parallax
     height="200"
-    src="https://i0.wp.com/blancoynegro.com.co/wp-content/uploads/2020/07/IMG_20200720_162620.jpg?w=1080&ssl=1">
+    :src= "About" >
     <div class="d-flex flex-column fill-height justify-center align-center text-white">
       <h1 class="text-h4 font-weight-thin mb-4">
         About Us
@@ -22,4 +24,12 @@
     background-color: aliceblue;
 }
 </style>
-
+<script>
+  export default {
+    data () {
+      return {
+        About
+      }
+    },
+  }
+</script>
