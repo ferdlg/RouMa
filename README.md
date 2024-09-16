@@ -39,9 +39,8 @@ Route Management (RouMa) es un proyecto de microservicios, el cual esta desarrol
 - Lenguaje de programación: C#
 
 ### Frontend 🛣
-- Framework: Vue
+- Framework: Vue, Vuetify
 - Lenguaje de programación: JavaScript
 
-### Algunas librerias
-- [Libreria] css
+
   
