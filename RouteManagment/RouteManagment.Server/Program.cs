@@ -17,13 +17,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Add filter validations from App 
-IMvcBuilder mvcBuilder = builder.Services.AddMvc(options =>
-{
-    options.Filters.Add<ValidationFilter>();
-}).AddFluentValidation(options =>
-{
-    options.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
-});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -37,6 +31,9 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(conectio
 // ID Interface registration --> Implementacion Generica
 
 builder.Services.AddTransient<IRouteService, RouteService>();
+builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IPeopleService, PeopleService>();
+
 builder.Services.AddScoped<ITransportRepository, TransportRepository>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped(typeof(IServiceR<>), typeof(BaseServiceR<>));

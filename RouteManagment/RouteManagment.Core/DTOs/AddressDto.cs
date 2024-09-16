@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class AddressDto
     {
-        public int AddressId { get; set; }
+        public int Id { get; set; }
 
         public string? StreetName { get; set; }
 

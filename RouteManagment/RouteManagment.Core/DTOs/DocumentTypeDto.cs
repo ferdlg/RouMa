@@ -2,7 +2,7 @@
 {
     public class DocumentTypeDto
     {
-        public int DocumentTypeId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 

@@ -6,7 +6,9 @@ import Steppers from './Steppers.vue';
 <template>
     <v-container>
         <HeaderHow />
-        <Steppers/>
+        <v-container>
+            <Steppers/>
+        </v-container>
     </v-container>
 </template>
 

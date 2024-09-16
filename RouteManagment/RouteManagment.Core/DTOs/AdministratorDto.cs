@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class AdministratorDto
     {
-        public int AdministratorId { get; set; }
+        public int Id { get; set; }
 
         public int DocumentNumber { get; set; }
     }

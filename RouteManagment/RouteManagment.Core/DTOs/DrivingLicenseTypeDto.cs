@@ -2,7 +2,7 @@
 {
     public class DrivingLicenseTypeDto
     {
-        public int TypeLicenseId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 

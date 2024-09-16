@@ -3,7 +3,7 @@ namespace RouteManagment.Core.DTOs
 {
         public class UserDto
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         public int DocumentNumber { get; set; }
 

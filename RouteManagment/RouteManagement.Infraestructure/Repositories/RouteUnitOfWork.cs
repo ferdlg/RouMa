@@ -17,7 +17,6 @@ namespace RouteManagement.Infraestructure.Repositories
 
             _respositories = new Dictionary<Type, object>
             {
-                { typeof(Route), new BaseRepository<Route>(appDbContext) },
                 { typeof(Stop), new BaseRepository<Stop>(appDbContext) },
                 { typeof(RoutesStop), new BaseRepository<RoutesStop>(appDbContext) },
                 { typeof(Address), new BaseRepository<Address>(appDbContext) },

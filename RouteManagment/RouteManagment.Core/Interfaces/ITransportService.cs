@@ -24,8 +24,8 @@ namespace RouteManagment.Core.Interfaces
     }
     public class BaseServiceT<T> : IServiceT<T> where T : BaseEntity
     {
-        private readonly IRouteUnitOfWork _unitOfWork;
-        public BaseServiceT(IRouteUnitOfWork iunitOfWork)
+        private readonly ITransportUnitOfWork _unitOfWork;
+        public BaseServiceT(ITransportUnitOfWork iunitOfWork)
         {
             _unitOfWork = iunitOfWork;
         }
@@ -50,7 +50,7 @@ namespace RouteManagment.Core.Interfaces
         public async Task<T> Update(T entity)
         {
             _unitOfWork.GetRepository<T>().Update(entity);
-            await _unitOfWork.SaveChanguesAsync();
+            await _unitOfWork.SaveChangesAsync();
             return entity;
         }
         public async Task<T> Delete(int id)

@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class TransportRequestDto
     {
-        public int RequestId { get; set; }
+        public int Id { get; set; }
 
         public DateTime Date { get; set; }
 

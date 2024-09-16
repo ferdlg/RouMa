@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class RolPermisionDto
     {
-        public int RolPermissionId { get; set; }
+        public int Id { get; set; }
 
         public int PermissionId { get; set; }
 

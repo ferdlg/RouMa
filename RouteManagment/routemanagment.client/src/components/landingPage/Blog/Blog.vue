@@ -5,7 +5,7 @@ import HeaderBlog from './HeaderBlog.vue';
 </script>
 
 <template>
-    <v-container>
+    <v-container id="Blog">
         <HeaderBlog/>
         <BlogCards/>
     </v-container>

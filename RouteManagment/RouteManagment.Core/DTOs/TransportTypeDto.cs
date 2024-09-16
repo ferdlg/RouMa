@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class TransportTypeDto
     {
-        public int TransportTypeId { get; set; }
+        public int Id { get; set; }
 
         public string? Name { get; set; }
 

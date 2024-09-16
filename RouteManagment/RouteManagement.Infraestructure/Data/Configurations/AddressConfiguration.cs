@@ -14,12 +14,13 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
 
             builder.ToTable("addresses");
 
-            builder.HasIndex(e => e.StreetTypeId, "StreetTypeId");
 
             builder.Property(e => e.Id)
                 .HasColumnName("AddressId")
-                .HasColumnType("int(11)");
+                .HasColumnType("int");
   
+            builder.HasIndex(e => e.StreetTypeId, "StreetTypeId");
+            
             builder.Property(e => e.Prefix)
                 .HasMaxLength(50)
                 .HasDefaultValueSql("'NULL'");

@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class DriverDto
     {
-        public int DriverId { get; set; }
+        public int Id { get; set; }
 
         public int DrivingLicenseNumber { get; set; }
 

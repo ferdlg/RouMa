@@ -1,0 +1,6 @@
+@routemanagment.client_HostAddress = http://localhost:5010
+
+GET {{routemanagment.client_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
