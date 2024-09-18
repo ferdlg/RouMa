@@ -24,6 +24,7 @@ namespace RouteManagment.Core.Services
         public async Task InsertPeople(People people)
         {
             await _unitOfWork.PeopleRepository.Add(people);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<bool> Update(People people)

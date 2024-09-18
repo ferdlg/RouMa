@@ -1,10 +1,9 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
+using RouteManagment.Core.Interfaces;
 using RouteManagment.Server.Responses;
 
 
@@ -17,20 +16,20 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportController : ControllerBase
     {
-        private readonly ITransportRepository _transportRepository;
+        private readonly ITransportService _transportService;
         private readonly IMapper _mapper;
 
-        public TransportController(ITransportRepository transportRepository, IMapper mapper)
+        public TransportController(ITransportService transportService, IMapper mapper)
         {
-            _transportRepository = transportRepository;
+            _transportService = transportService;
             _mapper = mapper;
         }
         //Request to get all Transports
 
         [HttpGet]
-        public async Task<IActionResult> GetTransports()
+        public IActionResult GetTransports()
         {
-           var transports = _transportRepository.GetTransports();
+           var transports = _transportService.GetTransports();
            var transportsDto = _mapper.Map<IEnumerable<TransportDto>>(transports);
            var response = new ApiResponse<IEnumerable<TransportDto>>(transportsDto);
            return Ok(response);
@@ -41,7 +40,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetTransports(string? plate)
         {
-           var transport = await _transportRepository.GetTransport(plate);
+           var transport = await _transportService.GetTransport(plate);
            var transportDto = _mapper.Map<TransportDto>(transport);
            var response = new ApiResponse<TransportDto>(transportDto);
 
@@ -55,9 +54,9 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Posttop(TransportDto transportDto)
         {
            var transport = _mapper.Map<Transport>(transportDto);
-           await _transportRepository.PostTransport(transport);
+           await _transportService.InsertTransport(transport);
 
-           transportDto = _mapper.Map<TransportDto>(_transportRepository);
+           transportDto = _mapper.Map<TransportDto>(_transportService);
            var response = new ApiResponse<TransportDto>(transportDto);
            return Ok(response);
         }
@@ -66,21 +65,21 @@ namespace RouteManagment.Server.Controllers
         //Request to update transport
         [HttpPut("{plate}")]
 
-        public async Task<IActionResult> UpdateTransport(string? plate, TransportDto transportDto)
+        public async Task<IActionResult> Update(string? plate, TransportDto transportDto)
         {
             var transport = _mapper.Map<Transport>(transportDto);
             transport.Plate = plate;
 
-            var result= await _transportRepository.UpdateTransport(transport);
+            var result= await _transportService.Update(transport);
             var response = new ApiResponse<bool>(result);
             return Ok(response);
         }
         //Request to remove transport by id 
         [HttpDelete("{plate}")]
 
-        public async Task<IActionResult> Deletetransport(string? plate)
+        public async Task<IActionResult> Delete(string? plate)
         {
-           var result = await _transportRepository.DeleteTransport(plate);
+           var result = await _transportService.Delete(plate);
            var response = new ApiResponse<bool>(result);
            return Ok(response);
         

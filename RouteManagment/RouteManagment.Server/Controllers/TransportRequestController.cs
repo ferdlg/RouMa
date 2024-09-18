@@ -16,12 +16,12 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestController : ControllerBase
     {
-        private readonly IServiceT<TransportRequest> _transportRequestRepository;
+        private readonly IServiceT<TransportRequest> _transportRequestService;
         private readonly IMapper _mapper;
 
-        public TransportRequestController(IServiceT<TransportRequest> TransportRequestRepository, IMapper mapper)
+        public TransportRequestController(IServiceT<TransportRequest> transportRequestService, IMapper mapper)
         {
-            _transportRequestRepository = TransportRequestRepository;
+            _transportRequestService = transportRequestService;
             _mapper = mapper;
         }
         //Request to get all TransportRequests
@@ -29,7 +29,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-           var TransportRequests =  _transportRequestRepository.GetAll();
+           var TransportRequests =  _transportRequestService.GetAll();
            var TransportRequestsDto = _mapper.Map<IEnumerable<TransportRequestDto>>(TransportRequests);
             return Ok(TransportRequestsDto);
         }
@@ -39,7 +39,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-           var TransportRequest = await _transportRequestRepository.GetById(id);
+           var TransportRequest = await _transportRequestService.GetById(id);
            var TransportRequestDto = _mapper.Map<TransportRequestDto>(TransportRequest);
            var response = new ApiResponse<TransportRequestDto>(TransportRequestDto);
            return Ok(response);
@@ -52,7 +52,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(TransportRequestDto transportDto)
         {
            var TransportRequest = _mapper.Map<TransportRequest>(transportDto);
-           await _transportRequestRepository.Add(TransportRequest);
+           await _transportRequestService.Add(TransportRequest);
 
            transportDto = _mapper.Map<TransportRequestDto>(TransportRequest);
            var response = new ApiResponse<TransportRequestDto>(transportDto);
@@ -68,7 +68,7 @@ namespace RouteManagment.Server.Controllers
             var transportRequest = _mapper.Map<TransportRequest>(transportRequestDto);
             transportRequest.Id = id;
 
-            var result= await _transportRequestRepository.Update(transportRequest);
+            var result= await _transportRequestService.Update(transportRequest);
             var response = new ApiResponse<TransportRequest>(result);
             return Ok(response);
         }
@@ -77,7 +77,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-          var result = await _transportRequestRepository.Delete(id);
+          var result = await _transportRequestService.Delete(id);
           var response = new ApiResponse<TransportRequest>(result);
           return Ok(response);
         }

@@ -40,12 +40,12 @@ namespace RouteManagement.Infraestructure.Repositories
 
         public void SaveChange()
         {
-            throw new NotImplementedException();
+            _appDbContext.SaveChanges();
         }
 
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _appDbContext.SaveChangesAsync();
         }
 
     }

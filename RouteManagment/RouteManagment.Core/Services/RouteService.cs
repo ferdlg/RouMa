@@ -1,4 +1,6 @@
-﻿using RouteManagment.Core.Entities;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using RouteManagment.Core.Entities;
+using RouteManagment.Core.Exceptions;
 using RouteManagment.Core.Interfaces;
 
 namespace RouteManagment.Core.Services
@@ -11,6 +13,14 @@ namespace RouteManagment.Core.Services
         {
             _unitOfWork = iunitOfWork;
         }
+        private void ValidationOrigenDestination(int origen, int destination)
+        {
+            if (origen == destination)
+            {
+                throw new BussinesExceptions(ErrorCode.InvaliData, message: "The origin and destination cannot be the same");
+            }
+
+        }
         public IEnumerable<Route> GetRoutes()
         {
             return  _unitOfWork.RouteRepository.GetAll();
@@ -19,13 +29,25 @@ namespace RouteManagment.Core.Services
         {
             return await _unitOfWork.RouteRepository.GetById(id);
         }
+
         public async Task InsertRoute(Route route)
         {
+           var origen = route.AddressOriginId;
+           var destination = route.AddressHeadQuarterId;
 
-            await _unitOfWork.RouteRepository.Add(route);
+           ValidationOrigenDestination(origen, destination);
+
+           await _unitOfWork.RouteRepository.Add(route);
+           await _unitOfWork.SaveChanguesAsync();
+            
         }
         public async Task<bool> Update(Route route)
         {
+            var origen = route.AddressOriginId;
+            var destination = route.AddressHeadQuarterId;
+
+            ValidationOrigenDestination(origen, destination);
+
             _unitOfWork.RouteRepository.Update(route);
             await _unitOfWork.SaveChanguesAsync();
             return true;
@@ -70,11 +92,7 @@ namespace RouteManagment.Core.Services
         public async Task<T> Delete(int id)
         {
             var entity = await _unitOfWork.GetRepository<T>().GetById(id);
-
-            if (entity != null)
-            {
-                await _unitOfWork.GetRepository<T>().Delete(id);
-            }
+            await _unitOfWork.SaveChanguesAsync();
             return entity;
         }
 
