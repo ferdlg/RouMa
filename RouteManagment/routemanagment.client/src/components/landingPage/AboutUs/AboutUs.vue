@@ -7,17 +7,19 @@ import ListItems from './ListItems.vue'
 
 <template>
     <Parallax/>
-    <div class="container-items">
-        <div class="container-carousel">
-            <Carousel/>
+    <v-container>
+        <div class="container-items">
+            <div class="container-carousel">
+                <Carousel/>
+            </div>
+            <div class="container-text-card">
+                <TextCard/>
+            </div>
+            <div class="container-list-items">
+                <ListItems/>
+            </div>
         </div>
-        <div class="container-text-card">
-            <TextCard/>
-        </div>
-        <div class="container-list-items">
-            <ListItems/>
-        </div>
-    </div>
+    </v-container>
 </template>
 
 <style scoped>

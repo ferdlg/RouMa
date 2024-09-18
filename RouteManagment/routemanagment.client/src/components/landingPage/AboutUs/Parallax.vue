@@ -5,8 +5,8 @@ import About from '../../../assets/images/About.jpg'
 
 <template>
     <v-parallax
-    height="200"
-    :src= "About" >
+    height="250"
+    :src="About" >
     <div class="d-flex flex-column fill-height justify-center align-center text-white">
       <h1 class="text-h4 font-weight-thin mb-4">
         About Us
