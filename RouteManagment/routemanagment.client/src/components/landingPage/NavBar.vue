@@ -1,5 +1,12 @@
 <script setup>
     import ButtonLogin from './ButtonLogin.vue';
+    import {ref} from "vue";
+    
+    const items = ref ([
+      {text: "About Us", icon:"mdi-information" ,path:'/AboutUs'},
+      {text: "Contact Us", icon:"mdi-newspaper" ,path:'/Blog'},
+      {text: "Transports", icon:"mdi-help-circle" ,path:'/How'},
+    ]);
 </script>
 <template>
    <v-responsive>
@@ -27,15 +34,7 @@
        </v-app-bar>
    </v-responsive>
 </template>
-<script>
-    import {ref} from "vue";
-    
-    const items = ref ([
-      {text: "About Us", icon:"mdi-information" ,path:'/AboutUs'},
-      {text: "Blog", icon:"mdi-newspaper" ,path:'/Blog'},
-      {text: "How to use", icon:"mdi-help-circle" ,path:'/How'},
-    ]);
-</script> 
+
 
 <style scoped>
   .v-app-bar {

@@ -11,6 +11,7 @@ import {ref} from 'vue';
         ]
       )
       const show = ref(false)
+      const expand = ref(null)
 </script>
 
 <template>
@@ -52,7 +53,6 @@ import {ref} from 'vue';
         @click="show = !show"
       ></v-btn>
     </v-card-actions>
-
     <v-expand-transition>
       <div v-show="show">
         <v-divider></v-divider>
@@ -62,6 +62,7 @@ import {ref} from 'vue';
         </v-card-text>
       </div>
     </v-expand-transition>
+
   </v-card>
         </v-col>
       </v-row>
