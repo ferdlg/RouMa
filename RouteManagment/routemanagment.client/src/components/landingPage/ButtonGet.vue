@@ -5,7 +5,7 @@
     <div class="container-btn"></div>
         <v-btn class="btn-get">
             Get Stared
-            <v-icon>mdi-star</v-icon>
+            <v-icon>mdi-trending-neutral</v-icon>
         </v-btn>
 </template>
 

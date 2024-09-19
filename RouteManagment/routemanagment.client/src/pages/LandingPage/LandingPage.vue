@@ -7,9 +7,9 @@ import RoadSvg from '../../components/LandingPage/RoadSvg.vue';
 import Header from '../../components/LandingPage/Slogan.vue';
 import Slogan from '../../components/LandingPage/Slogan.vue';
 import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
-import HowToUse from '../../components/LandingPage/HowToUse/HowToUse.vue';
 import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
-import Blog from '../../components/LandingPage/Blog/Blog.vue';
+import ContactUs from '../../components/LandingPage/Contact Us/ContactUs.vue';
+import Transport from '../../components/LandingPage/Transports/Transport.vue';
 
 </script>
 
@@ -41,12 +41,12 @@ import Blog from '../../components/LandingPage/Blog/Blog.vue';
         <AboutUs/>
       </div>
 
-      <div class="div-HowToUse">
-        <HowToUse/>
+      <div class="div-ContactUs">
+        <ContactUs/>
       </div>
 
-      <div class="div-Blog">
-        <Blog/>
+      <div class="div-Transports">
+        <Transport/>
       </div>
       
     </main>
@@ -121,13 +121,13 @@ main .div-AboutUs{
 
   background-color: rgb(255, 255, 255);
 }
-main .div-HowToUse{
+main .div-ContactUs{
   grid-area: howToUse;
   padding: 10px;
   background-color: rgb(255, 255, 255);
 }
 
-main .div-Blog{
+main .div-Transports{
   grid-area: blog;
   background-color: rgb(253, 253, 253);
 }

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <v-btn variant="outlined" class="btn-login">
+    <v-btn variant="" class="btn-login" elevation="8">
         Login
         <v-icon>mdi-login</v-icon>
     </v-btn>
@@ -13,8 +13,9 @@
     .btn-login{
         background-color: var(--color-secundary-background);
         /* border-color: var(--color-secundary-background); */
-        border-radius: 30px;
         color: black;
-        border-style: inset;
+        border-radius: 30px;
+        border-color: transparent;
+       
     }
 </style>

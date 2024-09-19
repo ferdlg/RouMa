@@ -3,10 +3,10 @@
 
 <template>
     <v-container class="container-title">
-    <div class="d-flex flex-column fill-height justify-center align-center text-black">
-      <h1 class="text-h4 font-weight-thin mb-4">
+    <div class="d-flex flex-column fill-height justify-center align-center text-purple-darken-4">
+      <h2>
         Know our transports!
-      </h1>
+      </h2>
     </div>
     </v-container>
 </template>

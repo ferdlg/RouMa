@@ -27,8 +27,8 @@ import ListItems from './ListItems.vue'
     /* background-color: rgba(137, 43, 226, 0.11); */
     padding: 5%;
     display: grid;
-    grid-template-areas: "carousel card" "list list" ;
-    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "card carousel" "list list" ;
+    grid-template-columns: 1fr 1fr ;
     grid-gap: 2rem;
 }
 
@@ -38,7 +38,7 @@ import ListItems from './ListItems.vue'
 .container-items .container-text-card{
     grid-area: card;
     display: flex;
-    align-items: center;  
+    justify-content: flex-end;
 }
 .container-items .container-list-items{
     grid-area: list;

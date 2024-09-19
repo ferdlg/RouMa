@@ -3,8 +3,8 @@
 
 <template>
     <div class="container-slogan">
-        <h1>Movilidad a la Medida de tu Empresa</h1>
-        <p>Transformamos el trayecto al trabajo en un momento de comodidad</p>
+        <h1>Mobility tailored to your Company</h1>
+        <p>We transform the journey to work into a moment of comfort</p>
     </div>
 </template>
 

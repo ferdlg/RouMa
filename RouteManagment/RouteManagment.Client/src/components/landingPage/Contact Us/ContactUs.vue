@@ -1,11 +1,11 @@
 <script setup>
-import HeaderHow from './HeaderHow.vue';
 import Steppers from './Steppers.vue';
+import HeaderContact from './HeaderContact.vue';
 </script>
 
 <template>
     <v-container>
-        <HeaderHow />
+        <HeaderContact />
         <v-container>
             <Steppers/>
         </v-container>

@@ -4,11 +4,12 @@
     
     const items = ref ([
       {text: "About Us", icon:"mdi-information" ,path:'/AboutUs'},
-      {text: "Contact Us", icon:"mdi-newspaper" ,path:'/Blog'},
-      {text: "Transports", icon:"mdi-help-circle" ,path:'/How'},
+      {text: "Contact Us", icon:"mdi-phone" ,path:'/ContactUs'},
+      {text: "Transports", icon:"mdi-car" ,path:'/Transports'},
     ]);
 </script>
 <template>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <v-responsive>
      <v-app-bar class="nav-bar d-flex">
          <v-toolbar-title>V1.0.0</v-toolbar-title>
