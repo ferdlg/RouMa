@@ -1,5 +1,5 @@
 <script setup>
-  import LandingPage from './pages/LandingPage/LandingPage.vue';
+import LandingPage from './pages/LandingPage/LandingPage.vue';
 </script>
 
 <template>

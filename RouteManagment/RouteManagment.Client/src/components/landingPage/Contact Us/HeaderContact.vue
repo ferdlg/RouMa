@@ -3,9 +3,9 @@
 </script>
 
 <template>
-    <v-container class="container-title">
+    <v-container class="container">
     <div class="d-flex flex-column fill-height justify-center align-center text-purple-darken-4">
-      <h2>
+      <h2 class="container__title">
         Contact Us
       </h2>
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <style scoped>
-h2:hover{
+.container__title:hover{
   color: var(--color-secundary-background);
 }
 </style>

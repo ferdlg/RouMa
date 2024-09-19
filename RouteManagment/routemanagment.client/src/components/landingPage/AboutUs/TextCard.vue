@@ -3,31 +3,25 @@
 
 <template>
     <v-container>
-        <div class="div-h2">
-            <h2>What is Rouma?</h2>
+        <div class="section">
+            <h2 class="section__encabezado">What is Rouma?</h2>
             <v-divider ></v-divider>
-            <p>Rouma is a software created for tranform the way businesses move.</p> 
+            <p class="section__description">Rouma is a software created for tranform the way businesses move.</p> 
         </div>
-        <div class="div-h3">
+        <div class="section__encabezado">
             <h3>Vision Rouma</h3>
             <v-divider></v-divider>
-            <p>To be the leading software in the transformation of enterprise transportation management.</p>
+            <p class="section__description">To be the leading software in the transformation of enterprise transportation management.</p>
         </div>
     </v-container>
 </template>
 
 <style scoped>
-h2{
+.section__encabezado{
     color: #4A148C;
 }
-h3{
-    color: #4A148C;
-}
-
-.div-h2{
-    padding-bottom: 2rem;
-}
-.div-h3{
+.section__description{
+    color: black;
     padding-bottom: 2rem;
 }
 </style>

@@ -2,13 +2,13 @@
 </script>
 
 <template>
-    <div class="container-logosgv">
-        <img src="../../assets/svg/logo.svg" alt="LogoRouMa">
+    <div class="container">
+        <img class="container__logo-sgv" src="../../assets/svg/logo.svg" alt="LogoRouMa">
     </div>
 </template>
 
 <style scoped>
-.container-logosgv{
+.container{
     /* background-color: rgba(245, 245, 220, 0.322);  */
     width: 100%;
     display: flex;
@@ -17,7 +17,7 @@
     
 }
 
-.container-logosgv img{
+.container-logo-sgv{
     min-width: 50%;
     max-width: 50%;
    

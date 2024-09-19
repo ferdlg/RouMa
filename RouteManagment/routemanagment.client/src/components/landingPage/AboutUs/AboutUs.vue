@@ -8,14 +8,14 @@ import ListItems from './ListItems.vue'
 <template>
     <Parallax/>
     <v-container>
-        <div class="container-items">
-            <div class="container-carousel">
+        <div class="section">
+            <div class="section__carousel">
                 <Carousel/>
             </div>
-            <div class="container-text-card">
+            <div class="section__text-card">
                 <TextCard/>
             </div>
-            <div class="container-list-items">
+            <div class="section__list-items">
                 <ListItems/>
             </div>
         </div>
@@ -23,7 +23,7 @@ import ListItems from './ListItems.vue'
 </template>
 
 <style scoped>
-.container-items{
+.section{
     /* background-color: rgba(137, 43, 226, 0.11); */
     padding: 5%;
     display: grid;
@@ -32,15 +32,15 @@ import ListItems from './ListItems.vue'
     grid-gap: 2rem;
 }
 
-.container-items .container-carousel{
+.section__carousel{
     grid-area: carousel ;
 }
-.container-items .container-text-card{
+.section__text-card{
     grid-area: card;
     display: flex;
     justify-content: flex-end;
 }
-.container-items .container-list-items{
+.section__list-items{
     grid-area: list;
     padding: 1%;
 }

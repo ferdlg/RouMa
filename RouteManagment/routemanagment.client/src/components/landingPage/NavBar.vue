@@ -24,9 +24,9 @@
                  <v-icon>{{ item.icon }}</v-icon>
                </v-list-item-icon>
                <v-list-item-content>
-                 <RouterLink :to="item.path" class="nav-link">
-                   {{ item.text }}
-                 </RouterLink>
+                  <RouterLink :to="item.path" class="nav-link">
+                    {{ item.text }}
+                  </RouterLink>
                </v-list-item-content>
              </v-list-item>
              <ButtonLogin/>

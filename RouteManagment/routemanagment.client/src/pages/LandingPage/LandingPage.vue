@@ -10,59 +10,57 @@ import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
 import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
 import ContactUs from '../../components/LandingPage/Contact Us/ContactUs.vue';
 import Transport from '../../components/LandingPage/Transports/Transport.vue';
-
 </script>
-
 <template>
-  <header>
+  <header class="header">
     <v-layout>
-      <NavBar/>
+      <nav class="nav">
+        <NavBar/>
+      </nav>
     </v-layout>
   </header>
-    <main>
-      
-      <div class="container-logo">
+    <main class="main">
+      <!-- <RouterView/> -->
+      <div class="main__logo">
         <Logo/>
       </div>
-      <div class="container-slogan">
+      <div class="main__slogan">
         <Slogan/>
       </div>
-      <div class="container-btn-get">
+      <div class="main__btn-get">
         <ButtonGet/>
       </div>
-      <div class="container-svg-road">
+      <div class="main__svg-road">
         <RoadSvg/>
       </div>
-      <div class="container-svg-auto">
+      <div class="main__svg-auto">
         <Auto/>
       </div>
   
-      <div class="div-AboutUs">
+      <div class="main__about-us">
         <AboutUs/>
       </div>
 
-      <div class="div-ContactUs">
+      <div class="main__contact-us">
         <ContactUs/>
       </div>
 
-      <div class="div-Transports">
+      <div class="main__transports">
         <Transport/>
       </div>
-      
     </main>
     <!-- <footer>
       <FooterLanding/>
     </footer> -->
 </template>
-
 <style scoped>
-header{
+.header{
   width: 100%;
   height: 5vh;
   display: flex;
   align-items: center;
 }
-main{
+.main{
   width: 100%;
   margin-top: 2vh;
   display: grid;
@@ -71,65 +69,58 @@ main{
   grid-template-columns: 65% 35%;
 
 }
-main .container-logo{
+.main__logo, .main__slogan, .main__btn-get, .main__svg-road, .main__svg-auto, .main__contact-us, .main__transports{
+  display: flex;
+}
+.main__logo{
   grid-area: logo;
   /* background-color: rgba(38, 45, 105, 0.322);  */
-  display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
 }
 
-main .container-slogan{
+.main__slogan{
   grid-area: slogan;
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
-main .container-btn-get{
+.main__btn-get{
   grid-area: btnGet;
   /* background-color: rgba(155, 243, 96, 0.322); */
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   align-content: center;
 }
-main .container-svg-road{
+.main__svg-road{
   grid-area: svgRoad;
     /* background-color: rgba(255, 0, 0, 0.418);  */
-    display: flex;
-    width: 100%;
+      width: 100%;
     max-height: 100%;
-    display: flex;
-    flex-wrap: wrap;
+      flex-wrap: wrap;
     flex-direction: column;
     justify-content: center;
   }
-main .container-svg-auto{
+.main__svg-auto{
   grid-area: svgAuto;
   /* background-color: rgba(240, 248, 255, 0.322); */
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
 
 }
-
-main .div-AboutUs{
+.main__about-us{
   grid-area: aboutUs;
-
   background-color: rgb(255, 255, 255);
 }
-main .div-ContactUs{
+.main__contact-us{
   grid-area: howToUse;
   padding: 10px;
   background-color: rgb(255, 255, 255);
 }
-
-main .div-Transports{
+.main__transports{
   grid-area: blog;
   background-color: rgb(253, 253, 253);
 }
-
 </style>

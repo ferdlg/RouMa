@@ -2,9 +2,9 @@
 </script>
 
 <template>
-    <div class="container-slogan">
-        <h1>Mobility tailored to your Company</h1>
-        <p>We transform the journey to work into a moment of comfort</p>
+    <div class="container">
+        <h1 class="container__slogan-primary">Mobility tailored to your Company</h1>
+        <p class="container__slogan-secundary">We transform the journey to work into a moment of comfort</p>
     </div>
 </template>
 
@@ -15,10 +15,10 @@
   src:   url(../../../public/fonts/Ubuntu-vf.ttf) format("truetype"),
 
 }
-    .container-slogan{
+    .container{
         padding: 15px;
     }
-    .container-slogan h1{
+    .container__slogan-primary{
         color: var(--color-primary-background) ;
         padding: 10px;
         font-family: "Ubuntu";
@@ -26,7 +26,7 @@
         text-align: center;
    
     }
-    .container-slogan p{
+    .container__slogan-secundary{
         color: var(--color-primary-background);
         padding: 20px;
         font-size: 1em;

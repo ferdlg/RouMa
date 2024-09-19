@@ -5,7 +5,7 @@ import CardsTransport from "./CardsTransport.vue";
 </script>
 
 <template>
-    <v-container id="Blog">
+    <v-container>
         <HeaderTransport/>
         <CardsTransport/>
     </v-container>
