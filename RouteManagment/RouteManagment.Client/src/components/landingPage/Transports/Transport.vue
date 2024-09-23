@@ -1,8 +1,3 @@
-<script setup>
-import HeaderTransport from "./HeaderTransport.vue";
-import CardsTransport from "./CardsTransport.vue";
-
-</script>
 
 <template>
     <v-container>
@@ -11,5 +6,9 @@ import CardsTransport from "./CardsTransport.vue";
     </v-container>
 </template>
 
+<script setup>
+import HeaderTransport from "./HeaderTransport.vue";
+import CardsTransport from "./CardsTransport.vue";
+</script>
 <style>
 </style>

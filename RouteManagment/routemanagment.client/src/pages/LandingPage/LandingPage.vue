@@ -1,3 +1,46 @@
+<template>
+  <header class="header">
+    <v-layout>
+      <nav class="nav">
+        <NavBar/>
+      </nav>
+    </v-layout>
+  </header>
+    <main class="main">
+      <!-- <RouterView/> -->
+      <div id="logo" class="main__logo">
+        <Logo/>
+      </div>
+      <div id="slogan" class="main__slogan">
+        <Slogan/>
+      </div>
+      <div id="btn-get" class="main__btn-get">
+        <ButtonGet/>
+      </div>
+      <div id="svg-road" class="main__svg-road">
+        <RoadSvg/>
+      </div>
+      <div id="svg-auto" class="main__svg-auto">
+        <Auto/>
+      </div>
+  
+      <div id="about-us" class="main__about-us">
+        <AboutUs/>
+        <SignUp/>
+      </div>
+
+      <div id="contact-us" class="main__contact-us">
+        <ContactUs/>
+      </div>
+
+      <div id="transports" class="main__transports">
+        <Transport/>
+      </div>
+    </main>
+    <!-- <footer>
+      <FooterLanding/>
+    </footer> -->
+</template>
 <script setup> 
 import NavBar from '../../components/LandingPage/NavBar.vue';
 import ButtonGet from '../../components/LandingPage/ButtonGet.vue';
@@ -10,49 +53,8 @@ import AboutUs from '../../components/LandingPage/AboutUs/AboutUs.vue';
 import FooterLanding from '../../components/LandingPage/FooterLanding.vue';
 import ContactUs from '../../components/LandingPage/Contact Us/ContactUs.vue';
 import Transport from '../../components/LandingPage/Transports/Transport.vue';
+import SignUp from '../../components/Forms/Register/SignUp.vue';
 </script>
-<template>
-  <header class="header">
-    <v-layout>
-      <nav class="nav">
-        <NavBar/>
-      </nav>
-    </v-layout>
-  </header>
-    <main class="main">
-      <!-- <RouterView/> -->
-      <div class="main__logo">
-        <Logo/>
-      </div>
-      <div class="main__slogan">
-        <Slogan/>
-      </div>
-      <div class="main__btn-get">
-        <ButtonGet/>
-      </div>
-      <div class="main__svg-road">
-        <RoadSvg/>
-      </div>
-      <div class="main__svg-auto">
-        <Auto/>
-      </div>
-  
-      <div class="main__about-us">
-        <AboutUs/>
-      </div>
-
-      <div class="main__contact-us">
-        <ContactUs/>
-      </div>
-
-      <div class="main__transports">
-        <Transport/>
-      </div>
-    </main>
-    <!-- <footer>
-      <FooterLanding/>
-    </footer> -->
-</template>
 <style scoped>
 .header{
   width: 100%;

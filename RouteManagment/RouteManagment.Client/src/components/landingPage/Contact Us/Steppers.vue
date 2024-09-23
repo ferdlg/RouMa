@@ -1,3 +1,55 @@
+
+<template>
+ <form @submit.prevent="submit">
+    <v-text-field
+    v-model="name.value.value"
+      :counter="10"
+      :error-messages="name.errorMessage.value"
+      label="Name"
+      ></v-text-field>
+
+    <v-text-field
+    v-model="phone.value.value"
+    :counter="10"
+    :error-messages="phone.errorMessage.value"
+    label="Phone Number"
+    ></v-text-field>
+
+    <v-text-field
+    v-model="email.value.value"
+    :error-messages="email.errorMessage.value"
+      label="E-mail"
+      ></v-text-field>
+
+    <v-textarea label="Message"
+    :v-model="description.value.value"
+    :error-messages="description.errorMessage.value"
+    ></v-textarea>
+
+    <v-checkbox
+    v-model="checkbox.value.value"
+    :error-messages="checkbox.errorMessage.value"
+    label="Terms and conditions"
+    type="checkbox"
+    value="1"
+    ></v-checkbox>
+
+    <v-btn
+    class="me-4"
+    type="submit"
+    color="green"
+    >
+      submit
+    </v-btn>
+
+    <v-btn 
+    color="grey"
+    @click="handleReset">
+      clear
+    </v-btn>
+  </form>
+</template>
+
 <script setup>
     import {ref} from 'vue';
     import {useField, useForm} from  'vee-validate';
@@ -43,57 +95,5 @@
         alert(JSON.stringify(values, null, 2))
     })
 </script>
-
-<template>
- <form @submit.prevent="submit">
-    <v-text-field
-      v-model="name.value.value"
-      :counter="10"
-      :error-messages="name.errorMessage.value"
-      label="Name"
-    ></v-text-field>
-
-    <v-text-field
-      v-model="phone.value.value"
-      :counter="10"
-      :error-messages="phone.errorMessage.value"
-      label="Phone Number"
-    ></v-text-field>
-
-    <v-text-field
-      v-model="email.value.value"
-      :error-messages="email.errorMessage.value"
-      label="E-mail"
-    ></v-text-field>
-
-    <v-textarea label="Message"
-    :v-model="description.value.value"
-    :error-messages="description.errorMessage.value"
-    ></v-textarea>
-
-    <v-checkbox
-      v-model="checkbox.value.value"
-      :error-messages="checkbox.errorMessage.value"
-      label="Terms and conditions"
-      type="checkbox"
-      value="1"
-    ></v-checkbox>
-
-    <v-btn
-      class="me-4"
-      type="submit"
-      color="green"
-    >
-      submit
-    </v-btn>
-
-    <v-btn 
-    color="grey"
-    @click="handleReset">
-      clear
-    </v-btn>
-  </form>
-</template>
-
 <style scoped>
 </style>

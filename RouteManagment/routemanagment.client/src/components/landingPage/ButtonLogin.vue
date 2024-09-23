@@ -1,11 +1,3 @@
-<script setup>
-    import {useRouter} from 'vue-router';
-
-    const router = useRouter();
-    const navigateToSignIn = ()=>{
-        router.push({name: 'SignIn'})
-    };
-</script>
 
 <template>
     <v-btn 
@@ -17,6 +9,14 @@
     </v-btn>
 </template>
 
+<script setup>
+    import {useRouter} from 'vue-router';
+
+    const router = useRouter();
+    const navigateToSignIn = ()=>{
+        router.push({name: 'SignIn'})
+    };
+</script>
 <style scoped>
     .btn{
         background-color: var(--color-secundary-background);

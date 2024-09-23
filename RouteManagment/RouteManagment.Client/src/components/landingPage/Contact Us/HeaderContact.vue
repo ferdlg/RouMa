@@ -1,6 +1,3 @@
-<script setup>
-
-</script>
 
 <template>
     <v-container class="container">
@@ -11,6 +8,9 @@
     </div>
     </v-container>
 </template>
+<script setup>
+
+</script>
 
 <style scoped>
 .container__title:hover{

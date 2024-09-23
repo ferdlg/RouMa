@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
     <div class="container">
@@ -8,6 +6,8 @@
     </div>
 </template>
 
+<script setup>
+</script>
 <style>
 
 @font-face {

@@ -1,16 +1,16 @@
-<script setup>
-
-</script>
 
 <template>
       <v-footer>{{footer.date}}|{{footer.projectName}}</v-footer>
 </template>
 
-<script>
-   const footer = {
+<script setup>
+import {ref} from 'vue';
+   const footer = ref(
+      {
     date: 2024,
     projectName: 'RouMa'
    }
+)
 </script>
 <style>
 </style>

@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
     <div class="container">
@@ -7,6 +5,8 @@
     </div>
 </template>
 
+<script setup>
+</script>
 <style scoped>
 .container{
     /* background-color: rgba(240, 248, 255, 0.363);  */

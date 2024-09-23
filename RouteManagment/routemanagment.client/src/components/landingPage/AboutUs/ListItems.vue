@@ -1,6 +1,3 @@
-<script setup>
-
-</script>
 
 <template>
 
@@ -13,9 +10,9 @@
 
     <v-row>
       <v-col
-        v-for="customer in customers"
-        :key="customer"
-        class="group-img"
+      v-for="customer in customers"
+      :key="customer"
+      class="group-img"
       >
       <v-img
       :width="50"
@@ -28,9 +25,9 @@
         justify="center"
         >
         <v-progress-circular
-              color="grey-lighten-5"
-              indeterminate
-            ></v-progress-circular>
+        color="grey-lighten-5"
+        indeterminate
+        ></v-progress-circular>
         </v-row>
 
       </template>
@@ -40,19 +37,16 @@
 </v-container>
 </template>
 
-<script>
-export default {
-data(){
-  return{
-    customers : [
+<script setup>
+import {ref} from 'vue'
+ const customers = ref(
+    [
       {name:'Empresa1', src : 'https://static-cse.canva.com/blob/951786/1750logotiposqueteinspiraran.jpg'},
       {name:'Empresa3', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSo9KtcDoyR1J47I-QnJqzN2ZQDGJKUCSBXEA&s'},
       {name:'Empresa2', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDxYwshCz4XvXDZazVG4LAQL8lamAG6Y2p6g&s'},
       {name:'Empresa4', src: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRZ8lXvukcJaOWDSoWyabhE8Vo4Iuq3iolMkA&s'},
     ]
-  }
-}
-}
+ ) 
 </script>
 <style scoped>
 .d-flex{

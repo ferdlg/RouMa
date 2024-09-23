@@ -1,7 +1,3 @@
-<script setup>
-import Steppers from './Steppers.vue';
-import HeaderContact from './HeaderContact.vue';
-</script>
 
 <template>
     <v-container>
@@ -12,5 +8,9 @@ import HeaderContact from './HeaderContact.vue';
     </v-container>
 </template>
 
+<script setup>
+import Steppers from './Steppers.vue';
+import HeaderContact from './HeaderContact.vue';
+</script>
 <style>
 </style>

@@ -1,9 +1,3 @@
-<script setup>
-import Parallax from './Parallax.vue'
-import Carousel from './Carousel.vue'
-import TextCard from './TextCard.vue'
-import ListItems from './ListItems.vue'
-</script>
 
 <template>
     <Parallax/>
@@ -22,6 +16,12 @@ import ListItems from './ListItems.vue'
     </v-container>
 </template>
 
+<script setup>
+import Parallax from './Parallax.vue'
+import Carousel from './Carousel.vue'
+import TextCard from './TextCard.vue'
+import ListItems from './ListItems.vue'
+</script>
 <style scoped>
 .section{
     /* background-color: rgba(137, 43, 226, 0.11); */

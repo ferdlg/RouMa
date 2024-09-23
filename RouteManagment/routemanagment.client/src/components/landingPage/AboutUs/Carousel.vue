@@ -1,3 +1,22 @@
+
+<template>
+            <v-carousel hide-delimiters
+            :continuous="true"
+            :show-arrows="false"
+            height="300"
+            cycle
+            hide-delimiter-background
+            >
+              <v-carousel-item class="carousel-item"
+              v-for="(slide, i) in slides"
+              :key="i"
+              :src="slide.src"
+              >
+              </v-carousel-item>
+            </v-carousel>
+          
+</template>
+
 <script setup>
   import {ref} from "vue";
   import slide1 from '../../../assets/images/slide1.jpg';
@@ -12,25 +31,6 @@
         ],
   )
 </script>
-
-<template>
-            <v-carousel hide-delimiters
-              :continuous="true"
-              :show-arrows="false"
-              height="300"
-              cycle
-              hide-delimiter-background
-            >
-              <v-carousel-item class="carousel-item"
-                v-for="(slide, i) in slides"
-                :key="i"
-                :src="slide.src"
-              >
-              </v-carousel-item>
-            </v-carousel>
-          
-</template>
-
 <style scoped>
 </style>
 

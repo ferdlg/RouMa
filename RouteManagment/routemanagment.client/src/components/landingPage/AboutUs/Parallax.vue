@@ -1,7 +1,3 @@
-<script setup>
-import About from '../../../assets/images/About.jpg'
-  
-</script>
 
 <template>
     <v-parallax
@@ -19,6 +15,10 @@ import About from '../../../assets/images/About.jpg'
 
 </template>
 
+<script setup>
+import About from '../../../assets/images/About.jpg'
+  
+</script>
 <style scoped>
 .container-elements{
     background-color: aliceblue;

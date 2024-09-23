@@ -1,6 +1,3 @@
-<script setup>
-import ButtonGet from './ButtonGet.vue';
-</script>
 
 <template>
     <div class="container">
@@ -8,6 +5,9 @@ import ButtonGet from './ButtonGet.vue';
     </div>
 </template>
 
+<script setup>
+import ButtonGet from './ButtonGet.vue';
+</script>
 <style scoped>
     .container{
         max-height: 50%;

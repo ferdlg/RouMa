@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
     <v-container>
@@ -16,6 +14,8 @@
     </v-container>
 </template>
 
+<script setup>
+</script>
 <style scoped>
 .section__encabezado{
     color: #4A148C;

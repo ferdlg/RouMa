@@ -1,5 +1,3 @@
-<script>
-</script>
 
 <template>
     <v-container class="container-title">
@@ -11,5 +9,7 @@
     </v-container>
 </template>
 
+<script setup>
+</script>
 <style>
 </style>

@@ -1,5 +1,3 @@
-<script setup>
-</script>
 
 <template>
     <div class="container"></div>
@@ -9,6 +7,8 @@
         </v-btn>
 </template>
 
+<script setup>
+</script>
 <style scoped>
     .container{
         display: flex; 
