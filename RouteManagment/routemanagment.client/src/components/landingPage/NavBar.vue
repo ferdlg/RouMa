@@ -1,8 +1,9 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <v-responsive>
      <v-app-bar class="nav-bar d-flex">
-         <v-toolbar-title>V1.0.0</v-toolbar-title>
+         <v-toolbar-title>
+          <a href="#/" class="nav-link">V1.0.0</a>
+          </v-toolbar-title>
          <v-toolbar-items class="d-sm-flex">
            <v-list class="nav-list" dense>
              <v-list-item
@@ -45,7 +46,7 @@
 
   .nav-bar{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     background-color: var(--color-primary-background);
     color: rgba(255, 255, 255, 0.527);
@@ -59,11 +60,24 @@
     color:white;
   }
 
+  .nav-list-item{
+    margin: 0 10px;
+  }
   .nav-link{
     color: white;
     text-decoration: none;
   }
   .nav-link:hover{
     color: var(--color-secundary-background);
+  }
+
+  @media (max-width: 768px){
+
+    .nav-list{
+      flex-direction: row;
+    }
+    .nav-list-item{
+      margin: 5px 0;
+    }
   }
 </style>

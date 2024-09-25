@@ -6,8 +6,7 @@
       </nav>
     </v-layout>
   </header>
-    <main class="main">
-      <!-- <RouterView/> -->
+    <main  id="/" class="main">
       <div id="logo" class="main__logo">
         <Logo/>
       </div>

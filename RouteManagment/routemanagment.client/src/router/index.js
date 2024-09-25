@@ -1,18 +1,21 @@
 import { createMemoryHistory, createRouter } from 'vue-router'
 
-import LandingPage from '../pages/LandingPage/LandingPage.vue'
-import AboutUs from '../components/LandingPage/AboutUs/AboutUs.vue'
-import Transport from '../components/LandingPage/Transports/Transport.vue'
-import ContactUs from '../components/LandingPage/Contact Us/ContactUs.vue'
-import SignIn from '../components/Forms/Authentication/SignIn.vue'
 
 const routes = [   
-  { path: '/', component: LandingPage },
-  { path: '/AboutUs', component: AboutUs },
-  { path: '/Transports', component: Transport },
-  { path: '/ContactUs', component: ContactUs },
+  { path: '/', component: ()=> import('../pages/LandingPage/LandingPage.vue') },
+  { path: '/SignIn', name: 'SignIn',component: ()=> import('../components/Forms/Authentication/SignIn.vue')},
+  { path: '/SignUp', name: 'SignUp',component:  ()=> import('../components/Forms/Register/SignUp.vue')},
+  
+  // Admin views 
+  { path: '/admin/home', name: 'admin/home',component: ()=> import('../views/Admin/Home.vue') },
+  { path: '/admin/routes', name: 'admin/routes',component: ()=> import('../views/Admin/Routes.vue') },
+  { path: '/admin/companies', name: 'admin/companies',component: ()=> import('../views/Admin/Companies.vue') },
+  { path: '/admin/drivers', name: 'admin/drivers',component: ()=> import('../views/Admin/Drivers.vue') },
+  { path: '/admin/requestTransports', name: 'admin/requestTransports',component: ()=> import('../views/Admin/RequestTransport.vue') },
+  { path: '/admin/transports', name: 'admin/transports',component: ()=> import('../views/Admin/Transports.vue') },
+  { path: '/admin/passengers', name: 'admin/passengers',component: ()=> import('../views/Admin/Passengers.vue') },
+  
 
-  { path: '/SignIn', name: 'SignIn',component: SignIn }
 ];
 
 const router = createRouter({
