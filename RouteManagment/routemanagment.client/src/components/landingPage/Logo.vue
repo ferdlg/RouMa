@@ -16,7 +16,6 @@
     align-items: center;
     
 }
-
 .container-logo-sgv{
     min-width: 50%;
     max-width: 50%;

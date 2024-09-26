@@ -36,48 +36,5 @@
       {text: "Transports", icon:"mdi-car" ,path:'transports'},
     ]);
 </script>
-<style scoped>
-  .v-app-bar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
-  .nav-bar{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--color-primary-background);
-    color: rgba(255, 255, 255, 0.527);
-  }
-  .btn-login{
-    margin: 10px;
-  }
-  .nav-list{
-    display: flex;
-    background-color:transparent;
-    color:white;
-  }
-
-  .nav-list-item{
-    margin: 0 10px;
-  }
-  .nav-link{
-    color: white;
-    text-decoration: none;
-  }
-  .nav-link:hover{
-    color: var(--color-secundary-background);
-  }
-
-  @media (max-width: 768px){
-
-    .nav-list{
-      flex-direction: row;
-    }
-    .nav-list-item{
-      margin: 5px 0;
-    }
-  }
+<style src="../../assets/css/components/landingPage/nav-bar.css">
 </style>

@@ -88,28 +88,5 @@
       {icon: 'mdi-seat-passenger', title:'Passengers', value:'passengers', path:'/admin/passengers'}
     ])
   </script>
-<style scoped>
-
-.navigation__drawer{
-  border-radius: 0px 0px 20px 0px;
-  /* background-color: var(--color-dashboard-group1); */
-}
-.app__bar{
-  border: none;
-  padding: 0.5em;
-  /* background-color: var(--color-dashboard-group1); */
-}
-.list{
-  padding-top: 2em;
-}
-.list__item-icon{
-  color:var(--color-icons-dasboard-group1);
-}
-.list__item-title{
-  color: var(--color-icons-dasboard-group1);
-}
-.router__link{
-  text-decoration: none;
   
-}
-</style>
+<style src="../../../assets/css/layout/menu.css"></style>

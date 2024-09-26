@@ -1,6 +1,5 @@
 <template>
-    <v-container>
-        <v-card>
+        <v-card class="card">
             <v-data-table 
                 color="green"
                 height="300px"
@@ -8,7 +7,7 @@
             >
                 <thead>
                 <tr>
-                    <th v-for="header, value in headers" :key="value" class="text-left">
+                    <th v-for="header, index in headers" :key="index" class="text-left">
                     {{header.name}}
                     </th>
                     <th>Actions</th>
@@ -16,8 +15,8 @@
                 </thead>
                 <tbody>
                 <tr  v-for="item, value in desserts" :key="value">
-                    <td v-for="header, value in headers" :key="header.name">
-                        {{item[header.name]}}
+                    <td v-for="header, index in headers" :key="index">
+                        {{getItemValue(item, index)}}
                     </td>
                     <td>
                         <v-btn
@@ -37,7 +36,6 @@
                 </tbody>
             </v-data-table>
         </v-card>
-    </v-container>
     
     </template>
 
@@ -53,7 +51,15 @@ const props = defineProps({
         required: true,
     },
 });
+
+    const getItemValue = (item,index)=>{
+            const keys = Object.keys(item)
+            return item[keys[index]];
+    };
+
 </script>
 <style scoped>
-
+.card{
+    margin-top: 1em;
+}
 </style>

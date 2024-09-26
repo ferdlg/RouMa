@@ -5,8 +5,7 @@
    
 </template>
 <script setup>
-import Menu from '../../components/Dashboards/Layout/Menu.vue';
-import Statics from '../../components/Dashboards/Statistics.vue';
+import Menu from "../../components/dashboards/layout/Menu.vue";
 </script>
 <style>
 </style>

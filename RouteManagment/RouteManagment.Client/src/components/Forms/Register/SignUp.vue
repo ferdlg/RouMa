@@ -139,5 +139,4 @@ const typesS = ref([
 ])
 
 </script>
-<style>
-</style>
+<style src="../../../assets/css/components/forms/register/sign-up.css"></style>

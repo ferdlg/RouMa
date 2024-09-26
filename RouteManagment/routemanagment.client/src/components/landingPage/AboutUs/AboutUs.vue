@@ -22,27 +22,4 @@ import Carousel from './Carousel.vue'
 import TextCard from './TextCard.vue'
 import ListItems from './ListItems.vue'
 </script>
-<style scoped>
-.section{
-    /* background-color: rgba(137, 43, 226, 0.11); */
-    padding: 5%;
-    display: grid;
-    grid-template-areas: "card carousel" "list list" ;
-    grid-template-columns: 1fr 1fr ;
-    grid-gap: 2rem;
-}
-
-.section__carousel{
-    grid-area: carousel ;
-}
-.section__text-card{
-    grid-area: card;
-    display: flex;
-    justify-content: flex-end;
-}
-.section__list-items{
-    grid-area: list;
-    padding: 1%;
-}
-
-</style>
+<style src="../../../assets/css/components/landingPage/aboutUs/about-us.css"></style>

@@ -1,0 +1,15 @@
+.contain{
+    display: grid;
+    grid-template-areas: 'company admin' 'div div';
+    grid-template-columns: 1fr 1fr;
+    padding-top: 2em;
+}
+.contain__board-company{
+    grid-area: company;
+}
+.contain__board-admin--company{
+    grid-area: admin;
+}
+.div{
+    grid-area: div;
+}

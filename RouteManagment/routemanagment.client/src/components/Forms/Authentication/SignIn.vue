@@ -63,7 +63,7 @@ import {ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {useField, useForm} from 'vee-validate';
 
-    const visible = ref(true)
+    const visible = ref(false)
     const router = useRouter();
 
     const{handleSubmit} = useForm({
@@ -86,18 +86,4 @@ import {useField, useForm} from 'vee-validate';
 
 </script>
 
-<style scoped>
-
-  @media (max-width: 768px){
-    .container__singIn{
-      width: 80%;
-      padding: 1rem;
-    }
-  }
-  @media (min-width:769px){
-    .container__singIn{
-      width: 80%;
-      margin: 0 auto;
-    }
-  }
-</style>
+<style src="../../../assets/css/components/forms/authentication/sign-in.css"></style>

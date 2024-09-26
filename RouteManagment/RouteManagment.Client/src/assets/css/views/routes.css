@@ -1,0 +1,18 @@
+.contain{
+    display: grid;
+    grid-template-areas:'toolBar toolBar' 'table card-stops' 'map map';
+    grid-template-columns: 2fr 1fr;
+    padding-top: 1em;
+}
+.contain__table{
+    grid-area: table;
+}
+.contain__toolBar{
+    grid-area: toolBar;
+}
+.contain__map{
+    grid-area: map;
+}
+.contain__card{
+    grid-area: card-stops;
+}

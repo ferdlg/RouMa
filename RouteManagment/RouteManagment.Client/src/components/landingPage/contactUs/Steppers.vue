@@ -1,27 +1,53 @@
 
 <template>
  <form @submit.prevent="submit">
+  <v-row>
+    <v-col>
+      <v-text-field
+      v-model="name.value.value"
+        :counter="10"
+        :error-messages="name.errorMessage.value"
+        label="Fisrt Name"
+        ></v-text-field>
+    </v-col>
+    <v-col>
+      <v-text-field
+      v-model="name.value.value"
+        :counter="10"
+        :error-messages="name.errorMessage.value"
+        label="Last Name"
+        ></v-text-field>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col>
+      <v-text-field
+      v-model="email.value.value"
+      :error-messages="email.errorMessage.value"
+        label="Corporate E-mail"
+        ></v-text-field>
+    </v-col>
+    <v-col>
+      <v-text-field
+      v-model="phone.value.value"
+      :counter="10"
+      :error-messages="phone.errorMessage.value"
+      label="Phone Number"
+      ></v-text-field>
+    </v-col>
+  </v-row>
     <v-text-field
     v-model="name.value.value"
       :counter="10"
       :error-messages="name.errorMessage.value"
-      label="Name"
+      label="Company Name"
       ></v-text-field>
 
-    <v-text-field
-    v-model="phone.value.value"
-    :counter="10"
-    :error-messages="phone.errorMessage.value"
-    label="Phone Number"
-    ></v-text-field>
 
-    <v-text-field
-    v-model="email.value.value"
-    :error-messages="email.errorMessage.value"
-      label="E-mail"
-      ></v-text-field>
 
-    <v-textarea label="Message"
+    <v-textarea 
+    variant="solo-filled"
+    label="Message"
     :v-model="description.value.value"
     :error-messages="description.errorMessage.value"
     ></v-textarea>
