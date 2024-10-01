@@ -1,12 +1,14 @@
 <template>
     <Menu>
-        <BoardData :headers="headers" :desserts="desserts"></BoardData>
+      <ToolBarRequest></ToolBarRequest>
+      <BoardData :headers="headers" :desserts="desserts"></BoardData>
     </Menu>
 </template>
 <script setup>
 import {ref} from 'vue'
 import Menu from '../../components/dashboards/layout/Menu.vue';
 import BoardData from '../../components/dashboards/layout/BoardData.vue';
+import ToolBarRequest from '../../components/dashboards/requestTransport/ToolBarRequest.vue';
 const headers = ref ([
       {name: "Request Number", icon:''},
       {name: "Date", icon:''},

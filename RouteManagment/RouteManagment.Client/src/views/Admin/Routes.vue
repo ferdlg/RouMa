@@ -1,6 +1,5 @@
 <template>
     <Menu>
-        <div class="contain">
             <div class="contain__toolBar">
                 <ToolBarRoutes></ToolBarRoutes>
             </div>
@@ -13,7 +12,6 @@
             <div class="contain__map">
                 <Map class="contain__map-map"></Map>
             </div>
-        </div>
     </Menu>
    
 </template>

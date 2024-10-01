@@ -86,4 +86,4 @@ import {useField, useForm} from 'vee-validate';
 
 </script>
 
-<style src="../../../assets/css/components/forms/authentication/sign-in.css"></style>
+<style src="../../../../assets/css/components/forms/authentication/sign-in.css"></style>

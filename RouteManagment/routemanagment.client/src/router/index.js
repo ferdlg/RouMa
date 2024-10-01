@@ -3,8 +3,8 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 
 const routes = [   
   { path: '/', component: ()=> import('../pages/LandingPage/LandingPage.vue') },
-  { path: '/SignIn', name: 'SignIn',component: ()=> import('../components/forms/Authentication/SignIn.vue')},
-  { path: '/SignUp', name: 'SignUp',component:  ()=> import('../components/forms/Register/SignUp.vue')},
+  { path: '/SignIn', name: 'SignIn',component: ()=> import('../components/forms/people/authentication/SignIn.vue')},
+  { path: '/SignUp', name: 'SignUp',component:  ()=> import('../components/forms/people/register/SignUp.vue')},
   
   // Admin views 
   { path: '/admin/home', name: 'admin/home',component: ()=> import('../views/admin/Home.vue') },

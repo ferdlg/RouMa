@@ -1,5 +1,4 @@
 .contain{
-    display: grid;
     grid-template-areas:'toolBar toolBar' 'table card-stops' 'map map';
     grid-template-columns: 2fr 1fr;
     padding-top: 1em;

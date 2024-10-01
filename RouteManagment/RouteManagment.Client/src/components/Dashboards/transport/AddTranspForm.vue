@@ -1,6 +1,6 @@
 <template>
-    <div class="add__new--route">
-                    <div class="pa-4 text-center">
+<div class="add__new--transport">
+        <div class="pa-4 text-center">
                     <v-dialog
                     v-model="dialog"
                     min-width="200"
@@ -9,35 +9,31 @@
                     <template v-slot:activator="{ props: activatorProps }">
                         <v-btn
                         class="text-none font-weight-regular"
-                        prepend-icon="mdi-routes"
-                        text="New route"
+                        prepend-icon="mdi-train-car"
+                        text="New transport"
                         variant="tonal"
-                        color="green-darken-3"
+                        color="orange-darken-3"
                         v-bind="activatorProps"
                         ></v-btn>
                     </template>
 
                     <v-card
-                        color="grey-lighten-5"
-                        prepend-icon="mdi-routes"
-                        title="Add a new route"
-                        class="text-purple-darken-4"
+                        class="d-flex text-center text-orange-darken-3"
+                        prepend-icon="mdi-train-car"
+                        title="Add a new transport"
                     >
-                    <stepper></stepper>
+                    <v-card-text>
+                        <AddFormT></AddFormT>
+                    </v-card-text>
                     </v-card>
                     </v-dialog>
                 </div>
     </div>
-                <v-spacer></v-spacer>
-               
 </template>
-
 <script setup>
 import {ref} from 'vue'
-import Stepper from './Stepper.vue';
-    
-    const dialog = ref(false)
-</script>
+import AddFormT from '../../forms/transport/AddFormT.vue';
 
-<style scoped>
-</style>
+const dialog = ref(false)
+
+</script>

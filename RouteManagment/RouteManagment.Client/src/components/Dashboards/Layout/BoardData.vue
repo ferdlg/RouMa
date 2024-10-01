@@ -18,19 +18,9 @@
                     <td v-for="header, index in headers" :key="index">
                         {{getItemValue(item, index)}}
                     </td>
-                    <td>
-                        <v-btn
-                        variant="elevated"
-                        color="indigo-darken-3"
-                        icon="mdi-lead-pencil"
-                        size="small"
-                        ></v-btn>
-                        <v-btn
-                        variant="elevated"
-                        color="red"
-                        icon="mdi-delete-outline"
-                        size="small"
-                        ></v-btn>
+                    <td class="d-flex">
+                        <EditInfo></EditInfo>
+                        <Remove></Remove>
                     </td>
                 </tr>
                 </tbody>
@@ -41,6 +31,8 @@
 
 <script setup>
 import {defineProps} from 'vue'
+import EditInfo from './EditInfo.vue'
+import Remove from './Remove.vue';
 const props = defineProps({
     headers:{
         type: Array,

@@ -47,7 +47,6 @@ import ButtonGet from '../../components/landingPage/ButtonGet.vue';
 import RoadSvg from '../../components/landingPage/RoadSvg.vue';
 import Auto from '../../components/landingPage/Auto.vue';
 import AboutUs from '../../components/landingPage/aboutUs/AboutUs.vue';
-import SignUp from '../../components/forms/register/SignUp.vue';
 import ContactUs from '../../components/landingPage/contactUs/ContactUs.vue';
 import Transport from '../../components/landingPage/transports/Transport.vue';
 </script>

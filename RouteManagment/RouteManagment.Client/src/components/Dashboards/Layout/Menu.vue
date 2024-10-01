@@ -11,7 +11,7 @@
         >
           <v-list-item 
             prepend-avatar="https://randomuser.me/api/portraits/women/8.jpg" 
-            title="John Done"
+            title="John Doe"
             nav
             class="list__item-nav"
           >
