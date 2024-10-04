@@ -1,26 +1,34 @@
 <template>
     <Menu>
-        <div class="contain">
-            <div class="contain__board-company">
-                <v-card title="Companies">
-                    <BoardData :headers="headers_company" :desserts="desserts_company" ></BoardData>
-                </v-card>
+            <div class="contain__tools-company">
+                <ToolBar>
+                    <AddForm></AddForm>
+                </ToolBar>
             </div>
-            <div class="contain__board-admin--company">
-                <v-card title="Administrator">
-                    <BoardData :headers="headers_admin" :desserts="desserts_admin" ></BoardData>
-                </v-card>
-            </div>
-            <div class="div">
-                <h1>div</h1>
-            </div>
-        </div>
+                <v-row>
+                    <v-col>
+                        <div class="contain__board-company">
+                            <v-card title="Companies">
+                                <BoardData :headers="headers_company" :desserts="desserts_company" ></BoardData>
+                            </v-card>
+                        </div>
+                    </v-col>
+                    <v-col>
+                        <div class="contain__board-admin--company">
+                            <v-card title="Administrator">
+                                <BoardData :headers="headers_admin" :desserts="desserts_admin" ></BoardData>
+                            </v-card>
+                        </div>
+                    </v-col>
+                </v-row>
     </Menu>
 </template>
 <script setup>
 import {ref} from 'vue'
 import Menu from "../../components/dashboards/layout/Menu.vue";
 import BoardData from "../../components/dashboards/layout/BoardData.vue";
+import ToolBar from '../../components/dashboards/layout/ToolBar.vue';
+import AddForm from '../../components/dashboards/companies/AddForm.vue';
 
 const headers_company = ref ([
       {name: "Company"},

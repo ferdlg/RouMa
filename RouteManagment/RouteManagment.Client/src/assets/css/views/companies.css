@@ -1,9 +1,14 @@
 .contain{
     display: grid;
-    grid-template-areas: 'company admin' 'div div';
+    grid-template-areas: 'tools tools' 'company admin' 'div div';
     grid-template-columns: 1fr 1fr;
     padding-top: 2em;
 }
+
+.contain__tools-company{
+    grid-area: tools;
+}
+
 .contain__board-company{
     grid-area: company;
 }

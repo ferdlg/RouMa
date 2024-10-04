@@ -1,6 +1,6 @@
 <template>
     <Menu>
-        <!-- <Statics></Statics> -->
+        
     </Menu>
    
 </template>

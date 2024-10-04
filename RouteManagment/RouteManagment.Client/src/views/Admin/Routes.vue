@@ -1,17 +1,32 @@
 <template>
     <Menu>
+        <template v-slot:BarTools>
             <div class="contain__toolBar">
                 <ToolBarRoutes></ToolBarRoutes>
             </div>
-            <div class="contain__table">
-                <BoardData :headers="headers" :desserts="desserts" class="contain__table-data"></BoardData>
-            </div>
-            <div class="contain__card">
-                <Stops class="contain__card-stops"></Stops>
-            </div>
+        </template>
+        <template v-slot:other>
+            <v-row  align="center">
+                <v-col >
+                    <BoardData :headers="headers" :desserts="desserts" class="contain__table-data"></BoardData>
+                </v-col>
+                <v-col >
+                    <Map class="contain__map-map"></Map>
+                </v-col>
+            </v-row>
+            <v-row justify="center" align="center">
+                <v-col>
+                    <Stops class="contain__card-stops"></Stops>
+                </v-col>
+                <v-col>
+                    
+                </v-col>
+            </v-row>
             <div class="contain__map">
-                <Map class="contain__map-map"></Map>
             </div>
+        </template>
+                
+                
     </Menu>
    
 </template>

@@ -64,10 +64,11 @@
           <v-btn icon="mdi-bell" size="small"></v-btn>
           <v-btn icon="mdi-archive" size="small"></v-btn>
           
-    </v-app-bar>
-      <v-main class="d-grid" style="margin: 1em; min-height: 100vh; min-width: 300px;,position: relative; z-index: 1;">
-        <slot></slot>
-      </v-main>
+        </v-app-bar>
+          <v-main class="d-grid justify-center" style="margin: 1em; min-height: 100vh; min-width: 300px;,position: relative; z-index: 1;">
+            <slot name="BarTools"></slot>
+            <slot name="other"></slot>
+          </v-main>
       </v-layout>
     </v-card>
   </template>

@@ -1,5 +1,4 @@
 <template>
-    <v-container>
         <v-card 
         min-width="100"
         max-width="300" 
@@ -23,7 +22,6 @@
                 </v-timeline>
             </v-card-text>
         </v-card>
-    </v-container>
 </template>
 
 <script setup>

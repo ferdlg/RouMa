@@ -80,6 +80,8 @@
             <v-col>
               <div class="text-subtitle-1 text-center  text-blue-darken-4">Address<v-icon icon="mdi-map-marker-multiple-outline"></v-icon></div>
               <add-form-address></add-form-address>
+              <slot></slot>
+              
             </v-col>
           </v-row>
         </v-container>
