@@ -63,7 +63,6 @@ Route Management (RouMa) es un proyecto de microservicios, el cual esta desarrol
 <ul>
   <li>Vue</li>
   <li>Vuetify</li>
-  <li>Vuetify</li>
   <li>JavaScript</li>
   <li>Css</li>
 </ul>
