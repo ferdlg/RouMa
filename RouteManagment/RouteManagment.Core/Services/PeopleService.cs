@@ -36,6 +36,7 @@ namespace RouteManagment.Core.Services
         public async Task<bool> Delete(int id)
         {
             await _unitOfWork.PeopleRepository.Delete(id);
+            await _unitOfWork.SaveChangesAsync();
             return true;
         }
     }

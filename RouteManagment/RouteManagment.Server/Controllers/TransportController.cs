@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
 using RouteManagment.Core.Interfaces;
+using RouteManagment.Core.Services;
 using RouteManagment.Server.Responses;
 
 
@@ -38,7 +39,7 @@ namespace RouteManagment.Server.Controllers
 
         [HttpGet("{plate}")]
 
-        public async Task<IActionResult> GetTransports(string? plate)
+        public async Task<IActionResult> GetTransports(string plate)
         {
            var transport = await _transportService.GetTransport(plate);
            var transportDto = _mapper.Map<TransportDto>(transport);
@@ -65,7 +66,7 @@ namespace RouteManagment.Server.Controllers
         //Request to update transport
         [HttpPut("{plate}")]
 
-        public async Task<IActionResult> Update(string? plate, TransportDto transportDto)
+        public async Task<IActionResult> Update(string plate, TransportDto transportDto)
         {
             var transport = _mapper.Map<Transport>(transportDto);
             transport.Plate = plate;
@@ -77,12 +78,12 @@ namespace RouteManagment.Server.Controllers
         //Request to remove transport by id 
         [HttpDelete("{plate}")]
 
-        public async Task<IActionResult> Delete(string? plate)
+        public async Task<IActionResult> Delete(string plate)
         {
-           var result = await _transportService.Delete(plate);
-           var response = new ApiResponse<bool>(result);
-           return Ok(response);
-        
+            var result = await _transportService.Delete(plate);
+            var response = new ApiResponse<bool>(result);
+            return Ok(response);
+
         }
     }
 }

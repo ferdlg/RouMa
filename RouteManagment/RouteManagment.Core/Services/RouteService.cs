@@ -55,6 +55,7 @@ namespace RouteManagment.Core.Services
         public async Task<bool> Delete(int id)
         { 
            await _unitOfWork.RouteRepository.Delete(id);
+           await _unitOfWork.SaveChanguesAsync();
             return true;
         }
     }
@@ -92,7 +93,12 @@ namespace RouteManagment.Core.Services
         public async Task<T> Delete(int id)
         {
             var entity = await _unitOfWork.GetRepository<T>().GetById(id);
-            await _unitOfWork.SaveChanguesAsync();
+            if (entity != null) {
+
+                await _unitOfWork.GetRepository<T>().Delete(id);
+                await _unitOfWork.SaveChanguesAsync();
+            }
+
             return entity;
         }
 

@@ -2,16 +2,15 @@
 using Microsoft.EntityFrameworkCore;
 using RouteManagment.Core.Entities;
 using RouteManagment.Server.Data;
-using System.Security.Cryptography.Xml;
 
 namespace ManejoRutas.Infrastructure.Repositories
 {
-    public class  TransportRepository : ITransportRepository
+    public class TransportRepository : ITransportRepository
     {
         //logic for Crud Methods 
 
         private readonly AppDbContext _appDbContext;
-        private readonly DbSet<Transport> _transports;
+        protected  readonly DbSet<Transport> _transports;
 
         public TransportRepository(AppDbContext appDbContext)
         {
@@ -23,7 +22,7 @@ namespace ManejoRutas.Infrastructure.Repositories
             return _transports.AsEnumerable();
         }
 
-        public async Task<Transport> GetTransport(string? plate)
+        public async Task<Transport> GetTransport(string plate)
         {
             return await _transports.FindAsync(plate);
         }
@@ -33,16 +32,18 @@ namespace ManejoRutas.Infrastructure.Repositories
             await _transports.AddAsync(Transport);
         }
 
-
-
         public void UpdateTransport(Transport transport)
         {
             _transports.Update(transport);
         }
-        public async Task DeleteTransport(string? plate)
+        public async Task DeleteTransport(string plate)
         {
-            var rmTransport = await GetTransport(plate);
-            _transports.Remove(rmTransport);
+            Transport transport = await GetTransport(plate);
+            if (transport != null) { 
+            
+                _transports.Remove(transport);
+            }
+            Console.WriteLine("no se encuentra el objeto");
         }
     }
 }

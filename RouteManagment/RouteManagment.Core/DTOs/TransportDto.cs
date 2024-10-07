@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class TransportDto
     {
-        public string? Plate { get; set; }
+        public required string Plate { get; set; }
 
         public int Capacity { get; set; }
 

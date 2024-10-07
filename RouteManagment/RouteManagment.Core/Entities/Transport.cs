@@ -5,7 +5,7 @@ namespace RouteManagment.Core.Entities;
 
 public partial class Transport 
 {
-    public string? Plate { get; set; }
+    public required string Plate { get; set; }
 
     public int Capacity { get; set; }
 
