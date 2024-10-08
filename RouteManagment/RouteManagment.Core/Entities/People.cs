@@ -30,6 +30,7 @@ public partial class People : BaseEntity
     public virtual ICollection<Driver> Drivers { get; set; } = new List<Driver>();
 
     public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+    public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
 
     public virtual Role? Rol { get; set; }
     public virtual ICollection<User> Users{ get; set; } = new List<User>();

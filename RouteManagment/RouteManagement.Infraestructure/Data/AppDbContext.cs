@@ -22,7 +22,7 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Administrator> Administrators { get; set; }
 
     public virtual DbSet<Company> Companies { get; set; }
-
+    public virtual DbSet<CompanyAdministrator> CompanyAdministrators { get; set; }
     public virtual DbSet<DocumentType> DocumentTypes { get; set; }
 
     public virtual DbSet<Driver> Drivers { get; set; }
@@ -69,8 +69,9 @@ public partial class AppDbContext : DbContext
 
         modelBuilder.ApplyConfiguration(new AdministratorConfiguration());
 
-
         modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+
+        modelBuilder.ApplyConfiguration(new CompanyAdministratorConfiguration());
 
         modelBuilder.ApplyConfiguration(new DocumentTypeConfiguration());
 

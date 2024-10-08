@@ -4,12 +4,9 @@ namespace RouteManagment.Core.Interfaces
 {
     public interface IRouteUnitOfWork : IDisposable
     {
-        IRepository<Address> AddressRepository { get; }
-        IRepository<Headquarter> HeadquarterRepository { get; }
         IRepository<Route> RouteRepository { get; }
-        IRepository<Stop> StopRepository { get; }
-        IRepository<RoutesStop> RoutesStopRepository { get; }
-        IRepository<StreetType> StreetTypeRepository { get; }
+        IRepository<T> GetRepository<T>() where T : BaseEntity;
+
 
         void SaveChanges();
         Task SaveChanguesAsync();

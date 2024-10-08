@@ -5,8 +5,7 @@ namespace RouteManagment.Core.Entities;
 
 public partial class RolesPermission : BaseEntity
 {
-    //public int RolPermissionId { get; set; }
-
+ 
     public int PermissionId { get; set; }
 
     public int RolId { get; set; }

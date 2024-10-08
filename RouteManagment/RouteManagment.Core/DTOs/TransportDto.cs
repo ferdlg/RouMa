@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class TransportDto
     {
-        public string? Plate { get; set; }
+        public required string Plate { get; set; }
 
         public int Capacity { get; set; }
 
@@ -17,6 +17,7 @@ namespace RouteManagment.Core.DTOs
         public int? RouteId { get; set; }
 
         public int? TransportTypeId { get; set; }
+        public bool IsDelete { get; set; }
 
 
     }

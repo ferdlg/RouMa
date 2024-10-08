@@ -1,0 +1,39 @@
+*{
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+@font-face {
+  font-family: "Ubuntu";
+  src:   url(../../../public/fonts/Ubuntu-vf.ttf) format("truetype"),
+
+}
+
+:root {
+  --color-primary-background:#211245;
+  --color-secundary-background:#FDA901;
+  --color-secundary-ligth:#FFD88A;
+  --color-dashboard-group1:#FFFCF3;
+  --color-icons-dasboard-group1:#b48005;
+  --color-dashboard-group2:#F6F2FF;
+  --color-icons-dashboard-group2:#211245;
+}
+
+body {
+  margin: 0 ;
+  font-family: "Ubuntu";
+  background-color: rgb(0, 0, 0);
+
+}
+
+#app {
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  z-index: inherit;
+  min-width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(to left,
+  #FDA901 35% 35%,
+  #211245 35% 65%);
+}

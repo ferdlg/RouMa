@@ -9,12 +9,13 @@ namespace RouteManagment.Core.DTOs
     
     public class PassengerDto
     {
-        public int PassengerId { get; set; }
+        public int Id { get; set; }
 
         public int DocumentNumber { get; set; }
 
         public int CompanyId { get; set; }
         public int RouteId { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

@@ -47,6 +47,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasForeignKey(d => d.TransportTypeId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_3");
+
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

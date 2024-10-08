@@ -17,12 +17,12 @@ namespace RouteManagment.Server.Controllers
 
     public class PermissionController : ControllerBase
     {
-        private readonly IRepository<Permission> _PermissionRepository;
+        private readonly IServiceP<Permission> _permissionService;
         private readonly IMapper _mapper;
 
-        public PermissionController(IRepository<Permission> permissionRepository, IMapper mapper)
+        public PermissionController(IServiceP<Permission> permissionService, IMapper mapper)
         {
-            _PermissionRepository = permissionRepository;
+            _permissionService = permissionService;
             _mapper = mapper;
         }
         //Request to get all permissions
@@ -30,7 +30,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var permission =  _PermissionRepository.GetAll();
+            var permission =  _permissionService.GetAll();
             var permissionDto = _mapper.Map<IEnumerable<PermissionDto>>(permission);
             var response = new ApiResponse<IEnumerable<PermissionDto>>(permissionDto);
             return Ok(response);
@@ -41,7 +41,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var permission = await _PermissionRepository.GetById(id);
+            var permission = await _permissionService.GetById(id);
             var permissionDto = _mapper.Map<PermissionDto>(permission);
             var response = new ApiResponse<PermissionDto>(permissionDto);
 
@@ -55,7 +55,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(PermissionDto permissionDto)
         {
             var permission = _mapper.Map<Permission>(permissionDto);
-            await _PermissionRepository.Add(permission);
+            await _permissionService.Add(permission);
 
             permissionDto = _mapper.Map<PermissionDto>(permission);
             var response = new ApiResponse<PermissionDto>(permissionDto);
@@ -69,8 +69,8 @@ namespace RouteManagment.Server.Controllers
             var permission = _mapper.Map<Permission>(permissionDto);
             permission.Id = id;
 
-            var result = await _PermissionRepository.Update(permission);
-            var response =  new ApiResponse<bool>(result);
+            var result = await _permissionService.Update(permission);
+            var response =  new ApiResponse<Permission>(result);
             return Ok(response);
         }
         //Request to remove permission by id 
@@ -78,8 +78,8 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Deletepermission(int id)
         {
-           var result = await _PermissionRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var result = await _permissionService.Delete(id);
+           var response = new ApiResponse<Permission>(result);
 
            return Ok(response);
         }

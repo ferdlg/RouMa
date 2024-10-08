@@ -8,8 +8,10 @@ namespace RouteManagment.Core.DTOs
 {
     public class StreetTypeDto
     {
-        public int StreetTypeId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
+        public bool IsDelete { get; set; }
+
     }
 }

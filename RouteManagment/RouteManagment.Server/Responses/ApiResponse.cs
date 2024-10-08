@@ -1,3 +1,5 @@
+using RouteManagment.Core.Entities;
+
 namespace RouteManagment.Server.Responses
 {
     public class ApiResponse<T>
@@ -6,6 +8,11 @@ namespace RouteManagment.Server.Responses
         {
             Data = data;
         }
+
+        public ApiResponse(Transport result)
+        {
+        }
+
         public T Data { get; set; }
     }
 }

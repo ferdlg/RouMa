@@ -1,11 +1,11 @@
-<script setup>
-import Index from './pages/landingPage/Index.vue';
-</script>
 
 <template>
-      <Index />
+    <RouterView></RouterView>
+ 
 </template>
 
-<style scoped>
+<script setup>
 
+</script>
+<style scoped>
 </style>

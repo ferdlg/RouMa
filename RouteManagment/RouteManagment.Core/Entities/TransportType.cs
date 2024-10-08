@@ -5,8 +5,7 @@ namespace RouteManagment.Core.Entities;
 
 public partial class TransportType : BaseEntity
 {
-    // public int TransportTypeId { get; set; }
-
+ 
     public string? Name { get; set; }
 
     public string? Description { get; set; }

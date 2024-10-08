@@ -1,0 +1,13 @@
+
+@media (max-width: 768px){
+    .container__singIn{
+      width: 80%;
+      padding: 1rem;
+    }
+  }
+  @media (min-width:769px){
+    .container__singIn{
+      width: 80%;
+      margin: 0 auto;
+    }
+  }

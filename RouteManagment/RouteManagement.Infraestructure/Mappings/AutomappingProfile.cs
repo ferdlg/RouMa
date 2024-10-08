@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RouteManagement.Infraestructure.Mappings
 {
@@ -21,6 +16,9 @@ namespace RouteManagement.Infraestructure.Mappings
 
             CreateMap<Company, CompanyDto>();
             CreateMap<CompanyDto, Company>();
+
+            CreateMap<CompanyAdministrator, CompanyAdminDto>();
+            CreateMap<CompanyAdminDto, CompanyAdministrator>();
 
             CreateMap<DocumentType, DocumentTypeDto>();
             CreateMap<DocumentTypeDto, DocumentType>();

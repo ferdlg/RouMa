@@ -1,40 +1,40 @@
-<script setup>
-    import ButtonLogin from './ButtonLogin.vue';
-</script>
-
 <template>
-    <v-layout>
-      <v-app-bar class="nav-bar" elevation="0" border>
-        <v-toolbar-title> V.1.0 </v-toolbar-title>
-        <v-list class="d-flex">
-          <v-list-item v-for="(item, index) in items" :Key="index">
-            <v-list-item-title>{{item}}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-        <v-spacer></v-spacer>
-        <div class=".btn-login">
-          <ButtonLogin/>
-        </div> 
-      </v-app-bar>
-    </v-layout>
+   <v-responsive>
+     <v-app-bar class="nav-bar d-flex">
+         <v-toolbar-title>
+          <a href="#/" class="nav-link">V1.0.0</a>
+          </v-toolbar-title>
+         <v-toolbar-items class="d-sm-flex">
+           <v-list class="nav-list" dense>
+             <v-list-item
+             v-for="(item, index) in items"
+             :key="index"
+             class="nav-list-item"
+             >
+               <v-list-item-icon>
+                 <v-icon>{{ item.icon }}</v-icon>
+               </v-list-item-icon>
+               <v-list-item-content>
+                  <a :href="'#'+ item.path" class="nav-link">{{item.text}}</a>
+               </v-list-item-content>
+             </v-list-item>
+             <ButtonLogin/>
+           </v-list>
+         </v-toolbar-items>
+       </v-app-bar>
+   </v-responsive>
 </template>
 
-<style scoped>
-  .nav-bar{
-    background-color: transparent;
-    color: white;
-  }
-  .btn-login{
-    margin:0% 5em 0% 0%;
-  }
-  .d-flex{
-    background-color:transparent;
-    color:white;
-  }
 
-</style>
-<script>
-  import {ref, watch} from "vue";
-
-  let items = ref(["About Us","Blog", "How to use"]);
+<script setup>
+    import ButtonLogin from './ButtonLogin.vue';
+    import {ref} from "vue";
+    
+    const items = ref ([
+      {text: "About Us", icon:"mdi-information" ,path:'about-us'},
+      {text: "Contact Us", icon:"mdi-phone" ,path:'contact-us'},
+      {text: "Transports", icon:"mdi-car" ,path:'transports'},
+    ]);
 </script>
+<style src="../../assets/css/components/landingPage/nav-bar.css">
+</style>

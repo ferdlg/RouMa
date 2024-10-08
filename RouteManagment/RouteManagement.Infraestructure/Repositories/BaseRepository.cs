@@ -8,7 +8,7 @@ namespace RouteManagement.Infraestructure.Repositories
     public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         private readonly AppDbContext _appDbContext;
-        private DbSet<T> _entities;
+        protected readonly DbSet<T> _entities;
         public BaseRepository(AppDbContext appDbContext) 
         { 
             _appDbContext = appDbContext;
@@ -16,7 +16,7 @@ namespace RouteManagement.Infraestructure.Repositories
         }
         public IEnumerable<T> GetAll()
         {
-            return  _entities.AsEnumerable();
+            return  _entities.Where(e => !e.IsDelete).AsEnumerable();
         }
 
         public async Task<T> GetById(int id)
@@ -36,7 +36,7 @@ namespace RouteManagement.Infraestructure.Repositories
         public async Task Delete(int id)
         {
             T entity = await GetById(id);
-            _entities.Remove( entity);
+            entity.IsDelete = true;
            
         }
 

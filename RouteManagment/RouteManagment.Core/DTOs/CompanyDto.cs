@@ -2,9 +2,10 @@
 {
     public class CompanyDto
     {
-        public int CompanyId { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; } = null!;
+        public bool IsDelete { get; set; }
 
     }
 }

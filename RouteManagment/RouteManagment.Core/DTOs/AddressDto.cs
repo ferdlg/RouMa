@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class AddressDto
     {
-        public int AddressId { get; set; }
+        public int Id { get; set; }
 
         public string? StreetName { get; set; }
 
@@ -21,5 +21,6 @@ namespace RouteManagment.Core.DTOs
         public string? Prefix { get; set; }
 
         public int StreetTypeId { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

@@ -8,9 +8,10 @@ namespace RouteManagment.Core.DTOs
 {
     public class TransportRequestStateDto
     {
-        public int StateId { get; set; }
+        public int Id { get; set; }
 
         public string State { get; set; } = null!;
+        public bool IsDelete { get; set; }
 
     }
 }

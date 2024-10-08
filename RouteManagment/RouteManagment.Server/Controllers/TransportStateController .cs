@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportStateController : ControllerBase
     {
-        private readonly IRepository<TransportState> _TransportStateRepository;
+        private readonly IServiceT<TransportState> _TransportStateRepository;
         private readonly IMapper _mapper;
 
-        public TransportStateController(IRepository<TransportState> TransportStateRepository, IMapper mapper)
+        public TransportStateController(IServiceT<TransportState> TransportStateRepository, IMapper mapper)
         {
             _TransportStateRepository = TransportStateRepository;
             _mapper = mapper;
@@ -70,7 +70,7 @@ namespace RouteManagment.Server.Controllers
             transportState.Id= id;
 
             var result=  await _TransportStateRepository.Update(transportState);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportState>(result);
 
             return Ok(response);
         }
@@ -80,7 +80,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            var result = await _TransportStateRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var response = new ApiResponse<TransportState>(result);
            return Ok(response);
         }
     }

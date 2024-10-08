@@ -26,6 +26,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
             builder.Property(e => e.Name)
                 .HasMaxLength(50)
                 .HasDefaultValueSql("'NULL'");
+
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

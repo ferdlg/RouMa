@@ -16,12 +16,12 @@ namespace RouteManagment.Server.Controllers
 
     public class UserController : ControllerBase
     {
-        private readonly IRepository<User> _UserRepository;
+        private readonly IUserService _UserService;
         private readonly IMapper _mapper;
 
-        public UserController(IRepository<User> UserRepository, IMapper mapper)
+        public UserController(IUserService UserService, IMapper mapper)
         {
-            _UserRepository = UserRepository;
+            _UserService = UserService;
             _mapper = mapper;
         }
         //Request to get all Users
@@ -29,7 +29,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-           var Users =  _UserRepository.GetAll();
+           var Users =  _UserService.GetUsers();
            var UsersDto = _mapper.Map<IEnumerable<UserDto>>(Users);
            var response = new ApiResponse<IEnumerable<UserDto>>(UsersDto);
             return Ok(response);
@@ -40,7 +40,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-           var User = await _UserRepository.GetById(id);
+           var User = await _UserService.GetUserById(id);
            var UserDto = _mapper.Map<UserDto>(User);
            var response = new ApiResponse<UserDto>(UserDto);
            return Ok(response);
@@ -53,7 +53,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(UserDto userDto)
         {
            var user = _mapper.Map<User>(userDto);
-           await _UserRepository.Add(user);
+           await _UserService.InsertUser(user);
 
            userDto = _mapper.Map<UserDto>(user);
            var response = new ApiResponse<UserDto>(userDto);
@@ -69,7 +69,7 @@ namespace RouteManagment.Server.Controllers
             var User = _mapper.Map<User>(UserDto);
             User.Id= id;
 
-            var result = await _UserRepository.Update(User);
+            var result = await _UserService.Update(User);
             var response = new ApiResponse<bool>(result);
 
             return Ok(response);
@@ -79,7 +79,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-           var result = await _UserRepository.Delete(id);
+           var result = await _UserService.Delete(id);
            var response = new ApiResponse<bool>(result);
            return Ok(response);
         

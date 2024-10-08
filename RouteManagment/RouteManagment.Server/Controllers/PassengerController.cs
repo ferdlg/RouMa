@@ -19,12 +19,12 @@ namespace RouteManagment.Server.Controllers
 
     public class PassengerController : ControllerBase
     {
-        private readonly IRepository<Passenger> _PassengerRepository;
+        private readonly IServiceP<Passenger> _PassengerService;
         private readonly IMapper _mapper;
 
-        public PassengerController(IRepository<Passenger> PassengerRepository, IMapper mapper)
+        public PassengerController(IServiceP<Passenger> PassengerService, IMapper mapper)
         {
-            _PassengerRepository = PassengerRepository;
+            _PassengerService = PassengerService;
             _mapper = mapper;
         }
         //Request to get all Passengers
@@ -32,7 +32,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var passenger =  _PassengerRepository.GetAll();
+            var passenger =  _PassengerService.GetAll();
             var PassengerDto = _mapper.Map<IEnumerable<PassengerDto>>(passenger);
             var response = new ApiResponse<IEnumerable<PassengerDto>>(PassengerDto);
             return Ok(response);
@@ -43,7 +43,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var passenger = await _PassengerRepository.GetById(id);
+            var passenger = await _PassengerService.GetById(id);
             var passengerDto = _mapper.Map<PassengerDto>(passenger);
             var response = new ApiResponse<PassengerDto>(passengerDto);
             return Ok(response);
@@ -56,7 +56,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(PassengerDto passengerDto)
         {
             var passenger = _mapper.Map<Passenger>(passengerDto);
-            await _PassengerRepository.Add(passenger);
+            await _PassengerService.Add(passenger);
 
             passengerDto = _mapper.Map<PassengerDto>(passengerDto);
             var response = new ApiResponse<PassengerDto>(passengerDto);
@@ -71,8 +71,8 @@ namespace RouteManagment.Server.Controllers
             var passenger = _mapper.Map<Passenger>(passengerDto);
             passenger.Id = id;
 
-            var result= await _PassengerRepository.Update(passenger);
-            var response = new ApiResponse<bool>(result);
+            var result= await _PassengerService.Update(passenger);
+            var response = new ApiResponse<Passenger>(result);
             return Ok(response);
         }
         //Request to remove passenger by id 
@@ -80,8 +80,8 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-           var result= await _PassengerRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var result= await _PassengerService.Delete(id);
+           var response = new ApiResponse<Passenger>(result);
            return Ok(response);
          
         }

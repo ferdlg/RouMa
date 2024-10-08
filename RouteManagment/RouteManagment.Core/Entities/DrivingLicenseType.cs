@@ -2,7 +2,6 @@
 
 public partial class DrivingLicenseType : BaseEntity
 {
-    //public int TypeLicenseId { get; set; }
 
     public string Name { get; set; } = null!;
 

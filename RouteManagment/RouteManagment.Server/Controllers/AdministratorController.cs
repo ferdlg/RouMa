@@ -1,6 +1,5 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -17,12 +16,12 @@ namespace RouteManagment.Server.Controllers
 
     public class AdministratorController : ControllerBase
     {
-        private readonly IRepository<Administrator> _administratorRepository;
+        private readonly IServiceP<Administrator> _administratorService;
         private readonly IMapper _mapper;
 
-        public AdministratorController(IRepository<Administrator> administratorRepository, IMapper mapper)
+        public AdministratorController(IServiceP<Administrator> administratorService, IMapper mapper)
         {
-            _administratorRepository = administratorRepository;
+            _administratorService = administratorService;
             _mapper = mapper;
         }
         //Request to get all administrator
@@ -30,7 +29,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var administrators =  _administratorRepository.GetAll();
+            var administrators =  _administratorService.GetAll();
             var administratorsDto = _mapper.Map<IEnumerable<AdministratorDto>>(administrators);
 
             var response = new ApiResponse<IEnumerable<AdministratorDto>>(administratorsDto);
@@ -42,7 +41,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var administrator = await _administratorRepository.GetById(id);
+            var administrator = await _administratorService.GetById(id);
             var administratorDto = _mapper.Map<AdministratorDto>(administrator);
             var response = new ApiResponse<AdministratorDto>(administratorDto);
             return Ok(response);
@@ -53,7 +52,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(AdministratorDto administratorDto)
         {
             var administrator = _mapper.Map<Administrator>(administratorDto);
-            await _administratorRepository.Add(administrator);
+            await _administratorService.Add(administrator);
 
             administratorDto = _mapper.Map<AdministratorDto>(administrator);
             var response = new ApiResponse<AdministratorDto>(administratorDto);
@@ -68,8 +67,8 @@ namespace RouteManagment.Server.Controllers
             var administrator = _mapper.Map<Administrator>(administratorDto);
             administrator.Id = id;
 
-            var result= await _administratorRepository.Update(administrator);
-            var response = new ApiResponse<bool>(result);
+            var result = await _administratorService.Update(administrator);
+            var response = new ApiResponse<Administrator>(result);
             return Ok(response);
         }
         //Request to remove administrator by id 
@@ -77,8 +76,8 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var repository = await _administratorRepository.Delete(id);
-            var response = new ApiResponse<bool>(repository);
+            var result = await _administratorService.Delete(id);
+            var response = new ApiResponse<Administrator>(result);
             return Ok(response);
             
         }

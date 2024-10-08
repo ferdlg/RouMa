@@ -14,12 +14,13 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
 
             builder.ToTable("addresses");
 
-            builder.HasIndex(e => e.StreetTypeId, "StreetTypeId");
 
             builder.Property(e => e.Id)
                 .HasColumnName("AddressId")
-                .HasColumnType("int(11)");
+                .HasColumnType("int");
   
+            builder.HasIndex(e => e.StreetTypeId, "StreetTypeId");
+            
             builder.Property(e => e.Prefix)
                 .HasMaxLength(50)
                 .HasDefaultValueSql("'NULL'");
@@ -38,6 +39,10 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
                 .HasForeignKey(d => d.StreetTypeId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("addresses_ibfk_1");
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

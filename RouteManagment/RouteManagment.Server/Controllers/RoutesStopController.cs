@@ -16,10 +16,10 @@ namespace RouteManagment.Server.Controllers
 
     public class RoutesStopController : ControllerBase
     {
-        private readonly IRepository<RoutesStop> _routeStopRepository;
+        private readonly IServiceR<RoutesStop> _routeStopRepository;
         private readonly IMapper _mapper;
 
-        public RoutesStopController(IRepository<RoutesStop> routeStopRepository, IMapper mapper)
+        public RoutesStopController(IServiceR<RoutesStop> routeStopRepository, IMapper mapper)
         {
             _routeStopRepository = routeStopRepository;
             _mapper = mapper;
@@ -70,7 +70,7 @@ namespace RouteManagment.Server.Controllers
             routeStop.Id = id;
 
             var result = await _routeStopRepository.Update(routeStop);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<RoutesStop>(result);
             return Ok(response);
         }
         //Request to remove routeStop by id 
@@ -79,7 +79,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            var repository = await _routeStopRepository.Delete(id);
-           var response = new ApiResponse<bool>(repository);
+           var response = new ApiResponse<RoutesStop>(repository);
            return Ok(response);
         
         }

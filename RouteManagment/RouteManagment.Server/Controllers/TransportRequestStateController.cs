@@ -18,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class TransportRequestStateController : ControllerBase
     {
-        private readonly IRepository<TransportRequestState> _TransportRequestStateRepository;
+        private readonly IServiceT<TransportRequestState> _TransportRequestStateRepository;
         private readonly IMapper _mapper;
 
-        public TransportRequestStateController(IRepository<TransportRequestState> TransportRequestStateRepository, IMapper mapper)
+        public TransportRequestStateController(IServiceT<TransportRequestState> TransportRequestStateRepository, IMapper mapper)
         {
             _TransportRequestStateRepository = TransportRequestStateRepository;
             _mapper = mapper;
@@ -31,7 +31,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-           var TransportRequestStates = await _TransportRequestStateRepository.GetAll();
+           var TransportRequestStates =  _TransportRequestStateRepository.GetAll();
            var TransportRequestStatesDto = _mapper.Map<IEnumerable<TransportRequestStateDto>>(TransportRequestStates);
            return Ok(TransportRequestStatesDto);
         }
@@ -72,7 +72,7 @@ namespace RouteManagment.Server.Controllers
             TransportRequestState.Id= id;
 
             var result = await _TransportRequestStateRepository.Update(TransportRequestState);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportRequestState>(result);
             return Ok(response);
         }
         //Request to remove TransportRequestState by id 
@@ -81,7 +81,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _TransportRequestStateRepository.Delete(id);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<TransportRequestState>(result);
             return Ok(response);
         
         }

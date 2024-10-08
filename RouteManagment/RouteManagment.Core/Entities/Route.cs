@@ -5,8 +5,6 @@ namespace RouteManagment.Core.Entities;
 
 public partial class Route : BaseEntity
 {
-
-
     public int AddressOriginId { get; set; }
 
     public int AddressHeadQuarterId { get; set; }

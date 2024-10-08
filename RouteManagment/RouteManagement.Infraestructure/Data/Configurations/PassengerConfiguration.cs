@@ -14,7 +14,6 @@ namespace RouteManagement.Infraestructure.Data.Configurations
         public void Configure(EntityTypeBuilder<Passenger> builder)
         {
             builder.HasKey(e => e.Id).HasName("PRIMARY");
-
             builder.ToTable("passengers");
 
             builder.HasIndex(e => e.DocumentNumber, "DocumentNumber");
@@ -24,10 +23,20 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasColumnType("int(11)");
             builder.Property(e => e.DocumentNumber).HasColumnType("int(11)");
 
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
+
             builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.Passengers)
                 .HasForeignKey(d => d.DocumentNumber)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("passengers_ibfk_1");
+
+            builder.HasOne(d => d.CompanyIdNavigation).WithMany(c => c.Passengers)
+                .HasForeignKey(d => d.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("passengers_ibfk_2");
         }
     }
 }

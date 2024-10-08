@@ -33,6 +33,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("routes_ibfk_2");
 
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
+
         }
     }
 }

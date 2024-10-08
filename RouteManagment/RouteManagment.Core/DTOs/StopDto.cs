@@ -8,8 +8,10 @@ namespace RouteManagment.Core.DTOs
 {
     public class StopDto
     {
-        public int StopId { get; set; }
+        public int Id { get; set; }
 
         public int AddressId { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }

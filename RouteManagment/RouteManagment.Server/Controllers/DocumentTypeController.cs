@@ -1,7 +1,5 @@
 
 using AutoMapper;
-using ManejoRutas.Core.Interfaces;
-using ManejoRutas.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using RouteManagment.Core.DTOs;
 using RouteManagment.Core.Entities;
@@ -19,12 +17,12 @@ namespace RouteManagment.Server.Controllers
 
     public class DocumentTypeController : ControllerBase
     {
-        private readonly IRepository<DocumentType> _DocumentTypeRepository;
+        private readonly IServiceP<DocumentType> _documentTypeService;
         private readonly IMapper _mapper;
 
-        public DocumentTypeController(IRepository<DocumentType> DocumentTypeRepository, IMapper mapper)
+        public DocumentTypeController(IServiceP<DocumentType> documentTypeService, IMapper mapper)
         {
-            _DocumentTypeRepository = DocumentTypeRepository;
+            _documentTypeService = documentTypeService;
             _mapper = mapper;
         }
         //Request to get all DocumentTypes
@@ -32,7 +30,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var documentType =  _DocumentTypeRepository.GetAll();
+            var documentType =  _documentTypeService.GetAll();
             var documentTypeDto = _mapper.Map<IEnumerable<DocumentTypeDto>>(documentType);
             var response = new ApiResponse<IEnumerable<DocumentTypeDto>>(documentTypeDto);  
 
@@ -44,7 +42,7 @@ namespace RouteManagment.Server.Controllers
 
         public async Task<IActionResult> GetById(int id)
         {
-            var documentType = await _DocumentTypeRepository.GetById(id);
+            var documentType = await _documentTypeService.GetById(id);
             var documenTypeDto = _mapper.Map<DocumentTypeDto>(documentType);
             var response = new ApiResponse<DocumentTypeDto>(documenTypeDto);
             
@@ -58,7 +56,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(DocumentTypeDto DocumentTypeDto)
         {
             var documentType = _mapper.Map<DocumentType>(DocumentTypeDto);
-            await _DocumentTypeRepository.Add(documentType);
+            await _documentTypeService.Add(documentType);
             return Ok(documentType);
         }
             //Request to update documentType
@@ -69,8 +67,8 @@ namespace RouteManagment.Server.Controllers
                 var documentType = _mapper.Map<DocumentType>(documentTypeDto);
                 documentType.Id = id;
 
-                var result= await _DocumentTypeRepository.Update(documentType);
-                var response = new ApiResponse<bool>(result);
+                var result= await _documentTypeService.Update(documentType);
+                var response = new ApiResponse<DocumentType>(result);
             return Ok(response);
             }
             //Request to remove documentType by id 
@@ -78,10 +76,8 @@ namespace RouteManagment.Server.Controllers
 
             public async Task<IActionResult> Delete(int id)
             {
-             
-
-                var repository= await _DocumentTypeRepository.Delete(id);
-                var result = new ApiResponse<bool>(repository);
+                var repository= await _documentTypeService.Delete(id);
+                var result = new ApiResponse<DocumentType>(repository);
                 return Ok(result);
              
             }

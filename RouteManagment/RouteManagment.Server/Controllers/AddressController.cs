@@ -6,6 +6,7 @@ using RouteManagment.Core.DTOs;
 using AutoMapper;
 using RouteManagment.Core.Interfaces;
 using RouteManagment.Server.Responses;
+using Microsoft.AspNetCore.Hosting.Server;
 
 
 
@@ -18,12 +19,12 @@ namespace RouteManagment.Server.Controllers
 
     public class AddressController : ControllerBase
     {
-        private readonly IRepository<Address> _addressRepository;
+        private readonly IServiceR<Address> _addressService;
         private readonly IMapper _mapper;
 
-        public AddressController(IRepository<Address> addressRepository, IMapper mapper)
+        public AddressController(IServiceR<Address> addressService, IMapper mapper)
         {
-            _addressRepository = addressRepository;
+            _addressService = addressService;
             _mapper = mapper;
         }
         //Request to get all address
@@ -31,7 +32,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var addresses =  _addressRepository.GetAll();
+            var addresses =  _addressService.GetAll();
             var addressesDto = _mapper.Map<IEnumerable<AddressDto>>(addresses);
             var response = new ApiResponse<IEnumerable<AddressDto>>(addressesDto);
             return Ok(response);
@@ -42,7 +43,7 @@ namespace RouteManagment.Server.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var address = await _addressRepository.GetById(id);
+            var address = await _addressService.GetById(id);
             var addressesDto = _mapper.Map<AddressDto>(address);
             var response = new ApiResponse<AddressDto>(addressesDto);
 
@@ -55,7 +56,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Add(AddressDto addressDto)
         {
             var address = _mapper.Map<Address>(addressDto);
-            await _addressRepository.Add(address);
+            await _addressService.Add(address);
 
             var response = new ApiResponse<AddressDto>(addressDto);
 
@@ -70,17 +71,17 @@ namespace RouteManagment.Server.Controllers
             var address = _mapper.Map<Address>(addressDto);
             address.Id = id;
 
-            var result = await _addressRepository.Update(address);
-            var response = new ApiResponse<bool>(result);
+            var result = await _addressService.Update(address);
+            var response = new ApiResponse<Address>(result);
             return Ok(response);
         }
         //Request to remove address by id 
         [HttpDelete("{id}")]
 
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-           var repository =  _addressRepository.Delete(id);
-           var response = new ApiResponse<bool>(repository);
+           var result = await _addressService.Delete(id);
+           var response = new ApiResponse<Address>(result);
            return Ok(response);
         }
 

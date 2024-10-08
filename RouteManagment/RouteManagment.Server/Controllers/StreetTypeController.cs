@@ -18,10 +18,10 @@ namespace RouteManagment.Server.Controllers
 
     public class StreetTypeController : ControllerBase
     {
-        private readonly IRepository<StreetType> _streetTypeRepository;
+        private readonly IServiceR<StreetType> _streetTypeRepository;
         private readonly IMapper _mapper;
 
-        public StreetTypeController(IRepository<StreetType> StreetTypeRepository, IMapper mapper)
+        public StreetTypeController(IServiceR<StreetType> StreetTypeRepository, IMapper mapper)
         {
             _streetTypeRepository = StreetTypeRepository;
             _mapper = mapper;
@@ -71,7 +71,7 @@ namespace RouteManagment.Server.Controllers
             streetType.Id = id;
 
             var result=await _streetTypeRepository.Update(streetType);
-            var response = new ApiResponse<bool>(result);
+            var response = new ApiResponse<StreetType>(result);
             return Ok(streetType);
         }
         //Request to remove streetType by id 
@@ -80,7 +80,7 @@ namespace RouteManagment.Server.Controllers
         public async Task<IActionResult> Delete(int id)
         {
            var result = await _streetTypeRepository.Delete(id);
-           var response = new ApiResponse<bool>(result);
+           var response = new ApiResponse<StreetType>(result);
            return Ok();
         
         }

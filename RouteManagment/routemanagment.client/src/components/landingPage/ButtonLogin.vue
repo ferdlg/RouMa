@@ -1,14 +1,28 @@
+
 <template>
-    <v-btn variant="outlined" class="btn-login">
-    Login
+    <v-btn 
+    @click="navigateToSignIn"
+    class="btn" 
+    elevation="8">
+        Login
+        <v-icon class="btn__icon-login">mdi-login</v-icon>
     </v-btn>
 </template>
 
-<style scoped>
-    .btn-login{
-        background-color: transparent;
-        border-radius: 30px;
-        color: black;
+<script setup>
+    import {useRouter} from 'vue-router';
 
+    const router = useRouter();
+    const navigateToSignIn = ()=>{
+        router.push({name: 'SignIn'})
+    };
+</script>
+<style scoped>
+    .btn{
+        background-color: var(--color-secundary-background);
+        /* border-color: var(--color-secundary-background); */
+        color: black;
+        border-radius: 30px;
+        border-color: transparent;
     }
 </style>

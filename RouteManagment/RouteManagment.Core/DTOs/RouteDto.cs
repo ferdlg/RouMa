@@ -12,6 +12,7 @@ namespace RouteManagment.Core.DTOs
 
         public int AddressHeadQuarterId { get; set; }
 
+        public bool IsDelete { get; set; }
 
     }
 }

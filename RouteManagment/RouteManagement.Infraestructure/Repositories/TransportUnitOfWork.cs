@@ -9,32 +9,43 @@ namespace RouteManagement.Infraestructure.Repositories
     public class TransportUnitOfWork : ITransportUnitOfWork
     {
         private readonly AppDbContext _appDbContext;
+        private readonly Dictionary<Type, object> _repositories;
         private readonly ITransportRepository _transportRepository;
-        private readonly IRepository<TransportState> _transportStateRepository;
-        private readonly IRepository<TransportRequest> _transportRequestRepository;
-        private readonly IRepository<TransportRequestState> _transportRequestStateRepository;
-        private readonly IRepository<TransportType> _transportTypeRepository;
+
+        public TransportUnitOfWork(AppDbContext appDbContext)
+        {
+            _appDbContext = appDbContext;
+            _repositories = new Dictionary<Type, object>
+            {
+                { typeof(TransportState), new BaseRepository<TransportState>(appDbContext) },
+                { typeof(TransportRequest), new BaseRepository<TransportRequest>(appDbContext) },
+                { typeof(TransportRequestState), new BaseRepository<TransportRequestState>(appDbContext) },
+                { typeof(TransportType), new BaseRepository<TransportType>(appDbContext) }
+            };
+        }
 
         public ITransportRepository TransportRepository => _transportRepository ?? new TransportRepository(_appDbContext);
 
-        public IRepository<TransportRequest> TransportRequestRepository => _transportRequestRepository ?? new BaseRepository<TransportRequest>(_appDbContext);
+        public IRepository<T> GetRepository<T>() where T : BaseEntity
+        {
+            if (_repositories.TryGetValue(typeof(T), out var repository))
+            {
+                return (IRepository<T>)repository;
+            }
 
-        public IRepository<TransportState> TransporStateRepository => _transportStateRepository ?? new BaseRepository<TransportState>(_appDbContext);
-
-        public IRepository<TransportRequestState> TransportRequestStateRepository => _transportRequestStateRepository ?? new BaseRepository<TransportRequestState>(_appDbContext);
-
-        public IRepository<TransportType> TransportTypeRepository => _transportTypeRepository ?? new BaseRepository<TransportType>(_appDbContext);
+            throw new InvalidOperationException($"Repository not found for type {typeof(T).Name}");
+        }
 
         public void Dispose() => _appDbContext?.Dispose();
 
         public void SaveChange()
         {
-            throw new NotImplementedException();
+            _appDbContext.SaveChanges();
         }
 
-        public Task SaveChangesAsync()
+        public async Task SaveChangesAsync()
         {
-            throw new NotImplementedException();
+            await _appDbContext.SaveChangesAsync();
         }
 
     }

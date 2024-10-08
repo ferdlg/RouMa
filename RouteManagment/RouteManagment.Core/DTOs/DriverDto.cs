@@ -8,7 +8,7 @@ namespace RouteManagment.Core.DTOs
 {
     public class DriverDto
     {
-        public int DriverId { get; set; }
+        public int Id { get; set; }
 
         public int DrivingLicenseNumber { get; set; }
 
@@ -17,5 +17,7 @@ namespace RouteManagment.Core.DTOs
         public int TypeLicenseId { get; set; }
 
         public string? PlateTransport { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }
