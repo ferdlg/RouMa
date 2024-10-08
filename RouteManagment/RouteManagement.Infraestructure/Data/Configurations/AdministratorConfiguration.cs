@@ -28,6 +28,10 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasForeignKey(d => d.DocumentNumber)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("administrators_ibfk_1");
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

@@ -56,6 +56,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasForeignKey(d => d.RolId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("people_ibfk_3");
+
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

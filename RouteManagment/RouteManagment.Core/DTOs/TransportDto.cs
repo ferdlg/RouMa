@@ -17,6 +17,7 @@ namespace RouteManagment.Core.DTOs
         public int? RouteId { get; set; }
 
         public int? TransportTypeId { get; set; }
+        public bool IsDelete { get; set; }
 
 
     }

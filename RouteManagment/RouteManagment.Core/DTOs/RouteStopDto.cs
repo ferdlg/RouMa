@@ -7,5 +7,7 @@
         public int RouteId { get; set; }
 
         public int StopId { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }

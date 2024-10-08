@@ -28,6 +28,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasForeignKey(d => d.AddressId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("stops_ibfk_1");
+
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

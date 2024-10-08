@@ -18,6 +18,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
             builder.Property(e => e.AddressId).HasColumnType("int(11)");
             builder.Property(e => e.CompanyId).HasColumnType("int(11)");
 
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
+
         }
     }
 }

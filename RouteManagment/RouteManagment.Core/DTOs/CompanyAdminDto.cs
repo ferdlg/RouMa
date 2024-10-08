@@ -1,16 +1,11 @@
-﻿
-namespace RouteManagment.Core.DTOs
+﻿namespace RouteManagment.Core.DTOs
 {
-        public class UserDto
+    public class CompanyAdminDto
     {
         public int Id { get; set; }
-
         public int DocumentNumber { get; set; }
-
-        public string? Password { get; set; }
+        public int CompanyId { get; set; }
         public bool IsDelete { get; set; }
 
     }
-
 }
-

@@ -13,5 +13,7 @@ namespace RouteManagment.Core.DTOs
         public int PermissionId { get; set; }
 
         public int RolId { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }

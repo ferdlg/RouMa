@@ -17,5 +17,7 @@ namespace RouteManagment.Core.DTOs
         public int TypeLicenseId { get; set; }
 
         public string? PlateTransport { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }

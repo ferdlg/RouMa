@@ -14,6 +14,7 @@ public partial class Transport
     public int? RouteId { get; set; }
 
     public int? TransportTypeId { get; set; }
+    public bool IsDelete { get; set; }
 
     public virtual ICollection<Driver> Drivers { get; set; } = new List<Driver>();
 

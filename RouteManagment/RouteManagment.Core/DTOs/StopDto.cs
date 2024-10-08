@@ -11,5 +11,7 @@ namespace RouteManagment.Core.DTOs
         public int Id { get; set; }
 
         public int AddressId { get; set; }
+        public bool IsDelete { get; set; }
+
     }
 }

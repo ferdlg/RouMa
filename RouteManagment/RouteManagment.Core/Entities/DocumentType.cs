@@ -2,8 +2,6 @@
 
 public partial class DocumentType :BaseEntity
 {
-    //public int DocumentTypeId { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string? Description { get; set; }

@@ -11,5 +11,6 @@ namespace RouteManagment.Core.DTOs
         public int Id { get; set; }
 
         public int DocumentNumber { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

@@ -5,7 +5,6 @@ namespace RouteManagment.Core.Entities;
 
 public partial class Address : BaseEntity
 {
-   // public int AddressId { get; set; }
 
     public string? StreetName { get; set; }
 
@@ -16,7 +15,7 @@ public partial class Address : BaseEntity
     public string? Prefix { get; set; }
 
     public int StreetTypeId { get; set; }
-
+    
     public virtual ICollection<Headquarter> Headquarters { get; set; } = new List<Headquarter>();
 
     public virtual ICollection<People> People { get; set; } = new List<People>();

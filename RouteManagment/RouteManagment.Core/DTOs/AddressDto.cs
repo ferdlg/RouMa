@@ -21,5 +21,6 @@ namespace RouteManagment.Core.DTOs
         public string? Prefix { get; set; }
 
         public int StreetTypeId { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

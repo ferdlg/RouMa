@@ -12,4 +12,8 @@ public partial class Company : BaseEntity
     public virtual ICollection<TransportRequest> TransportRequests { get; set; } = new List<TransportRequest>();
 
     public virtual ICollection<Headquarter> Headquarters{ get; set; } = new List<Headquarter>();
+    public virtual ICollection<Passenger> Passengers { get; set; } = new List<Passenger>();
+    public virtual ICollection<CompanyAdministrator> CompanyAdministrators { get; set; } = new List<CompanyAdministrator>();
+
+
 }

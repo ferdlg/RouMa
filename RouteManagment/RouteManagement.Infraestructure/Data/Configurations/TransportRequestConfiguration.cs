@@ -50,6 +50,10 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transport_requests_ibfk_3");
 
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

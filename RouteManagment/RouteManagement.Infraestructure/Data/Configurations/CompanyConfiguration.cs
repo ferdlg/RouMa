@@ -23,6 +23,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                 .HasColumnType("int(11)");
             builder.Property(e => e.Name).HasMaxLength(50);
 
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
+
         }
     }
 }

@@ -9,34 +9,36 @@ using System.Threading.Tasks;
 
 namespace RouteManagement.Infraestructure.Data.Configurations
 {
-    public class PassengerConfiguration : IEntityTypeConfiguration<Passenger>
+    public class CompanyAdministratorConfiguration : IEntityTypeConfiguration<CompanyAdministrator>
     {
-        public void Configure(EntityTypeBuilder<Passenger> builder)
+        public void Configure(EntityTypeBuilder<CompanyAdministrator> builder)
         {
             builder.HasKey(e => e.Id).HasName("PRIMARY");
-            builder.ToTable("passengers");
+            builder.ToTable("company_administrator");
 
             builder.HasIndex(e => e.DocumentNumber, "DocumentNumber");
 
             builder.Property(e => e.Id)
-                .HasColumnName("PassengerId")
+                .HasColumnName("CompanyAdminId")
                 .HasColumnType("int(11)");
-            builder.Property(e => e.DocumentNumber).HasColumnType("int(11)");
+
+            builder.Property(e => e.DocumentNumber)
+                .HasColumnType("int(11)");
 
             builder.Property(e => e.IsDelete)
                  .HasColumnName("IsDelete")
                  .HasColumnType("boolean")
                  .HasDefaultValue(false);
 
-            builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.Passengers)
+            builder.HasOne(d => d.DocumentNumberNavigation).WithMany(p => p.CompanyAdministrators)
                 .HasForeignKey(d => d.DocumentNumber)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("passengers_ibfk_1");
+                .HasConstraintName("company_administraitor_ibfk_1");
 
-            builder.HasOne(d => d.CompanyIdNavigation).WithMany(c => c.Passengers)
+            builder.HasOne(d => d.CompanyIdNavigation).WithMany(c => c.CompanyAdministrators)
                 .HasForeignKey(d => d.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict)
-                .HasConstraintName("passengers_ibfk_2");
+                .HasConstraintName("company_administraitor_ibfk_2");
         }
     }
 }

@@ -39,6 +39,10 @@ namespace RouteManagement.Infraestructure.Data.Configuraions
                 .HasForeignKey(d => d.StreetTypeId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("addresses_ibfk_1");
+            builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
         }
     }
 }

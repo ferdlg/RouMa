@@ -17,6 +17,7 @@ namespace RouteManagement.Infraestructure.Repositories
             _repositories = new Dictionary<Type, object>
             {
                 { typeof(Administrator), new BaseRepository<Administrator>(appDbContext) },
+                { typeof(CompanyAdministrator), new BaseRepository<CompanyAdministrator>(appDbContext) },
                 { typeof(Company), new BaseRepository<Company>(appDbContext) },
                 { typeof(Driver), new BaseRepository<Driver>(appDbContext) },
                 { typeof(Passenger), new BaseRepository<Passenger>(appDbContext) },

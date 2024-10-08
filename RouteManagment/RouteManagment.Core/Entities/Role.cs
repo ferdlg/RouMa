@@ -5,8 +5,7 @@ namespace RouteManagment.Core.Entities;
 
 public partial class Role : BaseEntity
 {
-    // public int RolId { get; set; }
-
+ 
     public string Name { get; set; } = null!;
 
 

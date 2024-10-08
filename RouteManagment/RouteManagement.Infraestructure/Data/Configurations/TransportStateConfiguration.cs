@@ -22,6 +22,11 @@ namespace RouteManagement.Infraestructure.Data.Configurations
                     .HasColumnName("StateId")
                     .HasColumnType("int(11)");
                 builder.Property(e => e.State).HasMaxLength(50);
+
+                builder.Property(e => e.IsDelete)
+                 .HasColumnName("IsDelete")
+                 .HasColumnType("boolean")
+                 .HasDefaultValue(false);
             }
         }
     }
