@@ -13,6 +13,7 @@ namespace RouteManagment.Core.Services
             _unitOfwork = unitOfwork;
         }
 
+        //validations 
         private async Task ValidationTransportExist(string plate)
         {
             var transport = await _unitOfwork.TransportRepository.GetTransport(plate);
@@ -39,6 +40,8 @@ namespace RouteManagment.Core.Services
             }
         }
 
+
+        //
         public IEnumerable<Transport> GetTransports()
         {
             return _unitOfwork.TransportRepository.GetTransports();
@@ -52,7 +55,7 @@ namespace RouteManagment.Core.Services
         public async Task InsertTransport(Transport Transport)
         {
             await _unitOfwork.TransportRepository.AddTransport(Transport);
-            Console.WriteLine("Transport deleted successfully.");
+            Console.WriteLine("Transport added successfully.");
             await _unitOfwork.SaveChangesAsync();
         }
 
@@ -67,37 +70,30 @@ namespace RouteManagment.Core.Services
         {
             try
             {
-                // Intenta obtener el transporte por la placa
                 var transport = await _unitOfwork.TransportRepository.GetTransport(plate);
 
-                // Si no se encuentra el transporte, lanza una excepción personalizada
                 if (transport == null)
                 {
                     throw new BussinesExceptions(ErrorCode.NotFound, $"El transporte con placa {plate} no se encontró.");
                 }
-
-                // Elimina el transporte
                 await _unitOfwork.TransportRepository.DeleteTransport(plate);
-                await _unitOfwork.SaveChangesAsync(); // Guarda los cambios en la base de datos
+                await _unitOfwork.SaveChangesAsync();
 
                 Console.WriteLine("Transporte eliminado correctamente.");
                 return true;
             }
             catch (BussinesExceptions ex)
             {
-                // Manejo específico de las excepciones de negocio
                 Console.WriteLine($"Error de negocio: {ex.ErrorCode} - {ex.ErrorMessage}");
                 return false;
             }
             catch (DbUpdateException dbEx)
             {
-                // Manejo de excepciones relacionadas con la base de datos
                 Console.WriteLine($"Error en la actualización de la base de datos: {dbEx.InnerException?.Message}");
                 return false;
             }
             catch (Exception ex)
             {
-                // Manejo de cualquier otra excepción
                 Console.WriteLine($"Error: {ex.Message}");
                 return false;
             }

@@ -116,6 +116,7 @@ namespace RouteManagment.Core.Services
             {
                 await _unitOfWork.GetRepository<T>().Delete(id);
             }
+            await _unitOfWork.SaveChangesAsync();
             return entity;
         }
     }

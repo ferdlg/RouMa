@@ -19,7 +19,7 @@ namespace ManejoRutas.Infrastructure.Repositories
         }
         public IEnumerable<Transport> GetTransports()
         {
-            return _transports.AsEnumerable();
+            return _transports.Where(t => !t.IsDelete).AsEnumerable();
         }
 
         public async Task<Transport> GetTransport(string plate)
@@ -39,11 +39,8 @@ namespace ManejoRutas.Infrastructure.Repositories
         public async Task DeleteTransport(string plate)
         {
             Transport transport = await GetTransport(plate);
-            if (transport != null) { 
-            
-                _transports.Remove(transport);
-            }
-            Console.WriteLine("no se encuentra el objeto");
+            transport.IsDelete = true;
+   
         }
     }
 }

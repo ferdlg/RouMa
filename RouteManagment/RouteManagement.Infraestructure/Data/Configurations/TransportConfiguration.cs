@@ -35,17 +35,17 @@ namespace RouteManagement.Infraestructure.Data.Configurations
 
             builder.HasOne(d => d.Route).WithMany(p => p.Transports)
                 .HasForeignKey(d => d.RouteId)
-                .OnDelete(DeleteBehavior.SetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_2");
 
             builder.HasOne(d => d.State).WithMany(p => p.Transports)
                 .HasForeignKey(d => d.StateId)
-                .OnDelete(DeleteBehavior.SetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_1");
 
             builder.HasOne(d => d.TransportType).WithMany(p => p.Transports)
                 .HasForeignKey(d => d.TransportTypeId)
-                .OnDelete(DeleteBehavior.SetNull)
+                .OnDelete(DeleteBehavior.Restrict)
                 .HasConstraintName("transports_ibfk_3");
 
             builder.Property(e => e.IsDelete)
